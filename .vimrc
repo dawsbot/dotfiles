@@ -1,5 +1,6 @@
 set relativenumber
 set showmode
+set cursorline
 
 map <C-j> 10j
 map <C-k> 10k
