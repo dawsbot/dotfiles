@@ -10,6 +10,7 @@ set tabstop=2
 set smartindent
 set shiftwidth=2
 set expandtab
+set hlsearch
 
 map <C-j> 10j
 map <C-k> 10k
