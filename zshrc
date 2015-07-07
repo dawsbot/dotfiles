@@ -68,6 +68,7 @@ alias ga="git add -A"
 alias gc="git commit"
 alias gp="git push"
 alias gd="git diff "
+alias gb="git branch "
 
 alias v="vim "
 alias s="source "
