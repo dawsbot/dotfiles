@@ -11,6 +11,10 @@ olddir=~/dotfiles_old             # old dotfiles backup directory
 files="vimrc zshrc"    # list of files/folders to symlink in homedir
 
 ##########
+cd ~
+brew install fasd
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+cd -
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
