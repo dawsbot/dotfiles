@@ -33,6 +33,7 @@ set statusline+=%*
 set laststatus=2
 let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_check_on_open = 1 
+let NERDTreeShowLineNumbers=1
 
 "" Custom
 set relativenumber
@@ -45,6 +46,7 @@ colorscheme solarized
 
 set noswapfile
 
+"Tabbing and efficiency
 set tabstop=2
 set smartindent
 set shiftwidth=2
@@ -58,10 +60,15 @@ map <C-k> 10k
 set mouse=a
 set ttymouse=xterm
 
+" Leader overrides
 let mapleader = " "
 nmap <leader>n :NERDTree<cr>
-let NERDTreeShowLineNumbers=1
 
-" Leader overrides
+" Saving
 nmap <leader>w :w<cr>
-nmap <leader>q :q<cr>
+nmap <leader>q :wq<cr>
+nmap <leader>! :q!<cr>
+
+" Navigating windows
+nmap <silent> <leader>l :wincmd l<CR>
+nmap <silent> <leader>h :wincmd h<CR>
