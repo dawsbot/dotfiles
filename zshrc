@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/u562/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 ZSH_THEME="agnoster"
@@ -44,11 +44,6 @@ plugins=(brew)
 plugins=(node)
 plugins=(heroku)
 
-# User configuration
-
-export PATH="/Users/u562/.nvm/versions/node/v0.12.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -65,4 +60,14 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 eval "$(fasd --init posix-alias zsh-hook)"
+prompt_context(){}
 
+#Git aliases
+alias gs="git status"
+alias ga="git add -A"
+alias gc="git commit"
+alias gp="git push"
+alias gd="git diff "
+
+alias v="vim "
+alias s="source "
