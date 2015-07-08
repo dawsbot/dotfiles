@@ -26,16 +26,20 @@
  " this will conveniently prompt you to install them.
  NeoBundleCheck
 
-"" Syntastic
+" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set laststatus=2
 let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_check_on_open = 1 
-let NERDTreeShowLineNumbers=1
 
-"" Custom
+" NERDTree
+let NERDTreeShowLineNumbers=1
+" Close out NERDTree if it's the last things open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Custom
 set relativenumber
 set number
 set showmode
@@ -52,6 +56,7 @@ set smartindent
 set shiftwidth=2
 set expandtab
 set hlsearch
+set incsearch
 set backspace=indent,eol,start
 
 map <C-j> 10j
@@ -61,14 +66,20 @@ set mouse=a
 set ttymouse=xterm
 
 " Leader overrides
-let mapleader = " "
+let mapleader = ' '
 nmap <leader>n :NERDTree<cr>
 
 " Saving
 nmap <leader>w :w<cr>
-nmap <leader>q :wq<cr>
+nmap <leader>q :q<cr>
 nmap <leader>! :q!<cr>
+nmap <leader>1 :q!<cr>
 
 " Navigating windows
 nmap <silent> <leader>l :wincmd l<CR>
 nmap <silent> <leader>h :wincmd h<CR>
+nmap <silent> <leader>k :bd<CR>
+nmap <leader><leader> :bnext<CR>
+
+" Abbreviations
+iab cl console.log('');
