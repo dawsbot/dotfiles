@@ -23,6 +23,10 @@ alias f='fuck'
 #Removes user from prompt status line
 prompt_context(){}
 
+#Yank directly to clipboard OSX
+set clipboard=unnamed
+
+########## ALIASES ###########
 #Git aliases
 alias g='git '
 alias gs='git status'
