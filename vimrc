@@ -16,6 +16,7 @@
  NeoBundle 'tomtom/tcomment_vim.git' 
  NeoBundle 'bling/vim-airline' 
  NeoBundle 'altercation/vim-colors-solarized'
+ NeoBundle 'qpkorr/vim-bufkill'
 
  call neobundle#end()
 
@@ -44,6 +45,7 @@ set relativenumber
 set number
 set showmode
 set cursorline
+set cursorcolumn
 
 syntax on
 colorscheme solarized
@@ -78,8 +80,10 @@ nmap <leader>1 :q!<cr>
 " Navigating windows
 nmap <silent> <leader>l :wincmd l<CR>
 nmap <silent> <leader>h :wincmd h<CR>
-nmap <silent> <leader>k :bd<CR>
 nmap <leader><leader> :bnext<CR>
+
+"Delete buffer special. Defined in vim-bufkill
+nmap <silent> <leader>k :BD<CR>
 
 " Abbreviations
 iab cl console.log('');
