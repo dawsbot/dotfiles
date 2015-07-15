@@ -1,5 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+export PATH=/usr/local/share/npm/bin:$PATH
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # Set name of the theme to load.
 ZSH_THEME='agnoster'
@@ -36,6 +40,11 @@ alias gc='git commit'
 alias gp='git push'
 alias gd='git diff '
 alias gb='git branch '
+alias gl='git log'
 
 alias v='vim '
 alias s='source '
+
+alias s='source '
+
+alias r='rm -rf '

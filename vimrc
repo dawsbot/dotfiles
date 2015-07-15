@@ -1,5 +1,10 @@
- " Required:
+" Set leader key
+let mapleader = ' '
 
+"Yank to clipboard
+set clipboard=unnamed
+
+ " Required:
  if has('vim_starting')
    set nocompatible
    set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -68,22 +73,27 @@ set mouse=a
 set ttymouse=xterm
 
 " Leader overrides
-let mapleader = ' '
 nmap <leader>n :NERDTree<cr>
 
+"Delete buffer special. Defined in vim-bufkill
+nmap <leader>k :BD<CR>
+
 " Saving
-nmap <leader>w :w<cr>
-nmap <leader>q :q<cr>
-nmap <leader>! :q!<cr>
-nmap <leader>1 :q!<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>! :q!<cr>
+nnoremap <leader>1 :q!<cr>
+set pastetoggle=<F2>
+nmap <leader>p <F2><cr>
 
 " Navigating windows
-nmap <silent> <leader>l :wincmd l<CR>
-nmap <silent> <leader>h :wincmd h<CR>
-nmap <leader><leader> :bnext<CR>
+nnoremap <silent> <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <leader><leader> :bnext<CR>
 
-"Delete buffer special. Defined in vim-bufkill
-nmap <silent> <leader>k :BD<CR>
+"Set no highlight after a second Enter press
+nnoremap <CR> :noh<CR><CR>
 
 " Abbreviations
 iab cl console.log('');
+iab db debugger;
