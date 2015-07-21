@@ -15,8 +15,7 @@
   "env": {
     "browser": true,
     "jquery": true,
-    "node": true,
-    "karma": true
+    "node": true
   },
 
   "globals": {
