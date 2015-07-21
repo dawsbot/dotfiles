@@ -89,6 +89,7 @@ nmap <leader>p <F2><cr>
 " Navigating windows
 nnoremap <silent> <leader>l :wincmd l<CR>
 nnoremap <silent> <leader>h :wincmd h<CR>
+nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <leader><leader> :bnext<CR>
 
 "Set no highlight after a second Enter press
