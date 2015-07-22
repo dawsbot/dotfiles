@@ -3,7 +3,12 @@ function! TrimWhiteSpace()
   %s/\s\+$//e
   :w
 endfunction
-"
+
+function! DoubleQuotesToSingle()
+  %s/"/'/g
+  :w
+endfunction
+
 " Set leader key
 let mapleader = ' '
 
@@ -28,7 +33,7 @@ set clipboard=unnamed
  NeoBundle 'bling/vim-airline'
  NeoBundle 'altercation/vim-colors-solarized'
  NeoBundle 'qpkorr/vim-bufkill'
-
+ NeoBundle 'ajh17/VimCompletesMe'
  call neobundle#end()
 
  " Required:
@@ -62,6 +67,7 @@ set cursorcolumn
 syntax on
 match ErrorMsg '\s\+$'
 nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
+nnoremap <silent> <leader>" :call DoubleQuotesToSingle()<CR>
 
 colorscheme solarized
 
