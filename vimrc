@@ -1,3 +1,9 @@
+" Functions
+function! TrimWhiteSpace()
+  %s/\s\+$//e
+  :w
+endfunction
+"
 " Set leader key
 let mapleader = ' '
 
@@ -18,8 +24,8 @@ set clipboard=unnamed
  NeoBundle 'scrooloose/syntastic.git'
  NeoBundle 'scrooloose/nerdtree.git'
  NeoBundle 'powerline/powerline.git'
- NeoBundle 'tomtom/tcomment_vim.git' 
- NeoBundle 'bling/vim-airline' 
+ NeoBundle 'tomtom/tcomment_vim.git'
+ NeoBundle 'bling/vim-airline'
  NeoBundle 'altercation/vim-colors-solarized'
  NeoBundle 'qpkorr/vim-bufkill'
 
@@ -38,7 +44,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set laststatus=2
 let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_check_on_open = 1 
+let g:syntastic_check_on_open = 1
 
 " NERDTree
 let NERDTreeShowLineNumbers=1
@@ -52,7 +58,11 @@ set showmode
 set cursorline
 set cursorcolumn
 
+" Syntax
 syntax on
+match ErrorMsg '\s\+$'
+nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
+
 colorscheme solarized
 
 set noswapfile
@@ -98,3 +108,4 @@ nnoremap <CR> :noh<CR><CR>
 " Abbreviations
 iab cl console.log('');
 iab db debugger;
+

@@ -3,7 +3,7 @@
     "quotes": [2, 'single'],
     "curly": 2,
     "camelcase": 0,
-    "no-unused-vars": 1,
+    "no-unused-vars": 0,
     "no-use-before-define": 1,
     "no-underscore-dangle": 0,
     "strict": 0,
