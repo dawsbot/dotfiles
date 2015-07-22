@@ -1,4 +1,4 @@
-" Functions
+""""""""""""""""""" Functions """""""""""""""""""""
 function! TrimWhiteSpace()
   %s/\s\+$//e
   :w
@@ -15,33 +15,34 @@ let mapleader = ' '
 "Yank to clipboard
 set clipboard=unnamed
 
- " Required:
- if has('vim_starting')
-   set nocompatible
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
- end
+""""""""""""""""""" Neobundle """""""""""""""""""
+" Required:
+if has('vim_starting')
+ set nocompatible
+ set runtimepath+=~/.vim/bundle/neobundle.vim/
+end
 
- call neobundle#begin(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
- " Let NeoBundle manage NeoBundle
- " Required:
- NeoBundleFetch 'Shougo/neobundle.vim'
- NeoBundle 'scrooloose/syntastic.git'
- NeoBundle 'scrooloose/nerdtree.git'
- NeoBundle 'powerline/powerline.git'
- NeoBundle 'tomtom/tcomment_vim.git'
- NeoBundle 'bling/vim-airline'
- NeoBundle 'altercation/vim-colors-solarized'
- NeoBundle 'qpkorr/vim-bufkill'
- NeoBundle 'ajh17/VimCompletesMe'
- call neobundle#end()
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'scrooloose/syntastic.git'
+NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'powerline/powerline.git'
+NeoBundle 'tomtom/tcomment_vim.git'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'qpkorr/vim-bufkill'
+NeoBundle 'ajh17/VimCompletesMe'
+call neobundle#end()
 
- " Required:
- filetype plugin indent on
+" Required:
+filetype plugin indent on
 
- " If there are uninstalled bundles found on startup,
- " this will conveniently prompt you to install them.
- NeoBundleCheck
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -49,10 +50,11 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set laststatus=2
 let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open=1
 
 " NERDTree
 let NERDTreeShowLineNumbers=1
+
 " Close out NERDTree if it's the last things open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
@@ -66,8 +68,6 @@ set cursorcolumn
 " Syntax
 syntax on
 match ErrorMsg '\s\+$'
-nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
-nnoremap <silent> <leader>" :call DoubleQuotesToSingle()<CR>
 
 colorscheme solarized
 
@@ -88,7 +88,9 @@ map <C-k> 10k
 set mouse=a
 set ttymouse=xterm
 
-" Leader overrides
+""""""""""""""""""" Leader overrides """"""""""""""""""""
+nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
+nnoremap <silent> <leader>" :call DoubleQuotesToSingle()<CR>
 nmap <leader>n :NERDTree<cr>
 
 "Delete buffer special. Defined in vim-bufkill
@@ -114,4 +116,3 @@ nnoremap <CR> :noh<CR><CR>
 " Abbreviations
 iab cl console.log('');
 iab db debugger;
-
