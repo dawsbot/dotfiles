@@ -13,6 +13,7 @@ plugins=(git)
 plugins=(brew)
 plugins=(node)
 plugins=(heroku)
+plugins=(vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
