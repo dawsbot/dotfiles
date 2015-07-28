@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export PATH=/usr/local/share/npm/bin:$PATH
+export PATH=$PATH:/usr/local/git/bin/
 
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -10,8 +11,6 @@ ZSH_THEME='agnoster'
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(git)
-plugins=(brew)
-plugins=(node)
 plugins=(heroku)
 plugins=(vi-mode)
 
@@ -39,12 +38,10 @@ alias ga='git add'
 alias gaa='git add -A'
 alias gc='git commit'
 alias gp='git push'
+alias gpo='git push origin'
 alias gd='git diff '
 alias gb='git branch '
 alias gl='git log'
-
-alias v='vim '
-alias s='source '
 
 alias s='source '
 
