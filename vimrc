@@ -34,7 +34,6 @@ NeoBundle 'tomtom/tcomment_vim.git'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'qpkorr/vim-bufkill'
-NeoBundle 'ajh17/VimCompletesMe'
 call neobundle#end()
 
 " Required:
