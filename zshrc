@@ -50,3 +50,4 @@ alias sz='source ~/.zshrc'
 alias sv='source ~/.vimrc'
 
 alias r='rm -rf '
+alias vd='vimdiff '
