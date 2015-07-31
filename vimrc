@@ -106,6 +106,7 @@ nmap <leader>k :BD<CR>
 " Saving
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
+nnoremap <leader>e :wq<cr>
 nnoremap <leader>! :q!<cr>
 nnoremap <leader>1 :q!<cr>
 set pastetoggle=<F2>
