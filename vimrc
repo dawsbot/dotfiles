@@ -38,7 +38,9 @@ NeoBundle 'qpkorr/vim-bufkill'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'garbas/vim-snipmate'
-NeoBundle 'honza/vim-snippets'
+
+"Maintain my own fork for custom bindings
+NeoBundle 'dawsonbotsford/vim-snippets'
 
 call neobundle#end()
 
