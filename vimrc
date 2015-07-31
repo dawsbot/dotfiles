@@ -34,7 +34,12 @@ NeoBundle 'tomtom/tcomment_vim.git'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'qpkorr/vim-bufkill'
-NeoBundle 'ajh17/VimCompletesMe'
+
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'honza/vim-snippets'
+
 call neobundle#end()
 
 " Required:
@@ -45,12 +50,14 @@ filetype plugin indent on
 NeoBundleCheck
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set laststatus=2
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_check_on_open=1
+if exists(':syntastic')
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+  set laststatus=2
+  let g:syntastic_javascript_checkers=['eslint']
+  let g:syntastic_check_on_open=1
+endif
 
 " NERDTree
 let NERDTreeShowLineNumbers=1
