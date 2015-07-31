@@ -50,14 +50,12 @@ filetype plugin indent on
 NeoBundleCheck
 
 " Syntastic
-if exists(':syntastic')
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-  set laststatus=2
-  let g:syntastic_javascript_checkers=['eslint']
-  let g:syntastic_check_on_open=1
-endif
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set laststatus=2
+let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_check_on_open=1
 
 " NERDTree
 let NERDTreeShowLineNumbers=1
