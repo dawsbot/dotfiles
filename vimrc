@@ -38,6 +38,7 @@ NeoBundle 'qpkorr/vim-bufkill'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'garbas/vim-snipmate'
+NeoBundle 'justinj/vim-react-snippets'
 
 "Maintain my own fork for custom bindings
 NeoBundle 'dawsonbotsford/vim-snippets'
@@ -46,6 +47,8 @@ call neobundle#end()
 
 " Required:
 filetype plugin indent on
+set ai
+set si
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
