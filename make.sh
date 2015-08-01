@@ -10,12 +10,17 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="vimrc zshrc eslintrc"    # list of files/folders to symlink in homedir
 
-##########
-brew install fasd
+########## generic unix things 
+#Install homebrew here?
+brew install fasd #The z search
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh ~/install.sh)"
-brew install thefuck
-brew install nvm
 rm -rf ~/install.sh
+brew install thefuck
+
+########## npm installs ###############
+brew install nvm
+npm install -g eslint
+npm install -g babel-eslint
 
 # create dotfiles_old in homedir
 printf "\nCreating $olddir for backup of any existing dotfiles in ~"

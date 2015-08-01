@@ -11,7 +11,7 @@
     "no-multi-spaces": 2,
     "semi-spacing": 2,
     "no-shadow": 2,
-    "no-console": 2
+    "indent": [2, 2]
   },
 
   "env": {
