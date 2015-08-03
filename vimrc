@@ -39,6 +39,7 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'justinj/vim-react-snippets'
+NeoBundle 'dawsonbotsford/my-vim-snippets'
 
 "Maintain my own fork for custom bindings
 NeoBundle 'dawsonbotsford/vim-snippets'
