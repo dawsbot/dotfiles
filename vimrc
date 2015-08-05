@@ -114,7 +114,7 @@ nnoremap <leader>e :wq<cr>
 nnoremap <leader>! :q!<cr>
 nnoremap <leader>1 :q!<cr>
 set pastetoggle=<F2>
-nmap <leader>p <F2><cr>
+nmap <leader>p <F2><cr>ki
 
 " Navigating windows
 nnoremap <silent> <leader>l :wincmd l<CR>
