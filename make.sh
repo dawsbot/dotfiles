@@ -22,7 +22,6 @@ sudo easy_install Pygments
 brew install nvm
 npm install -g eslint
 npm install -g babel-eslint
-npm install -g vantage
 
 # create dotfiles_old in homedir
 printf "\nCreating $olddir for backup of any existing dotfiles in ~"
