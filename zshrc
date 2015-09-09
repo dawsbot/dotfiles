@@ -1,3 +1,8 @@
+# Increase history size
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export PATH=/usr/local/share/npm/bin:$PATH
@@ -47,6 +52,7 @@ alias gp='git push'
 alias gps='git push staging'
 alias gpp='git push production'
 alias gpo='git push origin'
+alias gpom='git push origin master'
 alias gd='git diff '
 alias gb='git branch '
 alias gbd='git branch -D '
@@ -77,3 +83,10 @@ cat() {
     command cat $1
   fi
 }
+
+#Python daemon watching
+alias pydemon="nodemon --exec 'python' "
+alias pyd="pydemon"
+
+#youtube-dl mp3 alias
+alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "

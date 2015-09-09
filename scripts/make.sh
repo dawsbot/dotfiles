@@ -8,7 +8,7 @@
 
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
-files="vimrc zshrc eslintrc"    # list of files/folders to symlink in homedir
+files="vimrc zshrc eslintrc gitignore"    # list of files/folders to symlink in homedir
 
 ########## generic unix things 
 #Install homebrew here?
@@ -41,3 +41,5 @@ for file in $files; do
     printf "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+sh ./gitignore.sh
