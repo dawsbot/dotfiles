@@ -2,11 +2,13 @@
 function! TrimWhiteSpace()
   %s/\s\+$//e
   :w
+  ''
 endfunction
 
 function! DoubleQuotesToSingle()
   %s/"/'/g
   :w
+  ''
 endfunction
 
 " Set leader key
@@ -103,6 +105,7 @@ set ttymouse=xterm
 """"""""""""""""""" Leader overrides """"""""""""""""""""
 nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
 nnoremap <silent> <leader>" :call DoubleQuotesToSingle()<CR>
+nnoremap <silent> <leader>' :call DoubleQuotesToSingle()<CR>
 nmap <leader>n :NERDTree<cr>
 
 "Delete buffer special. Defined in vim-bufkill
