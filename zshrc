@@ -17,7 +17,7 @@ ZSH_THEME='agnoster'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(git)
 plugins=(heroku)
-plugins=(vi-mode)
+# plugins=(vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,3 +90,11 @@ alias pyd="pydemon"
 
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
+#
+#eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/dawsonbotsford/code/swim/.gloud/google-cloud-sdk/path.zsh.inc'
+# The next line enables shell command completion for gcloud.
+source '/Users/dawsonbotsford/code/swim/.gloud/google-cloud-sdk/completion.zsh.inc'
