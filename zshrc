@@ -7,6 +7,7 @@ SAVEHIST=100000
 export ZSH=~/.oh-my-zsh
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=$PATH:/usr/local/git/bin/
+export PATH=$PATH:/usr/local/bin
 
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -56,9 +57,8 @@ alias gpom='git push origin master'
 alias gd='git diff '
 alias gb='git branch '
 alias gbd='git branch -D '
-alias gl='git log'
+alias gl='git log --graph --oneline --all'
 alias g*='git add -A && git commit'
-alias gr='git rebase'
 
 alias s='source '
 alias sz='source ~/.zshrc'
@@ -84,6 +84,12 @@ cat() {
   fi
 }
 
+#grip required shortcut command
+gr() {
+  grip $1 3003 &
+  open "http://localhost:3003/"
+}
+
 #Python daemon watching
 alias pydemon="nodemon --exec 'python' "
 alias pyd="pydemon"
@@ -98,3 +104,70 @@ alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 source '/Users/dawsonbotsford/code/swim/.gloud/google-cloud-sdk/path.zsh.inc'
 # The next line enables shell command completion for gcloud.
 source '/Users/dawsonbotsford/code/swim/.gloud/google-cloud-sdk/completion.zsh.inc'
+
+alias ct="cd /tmp"
+alias daws="python -mwebbrowser https://github.com/dawsonbotsford?tab=repositories"
+
+
+
+
+
+
+
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local words cword
+    if type _get_comp_words_by_ref &>/dev/null; then
+      _get_comp_words_by_ref -n = -n @ -w words -i cword
+    else
+      cword="$COMP_CWORD"
+      words=("${COMP_WORDS[@]}")
+    fi
+
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${words[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -o default -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    local si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
