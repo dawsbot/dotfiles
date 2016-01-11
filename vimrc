@@ -41,9 +41,10 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'garbas/vim-snipmate'
 NeoBundle 'justinj/vim-react-snippets'
-NeoBundle 'dawsonbotsford/my-vim-snippets'
 
 "Maintain my own fork for custom bindings
+"TODO: Figure out which of these is useless
+NeoBundle 'dawsonbotsford/my-vim-snippets'
 NeoBundle 'dawsonbotsford/vim-snippets'
 
 call neobundle#end()
@@ -83,6 +84,7 @@ set cursorcolumn
 syntax on
 match ErrorMsg '\s\+$'
 
+set background=dark
 colorscheme solarized
 
 set noswapfile
@@ -126,9 +128,10 @@ nnoremap <silent> <leader>h :wincmd h<CR>
 nnoremap <silent> <leader>j :wincmd j<CR>
 nnoremap <leader><leader> :bnext<CR>
 
-"Set no highlight after a second Enter press
+"Set no highlight after a second \"Enter\" press
 nnoremap <CR> :noh<CR><CR>
 
-" Abbreviations
-iab cl console.log('');
-iab db debugger;
+"Custom commands
+  "Engage spell checking
+  command Spell execute "set spell spelllang=en_us"
+
