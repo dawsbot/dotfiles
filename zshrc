@@ -27,8 +27,6 @@ export LANG=en_US.UTF-8
 export EDITOR='vim'
 
 eval "$(fasd --init auto)"
-alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
-alias f='fuck'
 
 #backwards search
 bindkey "^R" history-incremental-search-backward
@@ -40,6 +38,19 @@ prompt_context(){}
 set clipboard=unnamed
 
 ########## ALIASES ###########
+#Fuck command line tool
+alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+alias f='fuck'
+
+#File movement aliases
+alias b='cd ..'
+alias bb='cd ...'
+
+#npm aliases
+alias nis='npm install --save '
+alias nig='npm install --global '
+alias npm-exec='PATH=$(npm bin):$PATH'
+
 #Git aliases
 alias g='git '
 alias gs='git status'
@@ -55,6 +66,7 @@ alias gpp='git push production'
 alias gpo='git push origin'
 alias gpom='git push origin master'
 alias gphm='git push heroku master'
+alias gpbm='git push origin master && git push heroku master'
 alias gd='git diff '
 alias gb='git branch '
 alias gbd='git branch -D '

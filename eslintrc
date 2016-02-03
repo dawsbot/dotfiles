@@ -9,7 +9,6 @@
     "no-underscore-dangle": 2,
     "strict": 0,
     "no-multi-spaces": 2,
-    "semi-spacing": 2,
     "no-shadow": 2
   },
 
