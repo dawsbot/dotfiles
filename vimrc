@@ -78,7 +78,7 @@ set number
 set showmode
 set cursorline
 set cursorcolumn
-set scrolloff=5
+set scrolloff=15
 
 " Syntax
 syntax on
@@ -132,4 +132,22 @@ nnoremap <CR> :noh<CR><CR>
 "Custom commands
   "Engage spell checking
   command Spell execute "set spell spelllang=en_us"
+
+ab d debugger;
+ab cl console.log(
+
+augroup Shebang
+  autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$
+  autocmd BufNewFile *.js 0put =\"\'use strict\'\<nl>\"|$
+augroup END
+
+"Ignore case when searching
+set ignorecase
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+"Place a width 1 margin on the left
+set foldcolumn=1
+
 
