@@ -62,8 +62,14 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set laststatus=2
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_python_checkers = []
+
+let g:syntastic_javascript_eslint_generic = 1
+let g:syntastic_javascript_eslint_exec = 'xo'
+let g:syntastic_javascript_eslint_args = '--compact'
+let g:syntastic_javascript_checkers = ['eslint']
+
+" let g:syntastic_javascript_checkers=['eslint']
+" let g:syntastic_python_checkers = []
 let g:syntastic_check_on_open=1
 
 " NERDTree
@@ -133,12 +139,13 @@ nnoremap <CR> :noh<CR><CR>
   "Engage spell checking
   command Spell execute "set spell spelllang=en_us"
 
-ab d debugger;
-ab cl console.log(
+  "Show tab characters
+  command ShowTabs execute "set list"
+  command UnShowTabs execute "set nolist"
 
 augroup Shebang
   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$
-  autocmd BufNewFile *.js 0put =\"\'use strict\'\<nl>\"|$
+  autocmd BufNewFile *.js 0put =\"\'use strict\';\<nl>\"|$
 augroup END
 
 "Ignore case when searching

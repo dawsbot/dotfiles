@@ -1,3 +1,5 @@
+# Dawson Botsford zshrc https://github.com/dawsonbotsford
+
 # Increase history size
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
@@ -38,9 +40,6 @@ prompt_context(){}
 set clipboard=unnamed
 
 ########## ALIASES ###########
-#Fuck command line tool
-alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
-alias f='fuck'
 
 #File movement aliases
 alias b='cd ..'
@@ -77,25 +76,12 @@ alias s='source '
 alias sz='source ~/.zshrc'
 
 alias r='rm -rf '
-alias vd='vimdiff '
 
 alias vz='vim ~/dotfiles/zshrc'
 alias vv='vim ~/dotfiles/vimrc'
 alias ve='vim ~/dotfiles/eslintrc'
 
-#Colorize cat. Requies Python script "pygmentize" accessable in path
-cat() {
-  if command -v pygmentize > /dev/null; then
-    pygmentize $1 > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-      pygmentize $1
-    else
-      command cat $1
-    fi
-  else
-    command cat $1
-  fi
-}
+#TODO: setup colorized cat
 
 #grip required shortcut command
 gr() {
@@ -104,26 +90,18 @@ gr() {
 }
 
 #Python daemon watching
+alias na="nodemon --exec 'ava'"
+alias avademon="na"
+alias testdemon="node --exec 'npm test'"
+
 alias pydemon="nodemon --exec 'python' "
 alias pyd="pydemon"
 
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
-#
-#eval "$(rbenv init -)"
-#export PATH="$HOME/.rbenv/bin:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/Users/dawsonbotsford/code/swim/.gloud/google-cloud-sdk/path.zsh.inc'
-# The next line enables shell command completion for gcloud.
-source '/Users/dawsonbotsford/code/swim/.gloud/google-cloud-sdk/completion.zsh.inc'
 
 alias ct="cd /tmp"
-alias daws="python -mwebbrowser https://github.com/dawsonbotsford?tab=repositories"
-
-
-
-
 
 
 
