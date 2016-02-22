@@ -7,6 +7,7 @@ SAVEHIST=100000
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+export PATH=/usr/local/lib:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=$PATH:/usr/local/git/bin/
 export PATH=$PATH:/usr/local/bin
@@ -46,8 +47,10 @@ alias b='cd ..'
 alias bb='cd ...'
 
 #npm aliases
+alias ni='npm install '
 alias nis='npm install --save '
 alias nig='npm install --global '
+alias nid='npm install --save-dev '
 alias npm-exec='PATH=$(npm bin):$PATH'
 
 #Git aliases
@@ -162,3 +165,10 @@ elif type compctl &>/dev/null; then
   compctl -K _npm_completion npm
 fi
 ###-end-npm-completion-###
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+ # added for npm-completion https://github.com/Jephuff/npm-bash-completion
+PATH_TO_NPM_COMPLETION="/usr/local/lib/node_modules/npm-completion"
+source $PATH_TO_NPM_COMPLETION/npm-completion.sh
+PATH_TO_NPM_COMPLETION="/usr/local/bin/../lib/node_modules/npm-completion"

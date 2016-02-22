@@ -15,8 +15,6 @@ files="vimrc zshrc eslintrc gitignore"    # list of files/folders to symlink in 
 brew install fasd #The z search
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh ~/install.sh)"
 rm -rf ~/install.sh
-brew install thefuck
-sudo easy_install Pygments
 
 ########## npm installs ###############
 brew install nvm
@@ -38,7 +36,7 @@ for file in $files; do
     printf "\nMoving any existing dotfiles from ~ to $olddir"
     mv ~/.$file ~/dotfiles_old/
     printf "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+    ln ../$dir/$file ~/.$file
 done
 
 sh ./gitignore.sh
