@@ -66,7 +66,7 @@ set laststatus=2
 let g:syntastic_javascript_eslint_generic = 1
 let g:syntastic_javascript_eslint_exec = 'xo'
 let g:syntastic_javascript_eslint_args = '--compact'
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint', 'jshint']
 
 " let g:syntastic_javascript_checkers=['eslint']
 " let g:syntastic_python_checkers = []
