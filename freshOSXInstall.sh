@@ -25,6 +25,8 @@ npm install -g grunt-cli
 npm install -g gh
 npm install -g npm-name-cli
 npm install -g hicat
+npm install -g xo
+npm install -g openm
 
 brew install heroku-toolbelt
 heroku update
@@ -39,3 +41,4 @@ sh ./install.sh
 sudo easy_install pip
 sudo pip install grip
 
+git clone git://github.com/tarruda/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
