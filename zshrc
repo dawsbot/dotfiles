@@ -11,6 +11,9 @@ export PATH=/usr/local/lib:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=$PATH:/usr/local/git/bin/
 export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:~/Library/Android/sdk
+export PATH=$PATH:~/Library/Android/sdk/tools
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -53,7 +56,10 @@ alias nig='npm install --global '
 alias nid='npm install --save-dev '
 alias nl='npm link'
 alias l='link'
-alias n='npm'
+alias nv='npm version'
+alias nvp='npm version patch'
+alias np='npm publish'
+alias pub='gpom && npm publish'
 
 alias npm-exec='PATH=$(npm bin):$PATH'
 
@@ -74,17 +80,21 @@ alias gphm='git push heroku master'
 alias gpbm='git push origin master && git push heroku master'
 alias gd='git diff '
 alias gb='git branch '
-alias gl='git log --graph --oneline --all'
-alias g*='git add -A && git commit && git push'
 
-alias s='source '
+current_branch() {
+  basename "$(git symbolic-ref HEAD)"
+}
+
+burn() {
+  git branch -d "$1"
+  git push origin :"$1"
+}
+
+alias g*='git add -A && git commit && git push origin "$(current_branch)"'
 alias sz='source ~/.zshrc'
-
-alias r='rm -rf '
 
 alias vz='vim ~/dotfiles/zshrc'
 alias vv='vim ~/dotfiles/vimrc'
-alias ve='vim ~/dotfiles/eslintrc'
 
 #grip required shortcut command
 gr() {
@@ -96,16 +106,15 @@ gr() {
 alias na="nodemon --exec 'ava'"
 alias nx="nodemon --exec 'xo'"
 alias nt="nodemon --exec 'npm test'"
-alias openg="gh-home"
 
 alias pydemon="nodemon --exec 'python' "
 
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
-alias ct="cd /tmp"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias s="subl ."
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 alias howto='how2 -l javascript '
 
@@ -114,3 +123,4 @@ alias cm="mkdir $1 && cd $1"
 LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 export LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
