@@ -1,6 +1,6 @@
-# Install XCode (or just XCode tools)
-# Install Chrome
-# Install Iterm2 https://www.iterm2.com/downloads.html
+# * Manually install XCode (or just XCode tools)
+# * Manually Install Chrome
+# * Manually Install Iterm2 https://www.iterm2.com/downloads.html
 
 #Does not require XCode tools
 #Set git configs
@@ -21,18 +21,19 @@ sh make.sh
 brew update
 brew install wget
 brew install node
-npm install -g grunt-cli
 npm install -g gh
 npm install -g npm-name-cli
 npm install -g hicat
 npm install -g xo
+npm install -g ava
+npm install -g openg
 npm install -g openm
+npm install -g opent
 
 brew install heroku-toolbelt
 heroku update
 brew install vim
 brew install cmake
-
 
 # Neobundle install
 curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
