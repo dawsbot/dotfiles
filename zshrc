@@ -7,6 +7,8 @@ SAVEHIST=100000
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+
+# Extend path
 export PATH=/usr/local/lib:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=$PATH:/usr/local/git/bin/
@@ -15,20 +17,16 @@ export PATH=$PATH:~/Library/Android/sdk
 export PATH=$PATH:~/Library/Android/sdk/tools
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
-# Set name of the theme to load.
-ZSH_THEME='agnoster'
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+ZSH_THEME='agnoster'
+
 plugins=(git)
 plugins=(heroku)
-# plugins=(vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
+# Manually set your language environment
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 
@@ -86,8 +84,8 @@ current_branch() {
 }
 
 burn() {
-  git branch -d "$1"
-  git push origin :"$1"
+  git branch -d "$1" # Delete branch locally
+  git push origin :"$1" # Delete branch from remote (GitHub)
 }
 
 alias g*='git add -A && git commit && git push origin "$(current_branch)"'
@@ -96,7 +94,7 @@ alias sz='source ~/.zshrc'
 alias vz='vim ~/dotfiles/zshrc'
 alias vv='vim ~/dotfiles/vimrc'
 
-#grip required shortcut command
+#grip readme viewer shortcut command
 gr() {
   grip $1 3003 &
   open "http://localhost:3003/"
@@ -123,4 +121,3 @@ alias cm="mkdir $1 && cd $1"
 LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 export LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-

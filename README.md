@@ -1,9 +1,8 @@
-dotfiles
-========
-Personalized dotfiles for my iterm2 setup using zsh, oh-my-zsh, etc.
+> Personalized dotfiles for my iterm2 setup using zsh, oh-my-zsh, & vim
+
+### Demo
+![demo](img/demo.gif)
+
 
 ### Install
-```./make.sh```
-
-### Caution
-Will not work on a fresh system without some debugging.
+```sh scripts/make.sh```

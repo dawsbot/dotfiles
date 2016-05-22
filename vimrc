@@ -156,5 +156,3 @@ set showmatch
 
 "Place a width 1 margin on the left
 set foldcolumn=1
-
-
