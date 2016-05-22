@@ -57,6 +57,7 @@ alias l='link'
 alias nv='npm version'
 alias nvp='npm version patch'
 alias np='npm publish'
+alias ns='npm start'
 alias pub='gpom && npm publish'
 
 alias npm-exec='PATH=$(npm bin):$PATH'
@@ -79,16 +80,16 @@ alias gpbm='git push origin master && git push heroku master'
 alias gd='git diff '
 alias gb='git branch '
 
-current_branch() {
-  basename "$(git symbolic-ref HEAD)"
-}
-
 burn() {
   git branch -d "$1" # Delete branch locally
   git push origin :"$1" # Delete branch from remote (GitHub)
 }
 
-alias g*='git add -A && git commit && git push origin "$(current_branch)"'
+current_branch() {
+  basename "$(git symbolic-ref HEAD)"
+}
+
+alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
 alias sz='source ~/.zshrc'
 
 alias vz='vim ~/dotfiles/zshrc'
