@@ -80,6 +80,10 @@ alias gpbm='git push origin master && git push heroku master'
 alias gd='git diff '
 alias gb='git branch '
 
+why() {
+  npm view "$1" description
+}
+
 burn() {
   git branch -d "$1" # Delete branch locally
   git push origin :"$1" # Delete branch from remote (GitHub)
@@ -117,7 +121,10 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 alias howto='how2 -l javascript '
 
-alias cm="mkdir $1 && cd $1"
+cm() {
+  mkdir "$1"
+  cd "$1"
+}
 
 LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 export LS_COLORS
