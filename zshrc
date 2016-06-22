@@ -47,21 +47,6 @@ set clipboard=unnamed
 alias b='cd ..'
 alias bb='cd ...'
 
-#npm aliases
-alias ni='npm install '
-alias nis='npm install --save '
-alias nig='npm install --global '
-alias nid='npm install --save-dev '
-alias nl='npm link'
-alias l='link'
-alias nv='npm version'
-alias nvp='npm version patch'
-alias np='npm publish'
-alias ns='npm start'
-alias pub='gpom && npm publish'
-
-alias npm-exec='PATH=$(npm bin):$PATH'
-
 #Git aliases
 alias g='git '
 alias gs='git status'
@@ -129,3 +114,5 @@ cm() {
 LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 export LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+source ~/dotfiles/zshrcFiles/npmAliases
