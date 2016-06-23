@@ -47,53 +47,6 @@ set clipboard=unnamed
 alias b='cd ..'
 alias bb='cd ...'
 
-#npm aliases
-alias ni='npm install '
-alias nis='npm install --save '
-alias nig='npm install --global '
-alias nid='npm install --save-dev '
-alias nl='npm link'
-alias l='link'
-alias nv='npm version'
-alias nvp='npm version patch'
-alias np='npm publish'
-alias ns='npm start'
-alias pub='gpom && npm publish'
-
-alias npm-exec='PATH=$(npm bin):$PATH'
-
-#Git aliases
-alias g='git '
-alias gs='git status'
-alias ga='git add'
-alias gaa='git add -A'
-alias gc='git commit'
-alias gch='git checkout'
-
-alias gp='git push'
-alias gps='git push staging'
-alias gpp='git push production'
-alias gpo='git push origin'
-alias gpom='git push origin master'
-alias gphm='git push heroku master'
-alias gpbm='git push origin master && git push heroku master'
-alias gd='git diff '
-alias gb='git branch '
-
-why() {
-  npm view "$1" description
-}
-
-burn() {
-  git branch -d "$1" # Delete branch locally
-  git push origin :"$1" # Delete branch from remote (GitHub)
-}
-
-current_branch() {
-  basename "$(git symbolic-ref HEAD)"
-}
-
-alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
 alias sz='source ~/.zshrc'
 
 alias vz='vim ~/dotfiles/zshrc'
@@ -129,3 +82,9 @@ cm() {
 LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 export LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+alias gnr="grep -Rn "
+
+source $HOME/dotfiles/zshrcs/arcAliases.sh
+source $HOME/dotfiles/zshrcs/gitAliases.sh
+source $HOME/dotfiles/zshrcs/npmAliases.sh
