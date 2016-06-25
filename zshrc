@@ -47,6 +47,7 @@ set clipboard=unnamed
 alias b='cd ..'
 alias bb='cd ...'
 
+<<<<<<< HEAD
 #Git aliases
 alias g='git '
 alias gs='git status'
@@ -79,6 +80,8 @@ current_branch() {
 }
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
+=======
+>>>>>>> 9128f65f1ee2c6bc14cbb2e59eb60cdc426fd9c1
 alias sz='source ~/.zshrc'
 
 alias vz='vim ~/dotfiles/zshrc'
@@ -115,4 +118,8 @@ LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 export LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-source ~/dotfiles/zshrcFiles/npmAliases
+alias gnr="grep -Rn "
+
+source $HOME/dotfiles/zshrcs/arcAliases.sh
+source $HOME/dotfiles/zshrcs/gitAliases.sh
+source $HOME/dotfiles/zshrcs/npmAliases.sh
