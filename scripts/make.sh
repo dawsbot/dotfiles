@@ -14,11 +14,6 @@ brew install fasd #The z search
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh ~/install.sh)"
 rm -rf ~/install.sh
 
-########## npm installs ###############
-brew install nvm
-npm install -g eslint
-npm install -g babel-eslint
-
 # create dotfiles_old in homedir
 printf "\nCreating $olddir for backup of any existing dotfiles in ~"
 mkdir -p $olddir

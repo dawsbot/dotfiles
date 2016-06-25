@@ -24,9 +24,7 @@ brew install node
 npm install -g gh
 npm install -g npm-name-cli
 npm install -g hicat
-npm install -g xo
-npm install -g ava
-npm install -g openg
+npm install -g openg-cli
 npm install -g openm
 npm install -g opent
 
