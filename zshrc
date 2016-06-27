@@ -49,20 +49,13 @@ alias bb='cd ...'
 
 alias sz='source ~/.zshrc'
 
-alias vz='vim ~/dotfiles/zshrc'
-alias vv='vim ~/dotfiles/vimrc'
-
-#grip readme viewer shortcut command
-gr() {
-  grip $1 3003 &
-  open "http://localhost:3003/"
-}
+alias vz='$EDITOR ~/dotfiles/zshrc'
+alias vv='#EDITOR ~/dotfiles/vimrc'
 
 #daemon watching
 alias na="nodemon --exec 'ava'"
 alias nx="nodemon --exec 'xo'"
 alias nt="nodemon --exec 'npm test'"
-
 alias pydemon="nodemon --exec 'python' "
 
 #youtube-dl mp3 alias
@@ -82,8 +75,6 @@ cm() {
 LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
 export LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-alias gnr="grep -Rn "
 
 source $HOME/dotfiles/zshrcs/arcAliases.sh
 source $HOME/dotfiles/zshrcs/gitAliases.sh
