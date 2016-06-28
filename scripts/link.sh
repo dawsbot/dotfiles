@@ -4,10 +4,10 @@
 ############################
 
 ########## Variables
-dir=~/dotfiles                    # dotfiles directory
+dir=~/dotfiles/link               # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 # files="vimrc zshrc eslintrc gitignore"    # list of files/folders to symlink in homedir
-files="vimrc zshrc"    # list of files/folders to symlink in homedir
+files="vimrc zshrc vim"    # list of files/folders to symlink in homedir
 
 # create dotfiles_old in homedir
 printf "\nCreating $olddir for backup of any existing dotfiles in ~"
