@@ -1,24 +1,24 @@
 echo "loaded dotfiles/zshrcs/gitAliases.sh"
 
 alias g='git '
-alias gs='git status'
-alias ga='git add'
-alias gaa='git add -A'
-alias gc='git commit'
-alias gch='git checkout'
+alias gs='git status '
+alias ga='git add '
+alias gaa='git add -A '
+alias gc='git commit '
+alias gch='git checkout '
+alias gchm='git checkout master '
 
-alias gp='git push'
-alias gps='git push staging'
-alias gpp='git push production'
-alias gpo='git push origin'
-alias gpom='git push origin master'
-alias gphm='git push heroku master'
-alias gpbm='git push origin master && git push heroku master'
-alias gpft='git push --follow-tags'
+alias gp='git push '
+alias gps='git push staging '
+alias gpp='git push production '
+alias gpo='git push origin '
+alias gpom='git push origin master '
+alias gphm='git push heroku master '
+alias gpbm='git push origin master && git push heroku master '
+alias gpft='git push --follow-tags '
 
 alias gd='git diff '
 alias gb='git branch '
-alias gch="git checkout "
 
 burn() {
   git branch -d "$1" # Delete branch locally
