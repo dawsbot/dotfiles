@@ -49,8 +49,8 @@ alias bb='cd ...'
 
 alias sz='source ~/.zshrc'
 
-alias vz='$EDITOR ~/dotfiles/zshrc'
-alias vv='#EDITOR ~/dotfiles/vimrc'
+alias vz='$EDITOR ~/.zshrc'
+alias vv='#EDITOR ~/.vimrc'
 
 #daemon watching
 alias na="nodemon --exec 'ava'"
@@ -81,3 +81,5 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 source $HOME/dotfiles/zshrcs/arcAliases.sh
 source $HOME/dotfiles/zshrcs/gitAliases.sh
 source $HOME/dotfiles/zshrcs/npmAliases.sh
+
+source ~/uberPrivaterc
