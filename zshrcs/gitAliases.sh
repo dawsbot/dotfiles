@@ -3,6 +3,7 @@ echo "loaded dotfiles/zshrcs/gitAliases.sh"
 alias g='git '
 alias gs='git status '
 alias ga='git add '
+alias gl='git log '
 alias gaa='git add -A '
 alias gc='git commit '
 alias gch='git checkout '
