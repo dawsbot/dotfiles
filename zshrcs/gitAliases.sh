@@ -22,7 +22,7 @@ alias gd='git diff '
 alias gb='git branch '
 
 burn() {
-  git branch -d "$1" # Delete branch locally
+  git branch -D "$1" # Delete branch locally
   git push origin :"$1" # Delete branch from remote (GitHub)
 }
 
