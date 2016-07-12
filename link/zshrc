@@ -55,7 +55,6 @@ alias vv='#EDITOR ~/.vimrc'
 #daemon watching
 alias na="nodemon --exec 'ava'"
 alias nx="nodemon --exec 'xo'"
-alias nt="nodemon --exec 'npm test'"
 alias pydemon="nodemon --exec 'python' "
 
 #youtube-dl mp3 alias
@@ -81,5 +80,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 source $HOME/dotfiles/zshrcs/arcAliases.sh
 source $HOME/dotfiles/zshrcs/gitAliases.sh
 source $HOME/dotfiles/zshrcs/npmAliases.sh
+source $HOME/dotfiles/zshrcs/utilities.sh
 
 source ~/uberPrivaterc
+
+export NVM_DIR="/Users/dawsonbotsford/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

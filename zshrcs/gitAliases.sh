@@ -1,5 +1,3 @@
-echo "loaded dotfiles/zshrcs/gitAliases.sh"
-
 alias g='git '
 alias gs='git status '
 alias ga='git add '
@@ -31,3 +29,13 @@ current_branch() {
 }
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
+
+# git push "this branch"
+gpt() {
+  git push origin "$(current_branch)"
+}
+
+gcl() {
+  git clone "$1"
+  # TODO: cd into cloned repo
+}
