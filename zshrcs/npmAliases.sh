@@ -1,5 +1,3 @@
-echo "loaded dotfiles/zshrcs/npmAliases.sh"
-
 alias ni='npm install '
 alias nis='npm install --save '
 alias nuis='npm uninstall --save '
@@ -13,6 +11,7 @@ alias nv='npm version '
 alias nvp='npm version patch '
 alias np='npm publish '
 alias ns='npm start '
+alias nt='npm test '
 alias pub='gpom && npm publish '
 
 alias npm-exec='PATH=$(npm bin):$PATH '
@@ -27,4 +26,9 @@ why() {
 
 opnm() {
   open https://npmjs.org/package/"$1"
+}
+
+die() {
+  rm -rf node_modules
+  npm install
 }
