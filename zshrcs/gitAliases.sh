@@ -16,6 +16,7 @@ alias gphm='git push heroku master '
 alias gpbm='git push origin master && git push heroku master '
 alias gpft='git push --follow-tags '
 
+alias gpu='git pull '
 alias gd='git diff '
 alias gb='git branch '
 
