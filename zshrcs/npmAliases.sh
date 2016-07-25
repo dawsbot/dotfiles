@@ -1,3 +1,7 @@
+
+alias i='npm install '
+alias t='npm test '
+
 alias ni='npm install '
 alias nis='npm install --save '
 alias nuis='npm uninstall --save '
@@ -11,6 +15,7 @@ alias nv='npm version '
 alias nvp='npm version patch '
 alias np='npm publish '
 alias ns='npm start '
+
 alias nt='npm test '
 alias pub='gpom && npm publish '
 
