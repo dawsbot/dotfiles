@@ -2,7 +2,7 @@
 # * Manually Install Chrome
 # * Manually Install Iterm2 https://www.iterm2.com/downloads.html
 
-#Does not require XCode tools
+#Does NOT require XCode tools
 #Set git configs
 git config --global user.name "Dawson Botsford"
 git config --global user.email "DawsonBotsford@gmail.com"
@@ -21,6 +21,11 @@ sh make.sh
 brew update
 brew install wget
 brew install node
+
+brew install diff-so-fancy
+# Set default "git diff" to be diff-so-fancy
+git config --global core.pager "diff-so-fancy | less --tabs=2 -RFX"
+
 npm install -g gh
 npm install -g npm-name-cli
 npm install -g hicat
