@@ -12,7 +12,7 @@ alias nuid='npm uninstall --save-dev '
 alias nl='npm link '
 alias l='link '
 alias nv='npm version '
-alias nvp='npm version patch '
+alias nvp='npm version patch && git push --follow-tags '
 alias np='npm publish '
 alias ns='npm start '
 
@@ -24,6 +24,7 @@ alias nr='npm run '
 alias nrw='npm run watch '
 alias nrb='npm run build '
 alias nrbd='npm run build-docs '
+alias nrsd='npm run serve-docs '
 
 why() {
   npm view "$1" description

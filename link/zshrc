@@ -50,7 +50,7 @@ alias bb='cd ...'
 alias sz='source ~/.zshrc'
 
 alias vz='$EDITOR ~/.zshrc'
-alias vv='#EDITOR ~/.vimrc'
+alias vv='$EDITOR ~/.vimrc'
 
 #daemon watching
 alias na="nodemon --exec 'ava'"
@@ -86,3 +86,5 @@ source ~/uberPrivaterc
 
 export NVM_DIR="/Users/dawsonbotsford/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+

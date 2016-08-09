@@ -6,6 +6,7 @@ alias gaa='git add -A '
 alias gc='git commit '
 alias gch='git checkout '
 alias gchm='git checkout master '
+alias gchb='git checkout -b '
 
 alias gp='git push '
 alias gps='git push staging '
