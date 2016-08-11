@@ -43,3 +43,4 @@ alias mk='mkdir'
 
 alias c='cd ~/code'
 alias v='vim '
+alias tr="tree -I 'node_modules'"
