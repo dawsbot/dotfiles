@@ -1,4 +1,4 @@
-# Dawson Botsford zshrc https://github.com/dawsonbotsford
+# Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
 
 # Increase history size
 HISTFILE=~/.zsh_history
@@ -13,8 +13,6 @@ export PATH=/usr/local/lib:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=$PATH:/usr/local/git/bin/
 export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:~/Library/Android/sdk
-export PATH=$PATH:~/Library/Android/sdk/tools
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 
@@ -22,7 +20,10 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 ZSH_THEME='agnoster'
 
 plugins=(git)
+plugins=(npm)
 plugins=(heroku)
+# ls colors
+plugins=(warhol)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -43,12 +44,7 @@ set clipboard=unnamed
 
 ########## ALIASES ###########
 
-#File movement aliases
-alias b='cd ..'
-alias bb='cd ...'
-
 alias sz='source ~/.zshrc'
-
 alias vz='$EDITOR ~/.zshrc'
 alias vv='$EDITOR ~/.vimrc'
 
@@ -60,22 +56,12 @@ alias pydemon="nodemon --exec 'python' "
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
-alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+# Shortcuts to executable files
 alias s="subl ."
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 alias howto='how2 -l javascript '
-
-cm() {
-  mkdir "$1"
-  cd "$1"
-}
-
-LS_COLORS='no=00;37:fi=00:di=00;33:ln=04;36:pi=40;33:so=01;35:bd=40;33;01:'
-# LSCOLORS='Exfxcxdxbxegedabagacad'
-export CLICOLOR=1
-# export LSCOLORS
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 source $HOME/dotfiles/zshrcs/arcAliases.sh
 source $HOME/dotfiles/zshrcs/gitAliases.sh
