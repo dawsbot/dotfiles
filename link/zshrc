@@ -19,9 +19,9 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 ZSH_THEME='agnoster'
 
-plugins=(git)
-plugins=(npm)
-plugins=(heroku)
+plugins=(git npm)
+plugins=(extract)
+
 # ls colors
 plugins=(warhol)
 

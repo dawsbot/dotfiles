@@ -13,6 +13,8 @@ alias nl='npm link '
 alias l='link '
 alias nv='npm version '
 alias nvp='npm version patch && git push --follow-tags '
+alias nvmi='npm version minor && git push --follow-tags '
+alias nvma='npm version major && git push --follow-tags '
 alias np='npm publish '
 alias ns='npm start '
 
