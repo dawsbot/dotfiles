@@ -1,33 +1,12 @@
 # copy last command
 alias copyLastCmd='fc -ln -1 | awk '{$1=$1}1' | pbcopy '
 
-extract () {
-   if [ -f $1 ] ; then
-       case $1 in
-           *.tar.bz2)   tar xvjf $1    ;;
-           *.tar.gz)    tar xvzf $1    ;;
-           *.bz2)       bunzip2 $1     ;;
-           *.rar)       unrar x $1       ;;
-           *.gz)        gunzip $1      ;;
-           *.tar)       tar xvf $1     ;;
-           *.tbz2)      tar xvjf $1    ;;
-           *.tgz)       tar xvzf $1    ;;
-           *.zip)       unzip $1       ;;
-           *.Z)         uncompress $1  ;;
-           *.7z)        7z x $1        ;;
-           *)           echo "ERROR: Don't know how to extract '$1'" ;;
-       esac
-   else
-       echo "'$1' is not a valid file!"
-   fi
-}
-
 # kill functions for processes
-kPhantom () {
-  pkill -f phantom
-}
-
+alias kPhantom='pkill -f phantom'
+alias kNode='pkill -f "node"'
 alias kFinder='killall Finder'
+
+alias kil='kPhantom && kNode && kFinder'
 
 # print the terminal color-scheme
 printColors () {
@@ -43,4 +22,4 @@ alias mk='mkdir'
 
 alias c='cd ~/code'
 alias v='vim '
-alias tr="tree -I 'node_modules'"
+alias tr="tree -I 'node_modules' -L 4"
