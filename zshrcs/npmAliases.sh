@@ -3,6 +3,8 @@ alias i='npm install '
 alias t='npm test '
 
 alias ni='npm install '
+alias nif='npm init -f '
+alias nit='npm install && npm test '
 alias nis='npm install --save '
 alias nuis='npm uninstall --save '
 alias nig='npm install --global '

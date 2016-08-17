@@ -46,3 +46,7 @@ sudo easy_install pip
 sudo pip install grip
 
 git clone git://github.com/tarruda/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# fzf setup
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
