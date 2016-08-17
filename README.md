@@ -1,12 +1,12 @@
 
-> Highly recommended dotfiles for OSX.
+> Highly recommended dotfiles for OSX hacking with maximum-efficient-speed.
 
 <br>
 
 Includes:  
 
 1. iterm2 setup with oh-my-zsh  
-2. vimrc setup with bundled packages
+2. vimrc setup with **all** bundled packages :tada:
 
 <br>
 
@@ -17,13 +17,35 @@ Includes:
 
 ### Install
 
-git clone this into your home directory (echo $HOME)
+#### XCode already installed
+```sh
+cd ~
+git clone https://github.com/dawsonbotsford/dotfiles
 
-
-```
 cd dotfiles
+# Link all dotfiles to $HOME
 sh scripts/link.sh
 ```
 
-This links your root files to the ~/dotfiles files. All modifications can be made to either the `~/<file>` or `~/dotfiles/link/<file>` since they are symlinked.
+This links your root files to the ~/dotfiles files. Modifications can be made to `~/<file>` **or** `~/dotfiles/link/<file>` since they are symlinked.
 
+<br>
+
+#### Brand-New Computer
+```sh
+cd ~
+git clone https://github.com/dawsonbotsford/dotfiles
+
+cd dotfiles
+# Will take ~20 minutes
+sh setup/freshOSXInstall.sh
+
+# Link all dotfiles to $HOME
+sh scripts/link.sh
+```
+
+<br>
+
+## License
+
+MIT © [Dawson Botsford](http://dawsonbotsford.com)

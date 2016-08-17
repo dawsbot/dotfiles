@@ -18,8 +18,9 @@ cz () {
   ls
 }
 
-alias mk='mkdir'
+eval $(thefuck --alias)
 
 alias c='cd ~/code'
 alias v='vim '
 alias tr="tree -I 'node_modules' -L 4"
+

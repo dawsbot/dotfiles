@@ -2,8 +2,8 @@
 
 # Increase history size
 HISTFILE=~/.zsh_history
-HISTSIZE=100000
-SAVEHIST=100000
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -73,4 +73,4 @@ source ~/uberPrivaterc
 export NVM_DIR="/Users/dawsonbotsford/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-
+source ~/.fzf.sh
