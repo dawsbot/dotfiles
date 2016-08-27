@@ -20,6 +20,7 @@ alias nvma='npm version major && git push --follow-tags '
 alias np='npm publish '
 alias ns='npm start '
 
+alias nt='npm test '
 alias pub='gpom && npm publish '
 
 alias npm-exec='PATH=$(npm bin):$PATH '
@@ -41,4 +42,3 @@ die() {
   rm -rf node_modules
   npm install
 }
-alias diet='die && npm run test'
