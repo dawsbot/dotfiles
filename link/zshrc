@@ -51,17 +51,21 @@ alias vv='$EDITOR ~/.vimrc'
 #daemon watching
 alias na="nodemon --exec 'ava'"
 alias nx="nodemon --exec 'xo'"
+alias nt="nodemon --exec 'npm test'"
 alias pydemon="nodemon --exec 'python' "
 
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
 # Shortcuts to executable files
+alias a="atom ."
 alias s="subl ."
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
-alias howto='how2 -l javascript '
+
+export NVM_DIR="/Users/dawsonbotsford/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 source $HOME/dotfiles/zshrcs/arcAliases.sh
 source $HOME/dotfiles/zshrcs/gitAliases.sh
@@ -70,7 +74,4 @@ source $HOME/dotfiles/zshrcs/utilities.sh
 
 source ~/uberPrivaterc
 
-export NVM_DIR="/Users/dawsonbotsford/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-source ~/.fzf.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

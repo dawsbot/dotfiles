@@ -1,0 +1,34 @@
+{
+  ".source.js.jsx": {
+    "editor": {
+      "commentStart": "// ",
+      "foldEndPattern": "^\\s*\\}|^\\s*\\]|^\\s*\\)",
+      "increaseIndentPattern": "{[^}\"']*$|\\[[^\\]\"']*$|\\([^)\"']*$",
+      "decreaseIndentPattern": "^\\s*(\\s*/[*].*[*]/\\s*)*[}\\])]",
+      "nonWordCharacters": "/\\()\"':,.;<>~!@#%^&*|+=[]{}`?-…"
+    }
+  },
+  ".meta.tag.jsx": {
+    "editor": {
+      "commentStart": "{/* ",
+      "commentEnd": " */}"
+    }
+  },
+  ".JSXAttrs": {
+    "editor": {
+      "commentStart": "// "
+    }
+  },
+  ".meta.embedded.expression.commented-out.jsx": {
+    "editor": {
+      "commentStart": "{/* ",
+      "commentEnd": " */}"
+    }
+  },
+  ".JSXNested": {
+    "editor": {
+      "commentStart": "{/* ",
+      "commentEnd": " */}"
+    }
+  }
+}

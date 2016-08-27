@@ -1,0 +1,142 @@
+Object.defineProperty(exports, '__esModule', {
+	value: true
+});
+exports.provideLinter = provideLinter;
+exports.activate = activate;
+exports.deactivate = deactivate;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+/** @babel */
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+var _atom = require('atom');
+
+var _loophole = require('loophole');
+
+var _atomSetText = require('atom-set-text');
+
+var _atomSetText2 = _interopRequireDefault(_atomSetText);
+
+var _pkgDir = require('pkg-dir');
+
+var _pkgDir2 = _interopRequireDefault(_pkgDir);
+
+var _loadJsonFile = require('load-json-file');
+
+var _eslintRuleDocumentation = require('eslint-rule-documentation');
+
+var _eslintRuleDocumentation2 = _interopRequireDefault(_eslintRuleDocumentation);
+
+var lintText = undefined;
+(0, _loophole.allowUnsafeNewFunction)(function () {
+	lintText = require('xo').lintText;
+});
+
+function lint(textEditor) {
+	var filePath = textEditor.getPath();
+	var dir = _pkgDir2['default'].sync(_path2['default'].dirname(filePath));
+
+	// no package.json
+	if (!dir) {
+		return [];
+	}
+
+	// ugly hack to workaround ESLint's lack of a `cwd` option
+	// TODO: remove this when https://github.com/sindresorhus/atom-linter-xo/issues/19 is resolved
+	var defaultCwd = process.cwd();
+	process.chdir(dir);
+
+	var pkg = (0, _loadJsonFile.sync)(_path2['default'].join(dir, 'package.json'));
+
+	// only lint when `xo` is a dependency
+	if (!(pkg.dependencies && pkg.dependencies.xo) && !(pkg.devDependencies && pkg.devDependencies.xo)) {
+		return [];
+	}
+
+	var report = undefined;
+	(0, _loophole.allowUnsafeNewFunction)(function () {
+		report = lintText(textEditor.getText(), {
+			cwd: dir,
+			filename: filePath
+		});
+	});
+
+	process.chdir(defaultCwd);
+
+	var textBuffer = textEditor.getBuffer();
+
+	return report.results[0].messages.map(function (x) {
+		var fix = undefined;
+
+		if (x.fix) {
+			fix = {
+				range: new _atom.Range(textBuffer.positionForCharacterIndex(x.fix.range[0]), textBuffer.positionForCharacterIndex(x.fix.range[1])),
+				newText: x.fix.text
+			};
+		}
+
+		var ret = {
+			filePath: filePath,
+			fix: fix,
+			type: x.severity === 2 ? 'Error' : 'Warning',
+			html: '<span>' + x.message + ' (<a href=' + (0, _eslintRuleDocumentation2['default'])(x.ruleId || '').url + '>' + x.ruleId + '</a>)</span>'
+		};
+
+		// some messages don't have these
+		if (typeof x.line === 'number' && typeof x.column === 'number') {
+			ret.range = [[x.line - 1, x.column - 1], [x.line - 1, x.column - 1]];
+		}
+
+		return ret;
+	});
+}
+
+function provideLinter() {
+	return {
+		name: 'XO',
+		grammarScopes: ['source.js', 'source.jsx', 'source.js.jsx'],
+		scope: 'file',
+		lintOnFly: true,
+		lint: lint
+	};
+}
+
+function activate() {
+	require('atom-package-deps').install('linter-xo');
+
+	this.subscriptions = new _atom.CompositeDisposable();
+	this.subscriptions.add(atom.commands.add('atom-text-editor', {
+		'XO:Fix': function XOFix() {
+			var editor = atom.workspace.getActiveTextEditor();
+
+			if (!editor) {
+				return;
+			}
+
+			var report = undefined;
+
+			(0, _loophole.allowUnsafeNewFunction)(function () {
+				report = lintText(editor.getText(), {
+					fix: true,
+					cwd: _path2['default'].dirname(editor.getPath())
+				});
+			});
+
+			var output = report.results[0].output;
+
+			if (output) {
+				(0, _atomSetText2['default'])(output);
+			}
+		}
+	}));
+}
+
+function deactivate() {
+	this.subscriptions.dispose();
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9kYXdzb25ib3RzZm9yZC8uYXRvbS9wYWNrYWdlcy9saW50ZXIteG8vaW5kZXguanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7b0JBQ2lCLE1BQU07Ozs7b0JBQ2tCLE1BQU07O3dCQUNWLFVBQVU7OzJCQUMzQixlQUFlOzs7O3NCQUNoQixTQUFTOzs7OzRCQUNHLGdCQUFnQjs7dUNBQzNCLDJCQUEyQjs7OztBQUUvQyxJQUFJLFFBQVEsWUFBQSxDQUFDO0FBQ2Isc0NBQXVCLFlBQU07QUFDNUIsU0FBUSxHQUFHLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQyxRQUFRLENBQUM7Q0FDbEMsQ0FBQyxDQUFDOztBQUVILFNBQVMsSUFBSSxDQUFDLFVBQVUsRUFBRTtBQUN6QixLQUFNLFFBQVEsR0FBRyxVQUFVLENBQUMsT0FBTyxFQUFFLENBQUM7QUFDdEMsS0FBTSxHQUFHLEdBQUcsb0JBQU8sSUFBSSxDQUFDLGtCQUFLLE9BQU8sQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDOzs7QUFHaEQsS0FBSSxDQUFDLEdBQUcsRUFBRTtBQUNULFNBQU8sRUFBRSxDQUFDO0VBQ1Y7Ozs7QUFJRCxLQUFNLFVBQVUsR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLENBQUM7QUFDakMsUUFBTyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQzs7QUFFbkIsS0FBTSxHQUFHLEdBQUcsd0JBQVMsa0JBQUssSUFBSSxDQUFDLEdBQUcsRUFBRSxjQUFjLENBQUMsQ0FBQyxDQUFDOzs7QUFHckQsS0FBSSxFQUFFLEdBQUcsQ0FBQyxZQUFZLElBQUksR0FBRyxDQUFDLFlBQVksQ0FBQyxFQUFFLENBQUEsQUFBQyxJQUM3QyxFQUFFLEdBQUcsQ0FBQyxlQUFlLElBQUksR0FBRyxDQUFDLGVBQWUsQ0FBQyxFQUFFLENBQUEsQUFBQyxFQUFFO0FBQ2xELFNBQU8sRUFBRSxDQUFDO0VBQ1Y7O0FBRUQsS0FBSSxNQUFNLFlBQUEsQ0FBQztBQUNYLHVDQUF1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QUUsQ0FBQztLQUNuQyxDQUFDLENBQUM7SUFDSCxDQUFDLENBQUM7O0FBRUgsT0FBTSxNQUFNLEdBQUcsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUM7O0FBRXhDLE9BQUksTUFBTSxFQUFFO0FBQ1gsa0NBQVEsTUFBTSxDQUFDLENBQUM7SUFDaEI7R0FDRDtFQUNELENBQUMsQ0FBQyxDQUFDO0NBQ0o7O0FBRU0sU0FBUyxVQUFVLEdBQUc7QUFDNUIsS0FBSSxDQUFDLGFBQWEsQ0FBQyxPQUFPLEVBQUUsQ0FBQztDQUM3QiIsImZpbGUiOiIvVXNlcnMvZGF3c29uYm90c2ZvcmQvLmF0b20vcGFja2FnZXMvbGludGVyLXhvL2luZGV4LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqIEBiYWJlbCAqL1xuaW1wb3J0IHBhdGggZnJvbSAncGF0aCc7XG5pbXBvcnQge0NvbXBvc2l0ZURpc3Bvc2FibGUsIFJhbmdlfSBmcm9tICdhdG9tJztcbmltcG9ydCB7YWxsb3dVbnNhZmVOZXdGdW5jdGlvbn0gZnJvbSAnbG9vcGhvbGUnO1xuaW1wb3J0IHNldFRleHQgZnJvbSAnYXRvbS1zZXQtdGV4dCc7XG5pbXBvcnQgcGtnRGlyIGZyb20gJ3BrZy1kaXInO1xuaW1wb3J0IHtzeW5jIGFzIGxvYWRKc29ufSBmcm9tICdsb2FkLWpzb24tZmlsZSc7XG5pbXBvcnQgcnVsZVVSSSBmcm9tICdlc2xpbnQtcnVsZS1kb2N1bWVudGF0aW9uJztcblxubGV0IGxpbnRUZXh0O1xuYWxsb3dVbnNhZmVOZXdGdW5jdGlvbigoKSA9PiB7XG5cdGxpbnRUZXh0ID0gcmVxdWlyZSgneG8nKS5saW50VGV4dDtcbn0pO1xuXG5mdW5jdGlvbiBsaW50KHRleHRFZGl0b3IpIHtcblx0Y29uc3QgZmlsZVBhdGggPSB0ZXh0RWRpdG9yLmdldFBhdGgoKTtcblx0Y29uc3QgZGlyID0gcGtnRGlyLnN5bmMocGF0aC5kaXJuYW1lKGZpbGVQYXRoKSk7XG5cblx0Ly8gbm8gcGFja2FnZS5qc29uXG5cdGlmICghZGlyKSB7XG5cdFx0cmV0dXJuIFtdO1xuXHR9XG5cblx0Ly8gdWdseSBoYWNrIHRvIHdvcmthcm91bmQgRVNMaW50J3MgbGFjayBvZiBhIGBjd2RgIG9wdGlvblxuXHQvLyBUT0RPOiByZW1vdmUgdGhpcyB3aGVuIGh0dHBzOi8vZ2l0aHViLmNvbS9zaW5kcmVzb3JodXMvYXRvbS1saW50ZXIteG8vaXNzdWVzLzE5IGlzIHJlc29sdmVkXG5cdGNvbnN0IGRlZmF1bHRDd2QgPSBwcm9jZXNzLmN3ZCgpO1xuXHRwcm9jZXNzLmNoZGlyKGRpcik7XG5cblx0Y29uc3QgcGtnID0gbG9hZEpzb24ocGF0aC5qb2luKGRpciwgJ3BhY2thZ2UuanNvbicpKTtcblxuXHQvLyBvbmx5IGxpbnQgd2hlbiBgeG9gIGlzIGEgZGVwZW5kZW5jeVxuXHRpZiAoIShwa2cuZGVwZW5kZW5jaWVzICYmIHBrZy5kZXBlbmRlbmNpZXMueG8pICYmXG5cdFx0IShwa2cuZGV2RGVwZW5kZW5jaWVzICYmIHBrZy5kZXZEZXBlbmRlbmNpZXMueG8pKSB7XG5cdFx0cmV0dXJuIFtdO1xuXHR9XG5cblx0bGV0IHJlcG9ydDtcblx0YWxsb3dVbnNhZmVOZXdGdW5jdGlvbigoKSA9PiB7XG5cdFx0cmVwb3J0ID0gbGludFRleHQodGV4dEVkaXRvci5nZXRUZXh0KCksIHtcblx0XHRcdGN3ZDogZGlyLFxuXHRcdFx0ZmlsZW5hbWU6IGZpbGVQYXRoXG5cdFx0fSk7XG5cdH0pO1xuXG5cdHByb2Nlc3MuY2hkaXIoZGVmYXVsdEN3ZCk7XG5cblx0Y29uc3QgdGV4dEJ1ZmZlciA9IHRleHRFZGl0b3IuZ2V0QnVmZmVyKCk7XG5cblx0cmV0dXJuIHJlcG9ydC5yZXN1bHRzWzBdLm1lc3NhZ2VzLm1hcCh4ID0+IHtcblx0XHRsZXQgZml4O1xuXG5cdFx0aWYgKHguZml4KSB7XG5cdFx0XHRmaXggPSB7XG5cdFx0XHRcdHJhbmdlOiBuZXcgUmFuZ2UoXG5cdFx0XHRcdFx0dGV4dEJ1ZmZlci5wb3NpdGlvbkZvckNoYXJhY3RlckluZGV4KHguZml4LnJhbmdlWzBdKSxcblx0XHRcdFx0XHR0ZXh0QnVmZmVyLnBvc2l0aW9uRm9yQ2hhcmFjdGVySW5kZXgoeC5maXgucmFuZ2VbMV0pXG5cdFx0XHRcdCksXG5cdFx0XHRcdG5ld1RleHQ6IHguZml4LnRleHRcblx0XHRcdH07XG5cdFx0fVxuXG5cdFx0Y29uc3QgcmV0ID0ge1xuXHRcdFx0ZmlsZVBhdGgsXG5cdFx0XHRmaXgsXG5cdFx0XHR0eXBlOiB4LnNldmVyaXR5ID09PSAyID8gJ0Vycm9yJyA6ICdXYXJuaW5nJyxcblx0XHRcdGh0bWw6IGA8c3Bhbj4ke3gubWVzc2FnZX0gKDxhIGhyZWY9JHtydWxlVVJJKHgucnVsZUlkIHx8ICcnKS51cmx9PiR7eC5ydWxlSWR9PC9hPik8L3NwYW4+YFxuXHRcdH07XG5cblx0XHQvLyBzb21lIG1lc3NhZ2VzIGRvbid0IGhhdmUgdGhlc2Vcblx0XHRpZiAodHlwZW9mIHgubGluZSA9PT0gJ251bWJlcicgJiYgdHlwZW9mIHguY29sdW1uID09PSAnbnVtYmVyJykge1xuXHRcdFx0cmV0LnJhbmdlID0gW1xuXHRcdFx0XHRbeC5saW5lIC0gMSwgeC5jb2x1bW4gLSAxXSxcblx0XHRcdFx0W3gubGluZSAtIDEsIHguY29sdW1uIC0gMV1cblx0XHRcdF07XG5cdFx0fVxuXG5cdFx0cmV0dXJuIHJldDtcblx0fSk7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBwcm92aWRlTGludGVyKCkge1xuXHRyZXR1cm4ge1xuXHRcdG5hbWU6ICdYTycsXG5cdFx0Z3JhbW1hclNjb3BlczogW1xuXHRcdFx0J3NvdXJjZS5qcycsXG5cdFx0XHQnc291cmNlLmpzeCcsXG5cdFx0XHQnc291cmNlLmpzLmpzeCdcblx0XHRdLFxuXHRcdHNjb3BlOiAnZmlsZScsXG5cdFx0bGludE9uRmx5OiB0cnVlLFxuXHRcdGxpbnRcblx0fTtcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIGFjdGl2YXRlKCkge1xuXHRyZXF1aXJlKCdhdG9tLXBhY2thZ2UtZGVwcycpLmluc3RhbGwoJ2xpbnRlci14bycpO1xuXG5cdHRoaXMuc3Vic2NyaXB0aW9ucyA9IG5ldyBDb21wb3NpdGVEaXNwb3NhYmxlKCk7XG5cdHRoaXMuc3Vic2NyaXB0aW9ucy5hZGQoYXRvbS5jb21tYW5kcy5hZGQoJ2F0b20tdGV4dC1lZGl0b3InLCB7XG5cdFx0J1hPOkZpeCc6ICgpID0+IHtcblx0XHRcdGNvbnN0IGVkaXRvciA9IGF0b20ud29ya3NwYWNlLmdldEFjdGl2ZVRleHRFZGl0b3IoKTtcblxuXHRcdFx0aWYgKCFlZGl0b3IpIHtcblx0XHRcdFx0cmV0dXJuO1xuXHRcdFx0fVxuXG5cdFx0XHRsZXQgcmVwb3J0O1xuXG5cdFx0XHRhbGxvd1Vuc2FmZU5ld0Z1bmN0aW9uKCgpID0+IHtcblx0XHRcdFx0cmVwb3J0ID0gbGludFRleHQoZWRpdG9yLmdldFRleHQoKSwge1xuXHRcdFx0XHRcdGZpeDogdHJ1ZSxcblx0XHRcdFx0XHRjd2Q6IHBhdGguZGlybmFtZShlZGl0b3IuZ2V0UGF0aCgpKVxuXHRcdFx0XHR9KTtcblx0XHRcdH0pO1xuXG5cdFx0XHRjb25zdCBvdXRwdXQgPSByZXBvcnQucmVzdWx0c1swXS5vdXRwdXQ7XG5cblx0XHRcdGlmIChvdXRwdXQpIHtcblx0XHRcdFx0c2V0VGV4dChvdXRwdXQpO1xuXHRcdFx0fVxuXHRcdH1cblx0fSkpO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gZGVhY3RpdmF0ZSgpIHtcblx0dGhpcy5zdWJzY3JpcHRpb25zLmRpc3Bvc2UoKTtcbn1cbiJdfQ==
+//# sourceURL=/Users/dawsonbotsford/.atom/packages/linter-xo/index.js
