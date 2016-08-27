@@ -21,6 +21,7 @@ sh make.sh
 brew update
 brew install wget
 brew install node
+brew install the_silver_searcher # Also known as "ag"
 
 brew install diff-so-fancy
 # Set default "git diff" to be diff-so-fancy

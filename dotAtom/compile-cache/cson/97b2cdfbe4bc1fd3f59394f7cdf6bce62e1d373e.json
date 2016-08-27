@@ -1,0 +1,1 @@
+{"atom-text-editor.vim-mode-plus:not(.insert-mode)":{":":"ex-mode:open"},"atom-text-editor.vim-mode.normal-mode":{"space h":"window:focus-pane-on-left","space l":"window:focus-pane-on-right","space w":"core:save","space q":"tabs:close-tab","g c":"emmet:toggle-comment"}}

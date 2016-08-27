@@ -1,0 +1,1 @@
+{".source.js":{"setTimeout":{"prefix":"st","body":"setTimeout(() => {\n\t${0}\n}, ${1:delay});"},"setInterval":{"prefix":"si","body":"setInterval(() => {\n\t${0}\n}, ${1:delay});"},"setImmediate":{"prefix":"sim","body":"setImmediate(() => {\n\t${0}\n});"}}}
