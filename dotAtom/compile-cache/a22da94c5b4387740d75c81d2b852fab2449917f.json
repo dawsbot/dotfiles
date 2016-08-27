@@ -1,0 +1,1 @@
+{"menu":[{"label":"Packages","submenu":[{"label":"Terminal Status","submenu":[{"label":"New","command":"terminal-status:new"},{"label":"Toggle","command":"terminal-status:toggle"},{"label":"Prev","command":"terminal-status:prev"},{"label":"Next","command":"terminal-status:next"}]}]}]}

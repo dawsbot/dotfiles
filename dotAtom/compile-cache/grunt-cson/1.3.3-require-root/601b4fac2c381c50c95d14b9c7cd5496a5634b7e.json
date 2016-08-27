@@ -1,0 +1,9 @@
+{
+  ".source.makefile": {
+    "editor": {
+      "increaseIndentPattern": "^[^\\t ]+:",
+      "commentStart": "# ",
+      "tabType": "hard"
+    }
+  }
+}
