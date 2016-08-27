@@ -1,0 +1,1 @@
+{"menu":[{"label":"Packages","submenu":[{"label":"npm install","submenu":[{"label":"--save","command":"npm-install:save"},{"label":"--save-dev","command":"npm-install:save-dev"}]}]}]}

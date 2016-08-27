@@ -1,0 +1,113 @@
+(function() {
+  var AutoComplete, Ex, fs, os, path;
+
+  fs = require('fs');
+
+  path = require('path');
+
+  os = require('os');
+
+  Ex = require('./ex');
+
+  module.exports = AutoComplete = (function() {
+    function AutoComplete(commands) {
+      this.commands = commands;
+      this.resetCompletion();
+    }
+
+    AutoComplete.prototype.resetCompletion = function() {
+      this.autoCompleteIndex = 0;
+      this.autoCompleteText = null;
+      return this.completions = [];
+    };
+
+    AutoComplete.prototype.expandTilde = function(filePath) {
+      if (filePath.charAt(0) === '~') {
+        return os.homedir() + filePath.slice(1);
+      } else {
+        return filePath;
+      }
+    };
+
+    AutoComplete.prototype.getAutocomplete = function(text) {
+      var cmd, filePath, parts;
+      if (!this.autoCompleteText) {
+        this.autoCompleteText = text;
+      }
+      parts = this.autoCompleteText.split(' ');
+      cmd = parts[0];
+      if (parts.length > 1) {
+        filePath = parts.slice(1).join(' ');
+        return this.getCompletion((function(_this) {
+          return function() {
+            return _this.getFilePathCompletion(cmd, filePath);
+          };
+        })(this));
+      } else {
+        return this.getCompletion((function(_this) {
+          return function() {
+            return _this.getCommandCompletion(cmd);
+          };
+        })(this));
+      }
+    };
+
+    AutoComplete.prototype.filterByPrefix = function(commands, prefix) {
+      return commands.sort().filter((function(_this) {
+        return function(f) {
+          return f.startsWith(prefix);
+        };
+      })(this));
+    };
+
+    AutoComplete.prototype.getCompletion = function(completeFunc) {
+      var complete;
+      if (this.completions.length === 0) {
+        this.completions = completeFunc();
+      }
+      if (this.completions.length) {
+        complete = this.completions[this.autoCompleteIndex % this.completions.length];
+        this.autoCompleteIndex++;
+        if (complete.endsWith('/') && this.completions.length === 1) {
+          this.resetCompletion();
+        }
+        return complete;
+      }
+    };
+
+    AutoComplete.prototype.getCommandCompletion = function(command) {
+      return this.filterByPrefix(this.commands, command);
+    };
+
+    AutoComplete.prototype.getFilePathCompletion = function(command, filePath) {
+      var baseName, basePath, files;
+      filePath = this.expandTilde(filePath);
+      if (filePath.endsWith(path.sep)) {
+        basePath = path.dirname(filePath + '.');
+        baseName = '';
+      } else {
+        basePath = path.dirname(filePath);
+        baseName = path.basename(filePath);
+      }
+      files = fs.readdirSync(basePath);
+      return this.filterByPrefix(files, baseName).map((function(_this) {
+        return function(f) {
+          filePath = path.join(basePath, f);
+          if (fs.lstatSync(filePath).isDirectory()) {
+            return command + ' ' + filePath + path.sep;
+          } else {
+            return command + ' ' + filePath;
+          }
+        };
+      })(this));
+    };
+
+    return AutoComplete;
+
+  })();
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAiZmlsZSI6ICIiLAogICJzb3VyY2VSb290IjogIiIsCiAgInNvdXJjZXMiOiBbCiAgICAiL1VzZXJzL2Rhd3NvbmJvdHNmb3JkLy5hdG9tL3BhY2thZ2VzL2V4LW1vZGUvbGliL2F1dG9jb21wbGV0ZS5jb2ZmZWUiCiAgXSwKICAibmFtZXMiOiBbXSwKICAibWFwcGluZ3MiOiAiQUFBQTtBQUFBLE1BQUEsOEJBQUE7O0FBQUEsRUFBQSxFQUFBLEdBQUssT0FBQSxDQUFRLElBQVIsQ0FBTCxDQUFBOztBQUFBLEVBQ0EsSUFBQSxHQUFPLE9BQUEsQ0FBUSxNQUFSLENBRFAsQ0FBQTs7QUFBQSxFQUVBLEVBQUEsR0FBSyxPQUFBLENBQVEsSUFBUixDQUZMLENBQUE7O0FBQUEsRUFHQSxFQUFBLEdBQUssT0FBQSxDQUFRLE1BQVIsQ0FITCxDQUFBOztBQUFBLEVBS0EsTUFBTSxDQUFDLE9BQVAsR0FDTTtBQUNTLElBQUEsc0JBQUMsUUFBRCxHQUFBO0FBQ1gsTUFBQSxJQUFDLENBQUEsUUFBRCxHQUFZLFFBQVosQ0FBQTtBQUFBLE1BQ0EsSUFBQyxDQUFBLGVBQUQsQ0FBQSxDQURBLENBRFc7SUFBQSxDQUFiOztBQUFBLDJCQUlBLGVBQUEsR0FBaUIsU0FBQSxHQUFBO0FBQ2YsTUFBQSxJQUFDLENBQUEsaUJBQUQsR0FBcUIsQ0FBckIsQ0FBQTtBQUFBLE1BQ0EsSUFBQyxDQUFBLGdCQUFELEdBQW9CLElBRHBCLENBQUE7YUFFQSxJQUFDLENBQUEsV0FBRCxHQUFlLEdBSEE7SUFBQSxDQUpqQixDQUFBOztBQUFBLDJCQVNBLFdBQUEsR0FBYSxTQUFDLFFBQUQsR0FBQTtBQUNYLE1BQUEsSUFBRyxRQUFRLENBQUMsTUFBVCxDQUFnQixDQUFoQixDQUFBLEtBQXNCLEdBQXpCO0FBQ0UsZUFBTyxFQUFFLENBQUMsT0FBSCxDQUFBLENBQUEsR0FBZSxRQUFRLENBQUMsS0FBVCxDQUFlLENBQWYsQ0FBdEIsQ0FERjtPQUFBLE1BQUE7QUFHRSxlQUFPLFFBQVAsQ0FIRjtPQURX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
+
+//# sourceURL=/Users/dawsonbotsford/.atom/packages/ex-mode/lib/autocomplete.coffee

@@ -1,0 +1,116 @@
+(function() {
+  var GitDiff, GitDiffAll, currentPane, diffPane, fs, git, openPromise, pathToRepoFile, repo, textEditor, _ref,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  fs = require('fs-plus');
+
+  _ref = require('../fixtures'), repo = _ref.repo, pathToRepoFile = _ref.pathToRepoFile, textEditor = _ref.textEditor;
+
+  git = require('../../lib/git');
+
+  GitDiff = require('../../lib/models/git-diff');
+
+  GitDiffAll = require('../../lib/models/git-diff-all');
+
+  currentPane = {
+    splitRight: function() {}
+  };
+
+  diffPane = {
+    splitRight: function() {
+      return void 0;
+    },
+    getActiveEditor: function() {
+      return textEditor;
+    }
+  };
+
+  openPromise = {
+    done: function(cb) {
+      return cb(textEditor);
+    }
+  };
+
+  describe("GitDiff", function() {
+    beforeEach(function() {
+      atom.config.set('git-plus.includeStagedDiff', true);
+      spyOn(atom.workspace, 'getActiveTextEditor').andReturn(textEditor);
+      spyOn(atom.workspace, 'open').andReturn(Promise.resolve(textEditor));
+      spyOn(git, 'cmd').andReturn(Promise.resolve('diffs'));
+      return waitsForPromise(function() {
+        return GitDiff(repo, {
+          file: pathToRepoFile
+        });
+      });
+    });
+    return describe("when git-plus.includeStagedDiff config is true", function() {
+      return it("calls git.cmd and specifies 'HEAD'", function() {
+        return expect(__indexOf.call(git.cmd.mostRecentCall.args[0], 'HEAD') >= 0).toBe(true);
+      });
+    });
+  });
+
+  describe("GitDiff when git-plus.wordDiff config is true", function() {
+    beforeEach(function() {
+      atom.config.set('git-plus.wordDiff', true);
+      atom.config.set('git-plus.includeStagedDiff', true);
+      spyOn(atom.workspace, 'getActiveTextEditor').andReturn(textEditor);
+      spyOn(atom.workspace, 'open').andReturn(Promise.resolve(textEditor));
+      spyOn(git, 'cmd').andReturn(Promise.resolve('diffs'));
+      return waitsForPromise(function() {
+        return GitDiff(repo, {
+          file: pathToRepoFile
+        });
+      });
+    });
+    return it("calls git.cmd and uses '--word-diff' flag", function() {
+      return expect(__indexOf.call(git.cmd.mostRecentCall.args[0], '--word-diff') >= 0).toBe(true);
+    });
+  });
+
+  describe("GitDiff when a file is not specified", function() {
+    beforeEach(function() {
+      atom.config.set('git-plus.includeStagedDiff', true);
+      spyOn(atom.workspace, 'getActiveTextEditor').andReturn(textEditor);
+      spyOn(atom.workspace, 'open').andReturn(Promise.resolve(textEditor));
+      spyOn(git, 'cmd').andReturn(Promise.resolve('diffs'));
+      return waitsForPromise(function() {
+        return GitDiff(repo);
+      });
+    });
+    return it("checks for the current open file", function() {
+      return expect(atom.workspace.getActiveTextEditor).toHaveBeenCalled();
+    });
+  });
+
+  describe("GitDiffAll", function() {
+    beforeEach(function() {
+      atom.config.set('git-plus.includeStagedDiff', true);
+      spyOn(atom.workspace, 'getActiveTextEditor').andReturn(textEditor);
+      spyOn(atom.workspace, 'open').andReturn(Promise.resolve(textEditor));
+      spyOn(fs, 'writeFile').andCallFake(function() {
+        return fs.writeFile.mostRecentCall.args[3]();
+      });
+      spyOn(git, 'cmd').andCallFake(function() {
+        var args;
+        args = git.cmd.mostRecentCall.args[0];
+        if (args[1] === '--stat') {
+          return Promise.resolve('diff stats\n');
+        } else {
+          return Promise.resolve('diffs');
+        }
+      });
+      return waitsForPromise(function() {
+        return GitDiffAll(repo);
+      });
+    });
+    return it("includes the diff stats in the diffs window", function() {
+      return expect(fs.writeFile.mostRecentCall.args[1].includes('diff stats')).toBe(true);
+    });
+  });
+
+}).call(this);
+
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAiZmlsZSI6ICIiLAogICJzb3VyY2VSb290IjogIiIsCiAgInNvdXJjZXMiOiBbCiAgICAiL1VzZXJzL2Rhd3NvbmJvdHNmb3JkLy5hdG9tL3BhY2thZ2VzL2dpdC1wbHVzL3NwZWMvbW9kZWxzL2dpdC1kaWZmLXNwZWMuY29mZmVlIgogIF0sCiAgIm5hbWVzIjogW10sCiAgIm1hcHBpbmdzIjogIkFBQUE7QUFBQSxNQUFBLHdHQUFBO0lBQUEscUpBQUE7O0FBQUEsRUFBQSxFQUFBLEdBQUssT0FBQSxDQUFRLFNBQVIsQ0FBTCxDQUFBOztBQUFBLEVBQ0EsT0FBcUMsT0FBQSxDQUFRLGFBQVIsQ0FBckMsRUFBQyxZQUFBLElBQUQsRUFBTyxzQkFBQSxjQUFQLEVBQXVCLGtCQUFBLFVBRHZCLENBQUE7O0FBQUEsRUFFQSxHQUFBLEdBQU0sT0FBQSxDQUFRLGVBQVIsQ0FGTixDQUFBOztBQUFBLEVBR0EsT0FBQSxHQUFVLE9BQUEsQ0FBUSwyQkFBUixDQUhWLENBQUE7O0FBQUEsRUFJQSxVQUFBLEdBQWEsT0FBQSxDQUFRLCtCQUFSLENBSmIsQ0FBQTs7QUFBQSxFQU1BLFdBQUEsR0FDRTtBQUFBLElBQUEsVUFBQSxFQUFZLFNBQUEsR0FBQSxDQUFaO0dBUEYsQ0FBQTs7QUFBQSxFQVFBLFFBQUEsR0FDRTtBQUFBLElBQUEsVUFBQSxFQUFZLFNBQUEsR0FBQTthQUFHLE9BQUg7SUFBQSxDQUFaO0FBQUEsSUFDQSxlQUFBLEVBQWlCLFNBQUEsR0FBQTthQUFHLFdBQUg7SUFBQSxDQURqQjtHQVRGLENBQUE7O0FBQUEsRUFXQSxXQUFBLEdBQ0U7QUFBQSxJQUFBLElBQUEsRUFBTSxTQUFDLEVBQUQsR0FBQTthQUFRLEVBQUEsQ0FBRyxVQUFILEVBQVI7SUFBQSxDQUFOO0dBWkYsQ0FBQTs7QUFBQSxFQWNBLFFBQUEsQ0FBUyxTQUFULEVBQW9CLFNBQUEsR0FBQTtBQUNsQixJQUFBLFVBQUEsQ0FBVyxTQUFBLEdBQUE7QUFDVCxNQUFBLElBQUksQ0FBQyxNQUFNLENBQUMs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
+
+//# sourceURL=/Users/dawsonbotsford/.atom/packages/git-plus/spec/models/git-diff-spec.coffee

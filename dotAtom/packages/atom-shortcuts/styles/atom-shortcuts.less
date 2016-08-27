@@ -1,0 +1,51 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.atom-shortcuts {
+  color: @text-color;
+  font-size: 10px;
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  margin: 3%;
+  padding: 10px;
+  background-color: @app-background-color;
+  z-index: 3;
+  border: 1px solid @base-border-color;
+
+  .left {
+    float: left;
+  }
+
+  .item {
+    border: 1px solid @text-color;
+    border-bottom: 0;
+    padding: 5px;
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .item-last {
+    border-bottom: 1px solid @text-color;
+  }
+
+  .one-third {
+    width: 33.3%;
+  }
+
+  .section {
+    padding: 5px;
+    border-bottom: 0;
+    h2 {
+      margin: 0;
+      padding: 5px 0;
+    }
+  }
+
+
+}
