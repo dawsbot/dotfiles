@@ -1,9 +1,6 @@
 "*":
   core:
     audioBeep: false
-    disabledPackages: [
-      "autocomplete-plus"
-    ]
     projectHome: "/Users/dawsonbotsford/code"
     themes: [
       "one-dark-ui"
@@ -11,6 +8,7 @@
     ]
   editor:
     fontFamily: "Operator Mono"
+    fontSize: 16
     lineHeight: 1.1
     showIndentGuide: true
     showInvisibles: true

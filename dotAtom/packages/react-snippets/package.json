@@ -1,0 +1,51 @@
+{
+  "name": "react-snippets",
+  "version": "0.4.2",
+  "description": "Atom Snippets for React, React Router and Flux",
+  "main": "./lib/react-snippets",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webbushka/atom-react-snippets.git"
+  },
+  "keywords": [
+    "react",
+    "react router",
+    "flux",
+    "snippets",
+    "es6"
+  ],
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webbushka/atom-react-snippets/issues"
+  },
+  "homepage": "https://github.com/webbushka/atom-react-snippets",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-lintspaces": "^0.3.0"
+  },
+  "readme": "Atom React.js Snippets [![Build Status](https://travis-ci.org/webbushka/atom-react-snippets.svg?branch=master)](https://travis-ci.org/webbushka/atom-react-snippets)\n====================================================================================================================================================================\n\nAn [Atom](https://atom.io/) snippet library for React, React Router and Flux. This library uses ES6 syntax, if you would prefer ES5 or Coffeescript snippets please use the [Atom React Package](https://atom.io/packages/react).\n\nInstall\n-------\n\nGo to `Packages > Settings View > Open` once in settings go to the Install tab and search for **react-snippets**\n\nRestart Atom\n\nDocumentation\n--------\n\n-\t[React Snippets](https://github.com/webbushka/atom-react-snippets/wiki/React-Snippets)\n-\t[React Router Snippets](https://github.com/webbushka/atom-react-snippets/wiki/Router-Snippets)\n-\t[Flux Snippets](https://github.com/webbushka/atom-react-snippets/wiki/Flux-Snippets)\n\nDevelopment\n-----------\n\n```sh\n$ cd ~/.atom/packages\n$ git clone https://github.com/webbushka/atom-react-snippets.git\n$ cd atom-react-snippets\n$ apm install\n$ apm link\n```\n\nFeatures\n--------\n\n-\tReact Snippets\n-\tReact Router Snippets - Needs update from v0.13 to v2.1\n-\tFlux Snippets\n\nContributing\n------------\n\n1.\tFork it!\n2.\tCreate your feature branch: `git checkout -b my-new-feature`\n3.\tCommit your changes: `git commit -m 'Add some feature'`\n4.\tPush to the branch: `git push origin my-new-feature`\n5.\tSubmit a pull request\n\nChange Log\n----------\n\n[It's over here!](https://github.com/webbushka/atom-react-snippets/wiki/Changelogs)\n\nLicense\n-------\n\n[MIT License](http://zenorocha.mit-license.org/) © Zeno Rocha\n\nCredit\n------\n\nThe React.js snippets were originally created by [orktes](https://atom.io/users/orktes) in [Atom React](https://atom.io/packages/react) in ES5 syntax.\n",
+  "readmeFilename": "README.md",
+  "_id": "react-snippets@0.4.2",
+  "_shasum": "0b5383f1c9a5e9c8e9310fe411f64d79be94f7e3",
+  "_resolved": "file:../d-116726-33604-1p0kshq/package.tgz",
+  "_from": "../d-116726-33604-1p0kshq/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".js": [
+        "Gulpfile.js"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}
