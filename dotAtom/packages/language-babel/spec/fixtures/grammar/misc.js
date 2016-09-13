@@ -26,7 +26,7 @@ function foo2(bar /*:: ?: string*/) {}
 //                ^^            ^^      punctuation.definition.comment.js
 //                  ^^  ^               punctuation.type.flowtype
 //                     ^                keyword.operator.optional.parameter.flowtype
-//                        ^^^^^^        support.type.builtin.primitive.flowtype
+//                      ^ ^^^^^^        support.type.builtin.primitive.flowtype
 //                                ^     punctuation.definition.parameters.end.js
 //                                  ^^  meta.brace.curly.js
 function foo(x /*: number*/) /*: string*/ {}
@@ -55,7 +55,6 @@ function foo(x /*: number*/) /*: string*/ {}
 //      ^^^^^^   support.type.builtin.primitive.flowtype
 };*/
 // <- meta.brace.curly.js
- // <- punctuation.object.end.flowtype
 //^^  punctuation.definition.comment.js
 /*:: export type GraphQLFormattedError = number;*/
 // <- punctuation.definition.comment.js
@@ -66,7 +65,6 @@ function foo(x /*: number*/) /*: string*/ {}
 //          ^^^^                                    keyword.other.typedef.flowtype
 //               ^^^^^^^^^^^^^^^^^^^^^              support.type.class.flowtype
 //                                       ^^^^^^     support.type.builtin.primitive.flowtype
-//                                             ^    punctuation.object.end.flowtype
 /*:: import type A, { B, C } from './types';*/
 // <- punctuation.definition.comment.js
  // <- punctuation.definition.comment.js
@@ -97,7 +95,7 @@ function foo(x /*: number*/) /*: string*/ {}
 a.component('randomComponent', {
 // <- variable.other.object.js
  // <- keyword.operator.accessor.js
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^  meta.function-call.method.with-arguments.js
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ^  meta.method-call.with-arguments.js
 //^^^^^^^^^                       entity.name.function.js
 //         ^                      meta.brace.round.js
 //          ^^^^^^^^^^^^^^^^^     string.quoted.single.js
@@ -106,7 +104,7 @@ a.component('randomComponent', {
 //                           ^    meta.delimiter.comma.js
 //                             ^  meta.brace.curly.js
   template: `<div class="test">test</div>`,
-//^^^^^^^^^ ^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^  meta.function-call.method.with-arguments.js
+//^^^^^^^^^ ^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^  meta.method-call.with-arguments.js
 //^^^^^^^^                                   constant.other.object.key.js
 //^^^^^^^^                                   string.unquoted.js
 //        ^                                  punctuation.separator.key-value.js
@@ -122,8 +120,8 @@ a.component('randomComponent', {
 //                                       ^   punctuation.definition.quasi.end.js
 //                                        ^  meta.delimiter.comma.js
 })
-// <- meta.function-call.method.with-arguments.js meta.brace.curly.js
- // <- meta.function-call.method.with-arguments.js meta.brace.round.js
+// <- meta.method-call.with-arguments.js meta.brace.curly.js
+ // <- meta.method-call.with-arguments.js meta.brace.round.js
 
 // class fields, statics and methods
 class SomeClass {
@@ -222,7 +220,7 @@ type $JSXIntrinsics = {
 //                           ^                     meta.delimiter.comma.js
 //                                          ^      meta.brace.round.close.flowtype
 //                                             ^   meta.brace.curly.js
-//                                              ^  punctuation.object.end.flowtype
+//                                              ^  punctuation.terminator.statement.js
 
 
 // Some JSX
@@ -233,13 +231,18 @@ type $JSXIntrinsics = {
 //^^^  meta.tag.jsx
 //  ^  punctuation.definition.tag.jsx
 //^^   entity.name.tag.open.jsx
+//  ^  JSXAttrs
 //  ^  JSXStartTagEnd
   <div />
 //^^^^ ^^  meta.tag.jsx
+//^^^^ ^^  JSXAttrs
+//^^^^ ^^  JSXNested
 //^    ^^  punctuation.definition.tag.jsx
 // ^^^     entity.name.tag.open.jsx
   <h1></h1>
 //^^^^^^^^^  meta.tag.jsx
+//^^^^^^^^^  JSXAttrs
+//^^^^^^^^^  JSXNested
 //^  ^^^  ^  punctuation.definition.tag.jsx
 // ^^        entity.name.tag.open.jsx
 //   ^       JSXStartTagEnd
@@ -247,6 +250,8 @@ type $JSXIntrinsics = {
 //      ^^   entity.name.tag.close.jsx
   <Component></Component>
 //^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.jsx
+//^^^^^^^^^^^^^^^^^^^^^^^  JSXAttrs
+//^^^^^^^^^^^^^^^^^^^^^^^  JSXNested
 //^         ^^^         ^  punctuation.definition.tag.jsx
 // ^^^^^^^^^               entity.name.tag.open.jsx
 // ^^^^^^^^^               support.class.component.open.jsx
@@ -256,6 +261,8 @@ type $JSXIntrinsics = {
 //             ^^^^^^^^^   support.class.component.close.jsx
   <this.component></this.component>
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.jsx
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  JSXAttrs
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  JSXNested
 //^              ^^^              ^  punctuation.definition.tag.jsx
 // ^^^^^^^^^^^^^^                    entity.name.tag.open.jsx
 // ^^^^^^^^^^^^^^                    support.class.component.open.jsx
@@ -265,6 +272,8 @@ type $JSXIntrinsics = {
 //                  ^^^^^^^^^^^^^^   support.class.component.close.jsx
   <namespace:component></namespace:component>
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.jsx
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  JSXAttrs
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  JSXNested
 //^                   ^^^                   ^  punctuation.definition.tag.jsx
 // ^^^^^^^^^^^^^^^^^^^                         entity.name.tag.open.jsx
 // ^^^^^^^^^^^^^^^^^^^                         support.class.component.open.jsx
@@ -274,6 +283,8 @@ type $JSXIntrinsics = {
 //                       ^^^^^^^^^^^^^^^^^^^   support.class.component.close.jsx
   <custom-element></custom-element>
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  meta.tag.jsx
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  JSXAttrs
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  JSXNested
 //^              ^^^              ^  punctuation.definition.tag.jsx
 // ^^^^^^^^^^^^^^                    entity.name.tag.open.jsx
 // ^^^^^^^^^^^^^^                    support.class.component.open.jsx
@@ -282,8 +293,8 @@ type $JSXIntrinsics = {
 //                  ^^^^^^^^^^^^^^   entity.name.tag.close.jsx
 //                  ^^^^^^^^^^^^^^   support.class.component.close.jsx
 </div>
-// <- meta.tag.jsx punctuation.definition.tag.jsx JSXEndTagStart
- // <- meta.tag.jsx punctuation.definition.tag.jsx JSXEndTagStart
+// <- meta.tag.jsx JSXAttrs punctuation.definition.tag.jsx JSXEndTagStart
+ // <- meta.tag.jsx JSXAttrs punctuation.definition.tag.jsx JSXEndTagStart
 //^^^^  meta.tag.jsx
 //   ^  punctuation.definition.tag.jsx
 //^^^   entity.name.tag.close.jsx
@@ -300,13 +311,12 @@ getPlayers()
 //^^          ^               keyword.operator.accessor.js
 //  ^^^^^ ^^ ^^^^^^^^^^^^^^   meta.function-call.with-arguments.js
 //  ^^^        ^^^^^^^^^      entity.name.function.js
-//     ^                  ^   meta.brace.round.js
+//     ^                ^^^   meta.brace.round.js
 //      ^ ^^                  meta.function.arrow.js
 //      ^                     variable.other.readwrite.js
 //        ^^                  storage.type.function.arrow.js
 //           ^                variable.other.object.js
-//             ^^^^^^^^^^^    meta.function-call.method.without-arguments.js
-//                      ^^    meta.group.braces.round.function.arguments.js
+//             ^^^^^^^^^^^    meta.method-call.without-arguments.js
 //                         ^  punctuation.terminator.statement.js
 
 Promise.resolve(123).then(::console.log);
@@ -314,10 +324,13 @@ Promise.resolve(123).then(::console.log);
  // <- support.class.builtin.js
 //^^^^^                                    support.class.builtin.js
 //     ^            ^     ^^       ^       keyword.operator.accessor.js
-//      ^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^   meta.function-call.method.with-arguments.js
+//      ^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^   meta.method-call.with-arguments.js
 //      ^^^^^^^      ^^^^                  entity.name.function.js
 //             ^   ^     ^             ^   meta.brace.round.js
 //              ^^^                        constant.numeric.js
 //                          ^^^^^^^        support.type.object.console.js
 //                                  ^^^    support.function.console.js
 //                                      ^  punctuation.terminator.statement.js
+
+
+// >> only:(source.js.jsx)

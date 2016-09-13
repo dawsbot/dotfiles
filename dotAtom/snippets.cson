@@ -19,3 +19,12 @@
 # If you are unfamiliar with CSON, you can read more about it in the
 # Atom Flight Manual:
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
+
+'.source.js':
+  'console log':
+    'prefix': 'c'
+    'body': 'console.log(`$1: `, $1);'
+
+  'debugger':
+    'prefix': 'd'
+    'body': 'debugger;'

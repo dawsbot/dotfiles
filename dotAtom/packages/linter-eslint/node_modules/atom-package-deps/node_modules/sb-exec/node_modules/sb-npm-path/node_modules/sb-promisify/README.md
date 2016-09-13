@@ -1,4 +1,5 @@
 # Promisify
+
 A node module to help you convert callback-style functions to promises
 
 ## Installation
@@ -10,45 +11,62 @@ npm install --save sb-promisify
 ## API
 
 ```js
-export function promisifyAll(object, throwError = true)
-export default function promisify(callback, throwError = true)
+function promisifyAll(object, throwError = true): Object
+function promisify(callback, throwError = true): Function
+
+export default promisify
+export { promisify, promisifyAll }
 ```
 
 ## Example Usage
 
-Here's the default behavior
-
 ```js
-'use babel'
-
-import promisify from 'sb-promisify'
 import fs from 'fs'
+import promisify from 'sb-promisify'
 
 const readFile = promisify(fs.readFile)
 
-readFile('/etc/passwd').then(function(contents) {
-  console.log(contents.toString('utf8'))
+readFile('/etc/passwd', 'utf8').then(function(contents) {
+  console.log(contents)
 }, function() {
   console.error('Unable to read file')
 })
 ```
+```js
+import fs from 'fs'
+import { promisifyAll } from 'sb-promisify'
 
-But if you set throwError to false, here's how it would react
+const promisedFS = promisifyAll(fs)
+
+promisedFS.readFileAsync('/etc/passwd', 'utf8').then(function(contents) {
+  console.log(contents)
+})
+promisedFS.readFile('/etc/passwd', 'utf8', function(contents) {
+  console.log(contents)
+})
+```
+
+If you set throwError to false, here's how it would react
 
 ```js
 'use babel'
 
-import promisify from 'sb-promisify'
 import fs from 'fs'
+import promisify from 'sb-promisify'
 
+const access = promisify(fs.access, false)
 const readFile = promisify(fs.readFile, false)
 
 readFile('/etc/passwd').then(function(contents) {
-  if (contents === null) {
+  if (contents === false) {
     console.error('Unable to read file')
   } else {
     console.log(contents.toString('utf8'))
   }
+})
+
+access('/etc/passwd').then(function(access) {
+  console.log('access', access) // true or false
 })
 ```
 

@@ -6,6 +6,7 @@
   'space q': 'tabs:close-tab'
   'cmd-d': 'pane:split-right'
 
+# tabbed emmet expansion (might mess up auto-complete tabbing)
 # 'atom-text-editor[data-grammar="source js jsx"]:not([mini])': 'tab': 'emmet:expand-abbreviation-with-tab'
 # end of custom
 

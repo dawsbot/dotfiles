@@ -20,6 +20,7 @@ alias gpft='git push --follow-tags '
 alias gpu='git pull '
 alias gd='git diff '
 alias gb='git branch '
+alias gbd='git branch -D '
 
 burn() {
   git branch -D "$1" # Delete branch locally

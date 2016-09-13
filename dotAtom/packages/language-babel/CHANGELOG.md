@@ -1,3 +1,26 @@
+### 2.37.0
+  - Add support for GraphQL template strings with tags of Relay.QL and gql. Also support # type comments
+  - Add Additional scope class id for literal object shorthand properties. `.shorthandpropertyname`
+
+### 2.36.3
+  - Fix auto indent JSX when using hard tabs and certain eslint rules
+  - Fix top most closing tag suggestions displaying wrong option when  multiple open tags were on line.
+
+### 2.36.2
+  - Change Indent JSX behaviour of ternary else. [Issue 241](https://github.com/gandm/language-babel/issues/241)
+
+### 2.36.1
+  - Change flow predicate syntax to use %checks rather than checks.
+  - Fix class field property assignments causing following async keyword to be incorrectly highlighted  [Issue 238](https://github.com/gandm/language-babel/issues/238)
+  - Fix certain keywords being interpreted as a tagname for template literals.  [Issue 240](https://github.com/gandm/language-babel/issues/240)
+
+### 2.36.0
+  - Add autoIndentJSX support to inline switch/case/default and for/while loops.
+  - Refactor more grammar to use the more robust JS identifier regex.
+
+### 2.35.0
+  - Atom's reflow command expects whitespace prefixing a // comment to have a scopeName! [Issue 234](https://github.com/gandm/language-babel/issues/234)
+
 ### 2.34.0
   - Add autoIndentJSX support for inline IIFE that uses if/else. [Issue 230](https://github.com/gandm/language-babel/issues/230)
   - Allow void keyword as possible code that precedes JSX

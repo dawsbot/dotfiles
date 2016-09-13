@@ -1,2 +1,6 @@
 dotAtom/compile-cache/**
+node_modules
+
+.apm
+blob-store
 

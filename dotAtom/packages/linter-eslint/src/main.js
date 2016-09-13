@@ -1,77 +1,25 @@
 'use babel'
 
 import { CompositeDisposable, Range } from 'atom'
-import { spawnWorker, showError, ruleURI } from './helpers'
+import { spawnWorker, showError } from './helpers'
 import escapeHTML from 'escape-html'
+import ruleURI from 'eslint-rule-documentation'
 
 module.exports = {
-  config: {
-    lintHtmlFiles: {
-      title: 'Lint HTML Files',
-      description: 'You should also add `eslint-plugin-html` to your .eslintrc plugins',
-      type: 'boolean',
-      default: false
-    },
-    useGlobalEslint: {
-      title: 'Use global ESLint installation',
-      description: 'Make sure you have it in your $PATH',
-      type: 'boolean',
-      default: false
-    },
-    showRuleIdInMessage: {
-      title: 'Show Rule ID in Messages',
-      type: 'boolean',
-      default: true
-    },
-    disableWhenNoEslintConfig: {
-      title: 'Disable when no ESLint config is found (in package.json or .eslintrc)',
-      type: 'boolean',
-      default: true
-    },
-    eslintrcPath: {
-      title: '.eslintrc Path',
-      description: "It will only be used when there's no config file in project",
-      type: 'string',
-      default: ''
-    },
-    globalNodePath: {
-      title: 'Global Node Installation Path',
-      description: 'Write the value of `npm get prefix` here',
-      type: 'string',
-      default: ''
-    },
-    eslintRulesDir: {
-      title: 'ESLint Rules Dir',
-      description: 'Specify a directory for ESLint to load rules from',
-      type: 'string',
-      default: ''
-    },
-    disableEslintIgnore: {
-      title: 'Don\'t use .eslintignore files',
-      type: 'boolean',
-      default: false
-    },
-    disableFSCache: {
-      title: 'Disable FileSystem Cache',
-      description: 'Paths of node_modules, .eslintignore and others are cached',
-      type: 'boolean',
-      default: false
-    },
-    fixOnSave: {
-      title: 'Fix errors on save',
-      description: 'Have eslint attempt to fix some errors automatically when saving the file.',
-      type: 'boolean',
-      default: false
-    }
-  },
   activate() {
     require('atom-package-deps').install()
 
     this.subscriptions = new CompositeDisposable()
     this.active = true
     this.worker = null
-    this.scopes = ['source.js', 'source.jsx', 'source.js.jsx', 'source.babel', 'source.js-semantic']
+    this.scopes = []
 
+    this.subscriptions.add(atom.config.observe('linter-eslint.scopes', scopes => {
+      // Remove any old scopes
+      this.scopes.splice(0, this.scopes.length)
+      // Add the current scopes
+      Array.prototype.push.apply(this.scopes, scopes)
+    }))
     const embeddedScope = 'source.js.embedded.html'
     this.subscriptions.add(atom.config.observe('linter-eslint.lintHtmlFiles', lintHtmlFiles => {
       if (lintHtmlFiles) {
@@ -171,13 +119,9 @@ module.exports = {
                 newText: fix.text
               }
             }
-            const range = Helpers.rangeFromLineNumber(textEditor, line - 1)
-            if (column) {
-              range[0][1] = column - 1
-            }
-            if (column > range[1][1]) {
-              range[1][1] = column - 1
-            }
+            const range = Helpers.rangeFromLineNumber(
+              textEditor, line - 1, column ? column - 1 : column
+            )
             const ret = {
               filePath,
               type: severity === 1 ? 'Warning' : 'Error',
@@ -185,7 +129,7 @@ module.exports = {
             }
             if (showRule) {
               const elName = ruleId ? 'a' : 'span'
-              const href = ruleId ? ` href=${ruleURI(ruleId)}` : ''
+              const href = ruleId ? ` href=${ruleURI(ruleId).url}` : ''
               ret.html = `<${elName}${href} class="badge badge-flexible eslint">` +
                 `${ruleId || 'Fatal'}</${elName}> ${escapeHTML(message)}`
             } else {

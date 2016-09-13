@@ -1,24 +1,48 @@
 {
-  "name": "seti-icons",
-  "version": "1.3.2",
-  "description": "The awesome icons provided by Seti UI theme.",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wyze/atom-seti-icons.git"
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/d-11683-24717-1mdxrym/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/d-11683-24717-1mdxrym/package.tgz",
+        "spec": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/d-11683-24717-1mdxrym/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/apm-install-dir-11683-24717-1bpq8xl"
+    ]
+  ],
+  "_from": "../d-11683-24717-1mdxrym/package.tgz",
+  "_id": "seti-icons@1.3.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/seti-icons",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/d-11683-24717-1mdxrym/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/d-11683-24717-1mdxrym/package.tgz",
+    "spec": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/d-11683-24717-1mdxrym/package.tgz",
+    "type": "local"
   },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-11683-24717-1mdxrym/package.tgz",
+  "_shasum": "3df9eb4e9c0333da4403d9a510738a7824f20286",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/d-11683-24717-1mdxrym/package.tgz",
+  "_where": "/private/var/folders/lc/zzjp7lw524s6swc0v94gydxc0000gn/T/apm-install-dir-11683-24717-1bpq8xl",
   "author": {
     "name": "Neil Kistner",
     "email": "neil.kistner@gmail.com",
     "url": "neilkistner.com"
   },
-  "main": "lib/index",
-  "keywords": [
-    "seti",
-    "icons"
-  ],
-  "engines": {
-    "atom": ">=1.4.0 <2.0.0"
+  "bugs": {
+    "url": "https://github.com/wyze/atom-seti-icons/issues"
   },
   "configSchema": {
     "noColor": {
@@ -27,27 +51,26 @@
       "description": "Display icons without color."
     }
   },
-  "readme": "# Seti Icons\n\n[![apm][apm-image]][apm-url]\n[![apmi][apmi-image]][apmi-url]\n\n> The awesome icons provided by Seti UI theme.\n\n![Seti UI](https://github.com/jesseweed/seti-ui/raw/master/screenshot-icons.png)\n\n## Settings\n\n| Name | Type | Default | Description |\n|---|---|---|---|\n| No Color | Boolean | false | Enables/disable color icons. |\n\n## Change Log\n\n[Full Change Log](changelog.md)\n\n### v1.3.2 (07/05/2016)\n- Add override in sidebar for Atom Dark/Light ([d9f18ec](https://github.com/wyze/atom-seti-icons/commit/d9f18ec)), closes [#33](https://github.com/wyze/atom-seti-icons/issues/33)\n\n## Credits\n\nThank you to [Jesse Weed](//github.com/jesseweed) for making the original Seti UI theme.\n\n## License\n\nCopyright © 2015-2016 [Neil Kistner](//github.com/wyze)\n\nReleased under the MIT license. See [license](license) for details.\n\n[apm-image]: https://img.shields.io/apm/v/seti-icons.svg?style=flat-square\n[apm-url]: https://atom.io/packages/seti-icons\n\n[apmi-image]: https://img.shields.io/apm/dm/seti-icons.svg?style=flat-square\n[apmi-url]: https://atom.io/packages/seti-icons\n",
-  "readmeFilename": "readme.md",
-  "bugs": {
-    "url": "https://github.com/wyze/atom-seti-icons/issues"
+  "dependencies": {},
+  "description": "The awesome icons provided by Seti UI theme.",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.4.0 <2.0.0"
   },
   "homepage": "https://github.com/wyze/atom-seti-icons#readme",
-  "_id": "seti-icons@1.3.2",
-  "_shasum": "acf4ed2344adb6f4f6a64b6a6b38823f9f97e621",
-  "_resolved": "file:../d-116726-33310-1qgkhyd/package.tgz",
-  "_from": "../d-116726-33310-1qgkhyd/package.tgz",
-  "_atomModuleCache": {
-    "version": 1,
-    "dependencies": [],
-    "extensions": {
-      ".js": [
-        "lib/index.js"
-      ],
-      ".json": [
-        "package.json"
-      ]
-    },
-    "folders": []
-  }
+  "keywords": [
+    "seti",
+    "icons"
+  ],
+  "license": "MIT",
+  "main": "lib/index",
+  "name": "seti-icons",
+  "optionalDependencies": {},
+  "readme": "# Seti Icons\n\n[![apm][apm-image]][apm-url]\n[![apmi][apmi-image]][apmi-url]\n\n> The awesome icons provided by Seti UI theme.\n\n![Seti UI](https://github.com/jesseweed/seti-ui/raw/master/screenshot-icons.png)\n\n## Settings\n\n| Name | Type | Default | Description |\n|---|---|---|---|\n| No Color | Boolean | false | Enables/disable color icons. |\n\n## Change Log\n\n[Full Change Log](changelog.md)\n\n### v1.3.3 (2016-09-03)\n- Add override for Genesis theme ([484d4eb](https://github.com/wyze/atom-seti-icons/commit/484d4eb)), closes [#36](https://github.com/wyze/atom-seti-icons/issues/36)\n\n## Credits\n\nThank you to [Jesse Weed](//github.com/jesseweed) for making the original Seti UI theme.\n\n## License\n\nCopyright © 2015-2016 [Neil Kistner](//github.com/wyze)\n\nReleased under the MIT license. See [license](license) for details.\n\n[apm-image]: https://img.shields.io/apm/v/seti-icons.svg?style=flat-square\n[apm-url]: https://atom.io/packages/seti-icons\n\n[apmi-image]: https://img.shields.io/apm/dm/seti-icons.svg?style=flat-square\n[apmi-url]: https://atom.io/packages/seti-icons\n",
+  "readmeFilename": "readme.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wyze/atom-seti-icons.git"
+  },
+  "version": "1.3.3"
 }

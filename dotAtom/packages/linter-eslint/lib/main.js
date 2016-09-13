@@ -9,68 +9,13 @@ var _escapeHtml = require('escape-html');
 
 var _escapeHtml2 = _interopRequireDefault(_escapeHtml);
 
+var _eslintRuleDocumentation = require('eslint-rule-documentation');
+
+var _eslintRuleDocumentation2 = _interopRequireDefault(_eslintRuleDocumentation);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
-  config: {
-    lintHtmlFiles: {
-      title: 'Lint HTML Files',
-      description: 'You should also add `eslint-plugin-html` to your .eslintrc plugins',
-      type: 'boolean',
-      default: false
-    },
-    useGlobalEslint: {
-      title: 'Use global ESLint installation',
-      description: 'Make sure you have it in your $PATH',
-      type: 'boolean',
-      default: false
-    },
-    showRuleIdInMessage: {
-      title: 'Show Rule ID in Messages',
-      type: 'boolean',
-      default: true
-    },
-    disableWhenNoEslintConfig: {
-      title: 'Disable when no ESLint config is found (in package.json or .eslintrc)',
-      type: 'boolean',
-      default: true
-    },
-    eslintrcPath: {
-      title: '.eslintrc Path',
-      description: "It will only be used when there's no config file in project",
-      type: 'string',
-      default: ''
-    },
-    globalNodePath: {
-      title: 'Global Node Installation Path',
-      description: 'Write the value of `npm get prefix` here',
-      type: 'string',
-      default: ''
-    },
-    eslintRulesDir: {
-      title: 'ESLint Rules Dir',
-      description: 'Specify a directory for ESLint to load rules from',
-      type: 'string',
-      default: ''
-    },
-    disableEslintIgnore: {
-      title: 'Don\'t use .eslintignore files',
-      type: 'boolean',
-      default: false
-    },
-    disableFSCache: {
-      title: 'Disable FileSystem Cache',
-      description: 'Paths of node_modules, .eslintignore and others are cached',
-      type: 'boolean',
-      default: false
-    },
-    fixOnSave: {
-      title: 'Fix errors on save',
-      description: 'Have eslint attempt to fix some errors automatically when saving the file.',
-      type: 'boolean',
-      default: false
-    }
-  },
   activate: function activate() {
     var _this = this;
 
@@ -79,8 +24,14 @@ module.exports = {
     this.subscriptions = new _atom.CompositeDisposable();
     this.active = true;
     this.worker = null;
-    this.scopes = ['source.js', 'source.jsx', 'source.js.jsx', 'source.babel', 'source.js-semantic'];
+    this.scopes = [];
 
+    this.subscriptions.add(atom.config.observe('linter-eslint.scopes', function (scopes) {
+      // Remove any old scopes
+      _this.scopes.splice(0, _this.scopes.length);
+      // Add the current scopes
+      Array.prototype.push.apply(_this.scopes, scopes);
+    }));
     var embeddedScope = 'source.js.embedded.html';
     this.subscriptions.add(atom.config.observe('linter-eslint.lintHtmlFiles', function (lintHtmlFiles) {
       if (lintHtmlFiles) {
@@ -188,13 +139,7 @@ module.exports = {
                 newText: fix.text
               };
             }
-            var range = Helpers.rangeFromLineNumber(textEditor, line - 1);
-            if (column) {
-              range[0][1] = column - 1;
-            }
-            if (column > range[1][1]) {
-              range[1][1] = column - 1;
-            }
+            var range = Helpers.rangeFromLineNumber(textEditor, line - 1, column ? column - 1 : column);
             var ret = {
               filePath: filePath,
               type: severity === 1 ? 'Warning' : 'Error',
@@ -202,7 +147,7 @@ module.exports = {
             };
             if (showRule) {
               var elName = ruleId ? 'a' : 'span';
-              var href = ruleId ? ' href=' + (0, _helpers.ruleURI)(ruleId) : '';
+              var href = ruleId ? ' href=' + (0, _eslintRuleDocumentation2.default)(ruleId).url : '';
               ret.html = '<' + elName + href + ' class="badge badge-flexible eslint">' + ((ruleId || 'Fatal') + '</' + elName + '> ' + (0, _escapeHtml2.default)(message));
             } else {
               ret.text = message;
