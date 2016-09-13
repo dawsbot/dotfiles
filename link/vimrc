@@ -31,9 +31,9 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'scrooloose/nerdtree.git'
-NeoBundle 'tomtom/tcomment_vim.git'
+" NeoBundle 'tomtom/tcomment_vim.git'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'qpkorr/vim-bufkill'
 
 NeoBundle 'tpope/vim-surround'
@@ -42,10 +42,12 @@ NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 
-NeoBundle 'pangloss/vim-javascript'
+" NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tmhedberg/matchit'
 
+NeoBundle 'yosiat/oceanic-next-vim'
+" NeoBundle 'mhartington/oceanic-next'
 call neobundle#end()
 
 " Required:
@@ -84,7 +86,7 @@ set number
 set showmode
 set cursorline
 set cursorcolumn
-set scrolloff=15
+set scrolloff=5
 
 " Syntax
 syntax on
@@ -92,7 +94,10 @@ syntax on
 match ErrorMsg '\s\+$'
 
 set background=dark
-colorscheme solarized
+
+" colorscheme solarized
+set t_Co=256
+colorscheme OceanicNext
 
 set noswapfile
 
@@ -124,7 +129,7 @@ nnoremap <leader>e :wq<cr>
 nnoremap <leader>! :q!<cr>
 nnoremap <leader>1 :q!<cr>
 set pastetoggle=<F2>
-nmap <leader>p <F2><cr>ki
+nmap <leader>p <F2><CR>ki
 
 " Navigating windows
 nnoremap <silent> <leader>l :wincmd l<CR>
@@ -138,11 +143,7 @@ nnoremap <CR> :noh<CR><CR>
 "Custom commands
   "Engage spell checking
   command Spell execute "set spell spelllang=en_us"
-  command T :normal i nadiia rtsao mreeder<ESC>
-
-  "Show tab characters
-  command ShowTabs execute "set list"
-  command UnShowTabs execute "set nolist"
+  command T :normal i rtsao mreeder<ESC>
 
 augroup Shebang
   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$

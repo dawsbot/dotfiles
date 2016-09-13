@@ -278,12 +278,12 @@ export type User = {
 //            ^  meta.delimiter.comma.js
 };
 // <- meta.brace.curly.js
- // <- punctuation.object.end.flowtype
+ // <- punctuation.terminator.statement.js
 
  import {
  // <- keyword.control.module.js
-//^^^^^     keyword.control.module.js
-//      ^   meta.brace.curly.js
+//^^^^^    keyword.control.module.js
+//      ^  meta.brace.curly.js
    amodule, // this is a comment
 // ^^^^^^^                        variable.other.readwrite.js
 //        ^                       meta.delimiter.comma.js
@@ -298,5 +298,6 @@ export type User = {
 // ^^^^         keyword.control.module.js
 //      ^    ^  punctuation.definition.string.begin.js
 //       ^^^^   string.quoted.module.js
+
 
 // >> only:(source.js.jsx)

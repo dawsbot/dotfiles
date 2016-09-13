@@ -1,7 +1,7 @@
 {
   "name": "language-babel",
   "main": "./lib/main",
-  "version": "2.34.0",
+  "version": "2.37.0",
   "description": "Babel JavaScript ES201x, React JSX & Flow Grammar & Transpiler",
   "keywords": [
     "es6",
@@ -51,10 +51,10 @@
     "url": "https://github.com/gandm/language-babel/issues"
   },
   "homepage": "https://github.com/gandm/language-babel#readme",
-  "_id": "language-babel@2.34.0",
-  "_shasum": "7cd8b883eb9697d209b802e4382f503840eb593d",
-  "_resolved": "file:../d-116726-93959-1nw8be0/package.tgz",
-  "_from": "../d-116726-93959-1nw8be0/package.tgz",
+  "_id": "language-babel@2.37.0",
+  "_shasum": "f152b40ab0934e8e7c1fea3d845948afe1be5d66",
+  "_resolved": "file:../d-11686-64626-enqvqr/package.tgz",
+  "_from": "../d-11686-64626-enqvqr/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
@@ -225,12 +225,12 @@
       },
       {
         "name": "babel-template",
-        "version": "6.14.0",
+        "version": "6.15.0",
         "path": "node_modules/babel-core/node_modules/babel-template/lib/index.js"
       },
       {
         "name": "babel-traverse",
-        "version": "6.14.0",
+        "version": "6.15.0",
         "path": "node_modules/babel-core/node_modules/babel-traverse/lib/index.js"
       },
       {
@@ -255,7 +255,7 @@
       },
       {
         "name": "babel-types",
-        "version": "6.14.0",
+        "version": "6.15.0",
         "path": "node_modules/babel-core/node_modules/babel-types/lib/index.js"
       },
       {
@@ -5006,8 +5006,8 @@
         ],
         "dependencies": {
           "babylon": "^6.9.0",
-          "babel-traverse": "^6.14.0",
-          "babel-types": "^6.14.0",
+          "babel-traverse": "^6.15.0",
+          "babel-types": "^6.15.0",
           "babel-runtime": "^6.9.0",
           "lodash": "^4.2.0"
         }
@@ -5026,7 +5026,7 @@
           "babel-code-frame": "^6.8.0",
           "babel-messages": "^6.8.0",
           "babel-runtime": "^6.9.0",
-          "babel-types": "^6.14.0",
+          "babel-types": "^6.15.0",
           "babylon": "^6.9.0",
           "debug": "^2.2.0",
           "globals": "^8.3.0",
@@ -5058,7 +5058,6 @@
         ],
         "dependencies": {
           "babel-runtime": "^6.9.1",
-          "babel-traverse": "^6.14.0",
           "esutils": "^2.0.2",
           "lodash": "^4.2.0",
           "to-fast-properties": "^1.0.1"

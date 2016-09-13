@@ -2,13 +2,11 @@ YouCompleteMe
 matchit
 neobundle.vim
 nerdtree
+oceanic-next-vim
 syntastic
-tcomment_vim
 tern_for_vim
 vim-airline
 vim-bufkill
-vim-colors-solarized
 vim-indent-guides
-vim-javascript
 vim-javascript-syntax
 vim-surround

@@ -1,7 +1,7 @@
 {
   "name": "linter-eslint",
   "main": "./lib/main",
-  "version": "7.2.4",
+  "version": "7.3.0",
   "description": "Lint JavaScript on the fly, using ESLint",
   "repository": {
     "type": "git",
@@ -11,6 +11,79 @@
   "engines": {
     "atom": ">=1.8.0 <2.0.0"
   },
+  "configSchema": {
+    "lintHtmlFiles": {
+      "title": "Lint HTML Files",
+      "description": "You should also add `eslint-plugin-html` to your .eslintrc plugins",
+      "type": "boolean",
+      "default": false
+    },
+    "useGlobalEslint": {
+      "title": "Use global ESLint installation",
+      "description": "Make sure you have it in your $PATH",
+      "type": "boolean",
+      "default": false
+    },
+    "showRuleIdInMessage": {
+      "title": "Show Rule ID in Messages",
+      "type": "boolean",
+      "default": true
+    },
+    "disableWhenNoEslintConfig": {
+      "title": "Disable when no ESLint config is found (in package.json or .eslintrc)",
+      "type": "boolean",
+      "default": true
+    },
+    "eslintrcPath": {
+      "title": ".eslintrc Path",
+      "description": "It will only be used when there's no config file in project",
+      "type": "string",
+      "default": ""
+    },
+    "globalNodePath": {
+      "title": "Global Node Installation Path",
+      "description": "Write the value of `npm get prefix` here",
+      "type": "string",
+      "default": ""
+    },
+    "eslintRulesDir": {
+      "title": "ESLint Rules Dir",
+      "description": "Specify a directory for ESLint to load rules from",
+      "type": "string",
+      "default": ""
+    },
+    "disableEslintIgnore": {
+      "title": "Don't use .eslintignore files",
+      "type": "boolean",
+      "default": false
+    },
+    "disableFSCache": {
+      "title": "Disable FileSystem Cache",
+      "description": "Paths of node_modules, .eslintignore and others are cached",
+      "type": "boolean",
+      "default": false
+    },
+    "fixOnSave": {
+      "title": "Fix errors on save",
+      "description": "Have eslint attempt to fix some errors automatically when saving the file.",
+      "type": "boolean",
+      "default": false
+    },
+    "scopes": {
+      "title": "List of scopes to run ESLint on, run `Editor: Log Cursor Scope` to determine the scopes for a file.",
+      "type": "array",
+      "default": [
+        "source.js",
+        "source.jsx",
+        "source.js.jsx",
+        "source.babel",
+        "source.js-semantic"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
   "scripts": {
     "test": "apm test",
     "lint": "eslint .",
@@ -18,11 +91,12 @@
     "compile": "ucompiler go"
   },
   "dependencies": {
-    "atom-linter": "^5.0.1",
+    "atom-linter": "^8.0.0",
     "atom-package-deps": "^4.0.1",
     "consistent-path": "^2.0.1",
     "escape-html": "^1.0.3",
     "eslint": "^2.11.1",
+    "eslint-rule-documentation": "^1.0.0",
     "process-communication": "^1.1.0",
     "resolve-env": "^1.0.0"
   },
@@ -32,7 +106,7 @@
     "ucompiler": "^3.2.0",
     "ucompiler-plugin-babel": "^3.0.0",
     "ucompiler-plugin-newline": "^3.0.0",
-    "babel-preset-steelbrain": "^2.0.1"
+    "babel-preset-steelbrain": "^4.0.2"
   },
   "package-deps": [
     "linter"
@@ -79,22 +153,22 @@
       "node": true
     }
   },
-  "readme": "# linter-eslint\n\n[![Build Status](https://travis-ci.org/AtomLinter/linter-eslint.svg)](https://travis-ci.org/AtomLinter/linter-eslint)\n[![Dependency Status](https://david-dm.org/AtomLinter/linter-eslint.svg)](https://david-dm.org/AtomLinter/linter-eslint)\n\nThis linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides\nan interface to [eslint](http://eslint.org). It will be used with files that\nhave the \"JavaScript\" syntax.\n\n## Installation\n\n```ShellSession\napm install linter-eslint\n```\n\n`linter-eslint` will look for a version of `eslint` local to your project and\nuse it if it's available. If none is found it will fall back to the version it\nships with.\n\nLets say you depend on a specific version of `eslint`, maybe it has unreleased\nfeatures, maybe it's just newer than what `linter-eslint` ships with. If\n`your-project/node_modules/eslint` exists `linter-eslint` will be used.\nThis package requires an `eslint` of at least v1.0.0.\n\nNote that if you do not have the `linter` package installed it will be\ninstalled\nfor you. If you are using an alternative `linter-*` consumer feel free\nto disable the `linter` package.\n\n## Use with plugins\n\nYou have two options:\n\n*   Install locally to your project `eslint` and the plugin\n\n    *   `$ npm i --save-dev eslint [eslint-plugins]`\n\n*   Install globaly `eslint` and plugins\n\n    *   `$ npm i -g eslint [eslint-plugins]`\n    *   Activate `Use Global Eslint` package option\n    *   (Optional) Set `Global Node Path` with `$ npm config get prefix`\n\n## Using ESLint\n\nNote that recent versions of ESLint do not use any rules by-default. This\nmeans you have to specify a configuration file for your project!\n\nTo do this in a straightforward way run this:\n\n```ShellSession\neslint --init\n```\n\nAlternatively you can create the `.eslintrc` file by yourself. It is a good\nidea to have a look at the [Get Started With ESLint](http://devnull.guru/get-started-with-eslint/)\nblog post by [IanVS](https://github.com/IanVS) and [the ESLint documentation](http://eslint.org/docs/user-guide/configuring),\nincluding the [list of rules](http://eslint.org/docs/rules/).\n",
+  "readme": "# linter-eslint\n\n[![Build Status](https://travis-ci.org/AtomLinter/linter-eslint.svg)](https://travis-ci.org/AtomLinter/linter-eslint)\n[![Dependency Status](https://david-dm.org/AtomLinter/linter-eslint.svg)](https://david-dm.org/AtomLinter/linter-eslint)\n\nThis linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides\nan interface to [eslint](http://eslint.org). It will be used with files that\nhave the \"JavaScript\" syntax.\n\n## Installation\n\n```ShellSession\napm install linter-eslint\n```\n\n`linter-eslint` will look for a version of `eslint` local to your project and\nuse it if it's available. If none is found it will fall back to the version it\nships with.\n\nLets say you depend on a specific version of `eslint`, maybe it has unreleased\nfeatures, maybe it's just newer than what `linter-eslint` ships with. If\n`your-project/node_modules/eslint` exists `linter-eslint` will be used.\nThis package requires an `eslint` of at least v1.0.0.\n\nNote that if you do not have the `linter` package installed it will be\ninstalled\nfor you. If you are using an alternative `linter-*` consumer feel free\nto disable the `linter` package.\n\n## Use with plugins\n\nYou have two options:\n\n*   Install locally to your project `eslint` and the plugin\n\n    *   `$ npm i --save-dev eslint [eslint-plugins]`\n\n*   Install globally `eslint` and plugins\n\n    *   `$ npm i -g eslint [eslint-plugins]`\n    *   Activate `Use Global Eslint` package option\n    *   (Optional) Set `Global Node Path` with `$ npm config get prefix`\n\n## Using ESLint\n\nNote that recent versions of ESLint do not use any rules by-default. This\nmeans you have to specify a configuration file for your project!\n\nTo do this in a straightforward way run this:\n\n```ShellSession\neslint --init\n```\n\nAlternatively you can create the `.eslintrc` file by yourself. It is a good\nidea to have a look at the [Get Started With ESLint](http://devnull.guru/get-started-with-eslint/)\nblog post by [IanVS](https://github.com/IanVS) and [the ESLint documentation](http://eslint.org/docs/user-guide/configuring),\nincluding the [list of rules](http://eslint.org/docs/rules/).\n",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/AtomLinter/linter-eslint/issues"
   },
   "homepage": "https://github.com/AtomLinter/linter-eslint#readme",
-  "_id": "linter-eslint@7.2.4",
-  "_shasum": "371a7f7e5894d445f782b94cec8144d55b32b6bb",
-  "_resolved": "file:../d-116726-35746-50t6eb/package.tgz",
-  "_from": "../d-116726-35746-50t6eb/package.tgz",
+  "_id": "linter-eslint@7.3.0",
+  "_shasum": "86fa979f96524b9c1ebe266a8e8341c64ee65d93",
+  "_resolved": "file:../d-11689-85715-8tjf9i/package.tgz",
+  "_from": "../d-11689-85715-8tjf9i/package.tgz",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "atom-linter",
-        "version": "5.0.2",
+        "version": "8.0.0",
         "path": "node_modules/atom-linter/lib/index.js"
       },
       {
@@ -104,17 +178,22 @@
       },
       {
         "name": "sb-exec",
-        "version": "2.0.5",
+        "version": "3.0.2",
         "path": "node_modules/atom-linter/node_modules/sb-exec/lib/index.js"
       },
       {
         "name": "consistent-env",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "path": "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/lib/index.js"
       },
       {
+        "name": "lodash.uniq",
+        "version": "4.5.0",
+        "path": "node_modules/atom-linter/node_modules/sb-exec/node_modules/lodash.uniq/index.js"
+      },
+      {
         "name": "sb-npm-path",
-        "version": "1.0.1",
+        "version": "2.0.0",
         "path": "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/lib/index.js"
       },
       {
@@ -124,7 +203,7 @@
       },
       {
         "name": "sb-promisify",
-        "version": "1.3.0",
+        "version": "2.0.1",
         "path": "node_modules/atom-linter/node_modules/sb-promisify/lib/index.js"
       },
       {
@@ -139,7 +218,7 @@
       },
       {
         "name": "atom-package-deps",
-        "version": "4.3.0",
+        "version": "4.3.1",
         "path": "node_modules/atom-package-deps/lib/index.js"
       },
       {
@@ -154,17 +233,22 @@
       },
       {
         "name": "sb-exec",
-        "version": "2.0.5",
+        "version": "3.0.2",
         "path": "node_modules/atom-package-deps/node_modules/sb-exec/lib/index.js"
       },
       {
         "name": "consistent-env",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "path": "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/lib/index.js"
       },
       {
+        "name": "lodash.uniq",
+        "version": "4.5.0",
+        "path": "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/lodash.uniq/index.js"
+      },
+      {
         "name": "sb-npm-path",
-        "version": "1.0.1",
+        "version": "2.0.0",
         "path": "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/lib/index.js"
       },
       {
@@ -174,7 +258,7 @@
       },
       {
         "name": "sb-promisify",
-        "version": "1.3.0",
+        "version": "2.0.1",
         "path": "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-promisify/lib/index.js"
       },
       {
@@ -184,8 +268,13 @@
       },
       {
         "name": "consistent-env",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "path": "node_modules/consistent-path/node_modules/consistent-env/lib/index.js"
+      },
+      {
+        "name": "lodash.uniq",
+        "version": "4.5.0",
+        "path": "node_modules/consistent-path/node_modules/consistent-env/node_modules/lodash.uniq/index.js"
       },
       {
         "name": "escape-html",
@@ -239,12 +328,12 @@
       },
       {
         "name": "concat-stream",
-        "version": "1.5.1",
+        "version": "1.5.2",
         "path": "node_modules/eslint/node_modules/concat-stream/index.js"
       },
       {
         "name": "inherits",
-        "version": "2.0.1",
+        "version": "2.0.3",
         "path": "node_modules/eslint/node_modules/concat-stream/node_modules/inherits/inherits.js"
       },
       {
@@ -519,7 +608,7 @@
       },
       {
         "name": "inherits",
-        "version": "2.0.1",
+        "version": "2.0.3",
         "path": "node_modules/eslint/node_modules/glob/node_modules/inherits/inherits.js"
       },
       {
@@ -544,7 +633,7 @@
       },
       {
         "name": "once",
-        "version": "1.3.3",
+        "version": "1.4.0",
         "path": "node_modules/eslint/node_modules/glob/node_modules/once/once.js"
       },
       {
@@ -659,7 +748,7 @@
       },
       {
         "name": "once",
-        "version": "1.3.3",
+        "version": "1.4.0",
         "path": "node_modules/eslint/node_modules/inquirer/node_modules/run-async/node_modules/once/once.js"
       },
       {
@@ -894,7 +983,7 @@
       },
       {
         "name": "bluebird",
-        "version": "3.4.3",
+        "version": "3.4.6",
         "path": "node_modules/eslint/node_modules/table/node_modules/bluebird/js/release/bluebird.js"
       },
       {
@@ -963,6 +1052,11 @@
         "path": "node_modules/eslint/node_modules/user-home/node_modules/os-homedir/index.js"
       },
       {
+        "name": "eslint-rule-documentation",
+        "version": "1.0.0",
+        "path": "node_modules/eslint-rule-documentation/index.js"
+      },
+      {
         "name": "process-communication",
         "version": "1.1.0",
         "path": "node_modules/process-communication/lib/main.js"
@@ -990,18 +1084,25 @@
         "lib/reporter.js",
         "lib/worker-helpers.js",
         "lib/worker.js",
+        "node_modules/atom-linter/decls/atom.js",
+        "node_modules/atom-linter/decls/jasmine.js",
         "node_modules/atom-linter/lib/helpers.js",
         "node_modules/atom-linter/lib/index.js",
         "node_modules/atom-linter/lib/types.js",
         "node_modules/atom-linter/node_modules/named-js-regexp/lib/named-js-regexp.js",
+        "node_modules/atom-linter/node_modules/sb-exec/decls/jasmine.js",
         "node_modules/atom-linter/node_modules/sb-exec/lib/helpers.js",
         "node_modules/atom-linter/node_modules/sb-exec/lib/index.js",
         "node_modules/atom-linter/node_modules/sb-exec/lib/types.js",
+        "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/decls/jasmine.js",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/lib/helpers.js",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/lib/index.js",
+        "node_modules/atom-linter/node_modules/sb-exec/node_modules/lodash.uniq/index.js",
+        "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/decls/jasmine.js",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/lib/helpers.js",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/lib/index.js",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-memoize/lib/index.js",
+        "node_modules/atom-linter/node_modules/sb-promisify/decls/jasmine.js",
         "node_modules/atom-linter/node_modules/sb-promisify/lib/index.js",
         "node_modules/atom-linter/node_modules/tmp/Gruntfile.js",
         "node_modules/atom-linter/node_modules/tmp/lib/tmp.js",
@@ -1015,18 +1116,25 @@
         "node_modules/atom-package-deps/lib/view.js",
         "node_modules/atom-package-deps/node_modules/atom-package-path/lib/index.js",
         "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/lib/main.js",
+        "node_modules/atom-package-deps/node_modules/sb-exec/decls/jasmine.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/lib/helpers.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/lib/index.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/lib/types.js",
+        "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/decls/jasmine.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/lib/helpers.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/lib/index.js",
+        "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/lodash.uniq/index.js",
+        "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/decls/jasmine.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/lib/helpers.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/lib/index.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-memoize/lib/index.js",
+        "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-promisify/decls/jasmine.js",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-promisify/lib/index.js",
         "node_modules/consistent-path/lib/index.js",
+        "node_modules/consistent-path/node_modules/consistent-env/decls/jasmine.js",
         "node_modules/consistent-path/node_modules/consistent-env/lib/helpers.js",
         "node_modules/consistent-path/node_modules/consistent-env/lib/index.js",
+        "node_modules/consistent-path/node_modules/consistent-env/node_modules/lodash.uniq/index.js",
         "node_modules/escape-html/index.js",
         "node_modules/eslint/bin/eslint.js",
         "node_modules/eslint/conf/cli-options.js",
@@ -1318,7 +1426,6 @@
         "node_modules/eslint/node_modules/concat-stream/index.js",
         "node_modules/eslint/node_modules/concat-stream/node_modules/inherits/inherits.js",
         "node_modules/eslint/node_modules/concat-stream/node_modules/inherits/inherits_browser.js",
-        "node_modules/eslint/node_modules/concat-stream/node_modules/inherits/test.js",
         "node_modules/eslint/node_modules/concat-stream/node_modules/readable-stream/duplex.js",
         "node_modules/eslint/node_modules/concat-stream/node_modules/readable-stream/lib/_stream_duplex.js",
         "node_modules/eslint/node_modules/concat-stream/node_modules/readable-stream/lib/_stream_passthrough.js",
@@ -2317,7 +2424,6 @@
         "node_modules/eslint/node_modules/glob/node_modules/inflight/node_modules/wrappy/wrappy.js",
         "node_modules/eslint/node_modules/glob/node_modules/inherits/inherits.js",
         "node_modules/eslint/node_modules/glob/node_modules/inherits/inherits_browser.js",
-        "node_modules/eslint/node_modules/glob/node_modules/inherits/test.js",
         "node_modules/eslint/node_modules/glob/node_modules/minimatch/minimatch.js",
         "node_modules/eslint/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/index.js",
         "node_modules/eslint/node_modules/glob/node_modules/minimatch/node_modules/brace-expansion/node_modules/balanced-match/index.js",
@@ -3676,6 +3782,7 @@
         "node_modules/eslint/node_modules/text-table/index.js",
         "node_modules/eslint/node_modules/user-home/index.js",
         "node_modules/eslint/node_modules/user-home/node_modules/os-homedir/index.js",
+        "node_modules/eslint-rule-documentation/index.js",
         "node_modules/process-communication/lib/communication.js",
         "node_modules/process-communication/lib/main.js",
         "node_modules/process-communication/node_modules/sb-communication/lib/main.js",
@@ -3698,14 +3805,18 @@
         "src/worker.js"
       ],
       ".json": [
+        "node_modules/atom-linter/.eslintrc.json",
         "node_modules/atom-linter/node_modules/named-js-regexp/package.json",
         "node_modules/atom-linter/node_modules/sb-exec/.eslintrc.json",
+        "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/.eslintrc.json",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/package.json",
+        "node_modules/atom-linter/node_modules/sb-exec/node_modules/lodash.uniq/package.json",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/.eslintrc.json",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-memoize/.eslintrc.json",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-memoize/package.json",
         "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/package.json",
         "node_modules/atom-linter/node_modules/sb-exec/package.json",
+        "node_modules/atom-linter/node_modules/sb-promisify/.eslintrc.json",
         "node_modules/atom-linter/node_modules/sb-promisify/package.json",
         "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/package.json",
         "node_modules/atom-linter/node_modules/tmp/package.json",
@@ -3714,14 +3825,19 @@
         "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/package.json",
         "node_modules/atom-package-deps/node_modules/atom-package-path/package.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/.eslintrc.json",
+        "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/.eslintrc.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/package.json",
+        "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/lodash.uniq/package.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/.eslintrc.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-memoize/.eslintrc.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-memoize/package.json",
+        "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-promisify/.eslintrc.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/node_modules/sb-promisify/package.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/package.json",
         "node_modules/atom-package-deps/node_modules/sb-exec/package.json",
         "node_modules/atom-package-deps/package.json",
+        "node_modules/consistent-path/node_modules/consistent-env/.eslintrc.json",
+        "node_modules/consistent-path/node_modules/consistent-env/node_modules/lodash.uniq/package.json",
         "node_modules/consistent-path/node_modules/consistent-env/package.json",
         "node_modules/consistent-path/package.json",
         "node_modules/escape-html/package.json",
@@ -3893,6 +4009,8 @@
         "node_modules/eslint/node_modules/user-home/node_modules/os-homedir/package.json",
         "node_modules/eslint/node_modules/user-home/package.json",
         "node_modules/eslint/package.json",
+        "node_modules/eslint-rule-documentation/package.json",
+        "node_modules/eslint-rule-documentation/plugins.json",
         "node_modules/process-communication/node_modules/sb-communication/package.json",
         "node_modules/process-communication/node_modules/sb-event-kit/package.json",
         "node_modules/process-communication/package.json",
@@ -3925,46 +4043,60 @@
           "src"
         ],
         "dependencies": {
-          "atom-linter": "^5.0.1",
+          "atom-linter": "^8.0.0",
           "atom-package-deps": "^4.0.1",
           "consistent-path": "^2.0.1",
           "escape-html": "^1.0.3",
           "eslint": "^2.11.1",
+          "eslint-rule-documentation": "^1.0.0",
           "process-communication": "^1.1.0",
           "resolve-env": "^1.0.0"
         }
       },
       {
         "paths": [
-          "node_modules/atom-linter/lib",
-          "node_modules/atom-linter"
+          "node_modules/atom-linter",
+          "node_modules/atom-linter/decls",
+          "node_modules/atom-linter/lib"
         ],
         "dependencies": {
           "named-js-regexp": "^1.3.1",
-          "sb-exec": "^2.0.4",
-          "sb-promisify": "^1.0.0",
+          "sb-exec": "^3.0.1",
+          "sb-promisify": "^2.0.1",
           "tmp": "~0.0.28"
         }
       },
       {
         "paths": [
           "node_modules/atom-linter/node_modules/sb-exec",
+          "node_modules/atom-linter/node_modules/sb-exec/decls",
           "node_modules/atom-linter/node_modules/sb-exec/lib"
         ],
         "dependencies": {
           "consistent-env": "^1.2.0",
-          "sb-npm-path": "^1.0.0"
+          "lodash.uniq": "^4.5.0",
+          "sb-npm-path": "^2.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env",
+          "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/decls",
+          "node_modules/atom-linter/node_modules/sb-exec/node_modules/consistent-env/lib"
+        ],
+        "dependencies": {
+          "lodash.uniq": "^4.5.0"
         }
       },
       {
         "paths": [
           "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path",
-          "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/lib",
-          "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/spec"
+          "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/decls",
+          "node_modules/atom-linter/node_modules/sb-exec/node_modules/sb-npm-path/lib"
         ],
         "dependencies": {
-          "sb-memoize": "^1.0.1",
-          "sb-promisify": "^1.2.0"
+          "sb-memoize": "^1.0.2",
+          "sb-promisify": "^2.0.1"
         }
       },
       {
@@ -3986,7 +4118,7 @@
         ],
         "dependencies": {
           "atom-package-path": "^1.1.0",
-          "sb-exec": "^2.0.5"
+          "sb-exec": "^3.0.1"
         }
       },
       {
@@ -4002,22 +4134,34 @@
       {
         "paths": [
           "node_modules/atom-package-deps/node_modules/sb-exec",
+          "node_modules/atom-package-deps/node_modules/sb-exec/decls",
           "node_modules/atom-package-deps/node_modules/sb-exec/lib"
         ],
         "dependencies": {
           "consistent-env": "^1.2.0",
-          "sb-npm-path": "^1.0.0"
+          "lodash.uniq": "^4.5.0",
+          "sb-npm-path": "^2.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env",
+          "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/decls",
+          "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/consistent-env/lib"
+        ],
+        "dependencies": {
+          "lodash.uniq": "^4.5.0"
         }
       },
       {
         "paths": [
           "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path",
-          "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/lib",
-          "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/spec"
+          "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/decls",
+          "node_modules/atom-package-deps/node_modules/sb-exec/node_modules/sb-npm-path/lib"
         ],
         "dependencies": {
-          "sb-memoize": "^1.0.1",
-          "sb-promisify": "^1.2.0"
+          "sb-memoize": "^1.0.2",
+          "sb-promisify": "^2.0.1"
         }
       },
       {
@@ -4027,6 +4171,16 @@
         ],
         "dependencies": {
           "consistent-env": "^1.2.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/consistent-path/node_modules/consistent-env",
+          "node_modules/consistent-path/node_modules/consistent-env/decls",
+          "node_modules/consistent-path/node_modules/consistent-env/lib"
+        ],
+        "dependencies": {
+          "lodash.uniq": "^4.5.0"
         }
       },
       {

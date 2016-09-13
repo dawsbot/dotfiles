@@ -43,7 +43,7 @@ describe 'Grammar', ->
 
   # flow predicates...
   grammarTest path.join(__dirname, 'fixtures/grammar/flow-predicates.js')
-  
+
   # issues raised
   grammarTest path.join(__dirname, 'fixtures/grammar/issues.js')
 

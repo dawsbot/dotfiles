@@ -11,8 +11,8 @@ git:
 sudo: false
 
 os:
-  - linux
   - osx
+  - linux
 
 env:
 
