@@ -143,7 +143,7 @@ nnoremap <CR> :noh<CR><CR>
 "Custom commands
   "Engage spell checking
   command Spell execute "set spell spelllang=en_us"
-  command T :normal i rtsao mreeder<ESC>
+  command T :normal i nadiia rtsao mreeder<ESC>
 
 augroup Shebang
   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$

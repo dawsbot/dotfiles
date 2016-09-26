@@ -20,7 +20,7 @@ cz () {
 
 eval $(thefuck --alias)
 
-alias c='cd ~/code'
+alias c='hicat '
 alias v='vim '
 alias tr="tree -I 'node_modules' -L 4"
 
