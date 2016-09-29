@@ -24,8 +24,6 @@ alias nvma='npm version major && git push --follow-tags '
 alias np='npm publish '
 alias ns='npm start '
 
-alias pub='gpom && npm publish '
-
 # Executing locally installed npm_modules from project home
 alias npm-exec='PATH=$(npm bin):$PATH '
 alias ne="npm-exec "
@@ -33,6 +31,7 @@ alias ne="npm-exec "
 # Command npm script aliases
 alias nr='npm run '
 alias nrw='npm run watch '
+alias w='npm run watch '
 alias nrb='npm run build '
 alias nrbd='npm run build-docs '
 alias nrsd='npm run serve-docs '
