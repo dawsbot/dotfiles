@@ -45,3 +45,5 @@ gcl() {
   git clone "$1"
   # TODO: cd into cloned repo
 }
+
+alias gitPrune='git branch | grep -v "master" | xargs git branch -D'

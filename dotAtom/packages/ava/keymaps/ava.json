@@ -1,6 +1,0 @@
-{
-	"atom-workspace": {
-		"ctrl-alt-shift-a": "ava:run-file",
-		"ctrl-alt-a": "ava:run"
-	}
-}
