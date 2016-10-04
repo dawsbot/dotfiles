@@ -7,6 +7,8 @@ SAVEHIST=10000
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+# Auto-update zsh
+DISABLE_UPDATE_PROMPT=true
 
 # Extend path
 export PATH=/usr/local/lib:$PATH

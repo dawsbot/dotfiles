@@ -47,4 +47,4 @@ gcl() {
   # TODO: cd into cloned repo
 }
 
-alias gitPrune='git branch | grep -v "master" | xargs git branch -D'
+alias prune='git branch | grep -v "master" | xargs git branch -D'
