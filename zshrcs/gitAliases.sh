@@ -10,7 +10,6 @@ alias gchb='git checkout -b '
 
 alias gp='git push '
 alias gps='git push staging '
-alias gpp='git push production '
 alias gpo='git push origin '
 alias gpom='git push origin master '
 alias gphm='git push heroku master '
@@ -26,6 +25,9 @@ alias gbd='git branch -D '
 alias gr='git remote '
 alias grv='git remote -v '
 
+clean() {
+  git checkout . && git clean -f -d
+}
 burn() {
   git branch -D "$1" # Delete branch locally
   git push origin :"$1" # Delete branch from remote (GitHub)
@@ -36,11 +38,6 @@ current_branch() {
 }
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
-
-# git push "this branch"
-gpt() {
-  git push origin "$(current_branch)"
-}
 
 gcl() {
   git clone "$1"
