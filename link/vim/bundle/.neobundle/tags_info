@@ -1,12 +1,8 @@
-YouCompleteMe
-matchit
 neobundle.vim
-nerdtree
 oceanic-next-vim
 syntastic
-tern_for_vim
+tcomment_vim
 vim-airline
 vim-bufkill
-vim-indent-guides
 vim-javascript-syntax
 vim-surround
