@@ -2,6 +2,7 @@ dotAtom/compile-cache
 dotAtom/blog-store
 node_modules
 
+*.log
 .apm
 blob-store
 

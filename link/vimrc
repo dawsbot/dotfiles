@@ -30,21 +30,18 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/syntastic.git'
-NeoBundle 'scrooloose/nerdtree.git'
-" NeoBundle 'tomtom/tcomment_vim.git'
+" NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'tomtom/tcomment_vim.git'
 NeoBundle 'bling/vim-airline'
 " NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'qpkorr/vim-bufkill'
 
 NeoBundle 'tpope/vim-surround'
-
-NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'ternjs/tern_for_vim'
 NeoBundle 'jelera/vim-javascript-syntax'
 
 " NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'tmhedberg/matchit'
+" NeoBundle 'nathanaelkane/vim-indent-guides'
+" NeoBundle 'tmhedberg/matchit'
 
 NeoBundle 'yosiat/oceanic-next-vim'
 " NeoBundle 'mhartington/oceanic-next'
