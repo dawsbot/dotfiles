@@ -1,4 +1,6 @@
+editorconfig-vim
 neobundle.vim
+nerdtree
 oceanic-next-vim
 syntastic
 tcomment_vim
