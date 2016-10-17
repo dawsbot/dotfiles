@@ -1,7 +1,8 @@
-
 alias i='npm install '
 alias t='npm test '
+alias it='npm install && npm test'
 
+alias t='npm test '
 # Install and uninstall shorteners
 alias ni='npm install '
 alias nit='npm install && npm test '

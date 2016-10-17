@@ -24,3 +24,10 @@ alias c='hicat '
 alias v='vim '
 alias tr="tree -I 'node_modules' -L 4"
 
+upgradeAll () {
+  brew prune
+  brew update
+  brew upgrade
+  brew doctor
+  npm update -g
+}
