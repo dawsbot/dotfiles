@@ -1,34 +1,22 @@
 # Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
 
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
 # Increase history size
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
-# Auto-update zsh
-DISABLE_UPDATE_PROMPT=true
-
 # Extend path
-export PATH=/usr/local/lib:$PATH
-export PATH=/usr/local/share/npm/bin:$PATH
-export PATH=$PATH:/usr/local/git/bin/
-export PATH=$PATH:/usr/local/bin
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export PATH=/usr/local/bin:$PATH
+# export PATH=/usr/local/share/npm/bin:$PATH
+# export PATH=$PATH:/usr/local/lib
+# export PATH=$PATH:/usr/local/git
 export PATH="$PATH:$HOME/cli"
-
-
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-ZSH_THEME='agnoster'
-
-plugins=(git npm)
-plugins=(extract)
-
-# ls colors
-plugins=(warhol)
-
-source $ZSH/oh-my-zsh.sh
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting */
 
 # Manually set your language environment
 export LANG=en_US.UTF-8
@@ -46,7 +34,6 @@ prompt_context(){}
 set clipboard=unnamed
 
 ########## ALIASES ###########
-
 alias sz='source ~/.zshrc'
 alias vz='$EDITOR ~/.zshrc'
 alias vv='$EDITOR ~/.vimrc'
@@ -60,8 +47,12 @@ alias pydemon="nodemon --exec 'python' "
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
 # Shortcuts to executable files
-alias a="atom ."
 alias s="subl ."
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
