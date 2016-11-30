@@ -18,6 +18,7 @@ alias nuid='npm uninstall --save-dev '
 
 alias nif='npm init -f '
 alias nl='npm link '
+alias nrl='npm run lint '
 alias nv='npm version '
 alias nvp='npm version patch && git push --follow-tags '
 alias nvmi='npm version minor && git push --follow-tags '
