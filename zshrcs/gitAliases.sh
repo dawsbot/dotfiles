@@ -1,3 +1,7 @@
+current_branch() {
+  basename "$(git symbolic-ref HEAD)"
+}
+
 alias g='git '
 alias gs='git status '
 alias ga='git add '
@@ -10,13 +14,13 @@ alias gchb='git checkout -b '
 
 alias gp='git push '
 alias gps='git push staging '
-alias gpo='git push origin '
+alias gpo='git push origin "$(current_branch)"'
 alias gpom='git push origin master '
 alias gphm='git push heroku master '
 alias gpbm='git push origin master && git push heroku master '
 alias gpft='git push --follow-tags '
 
-alias gpu='git pull '
+alias gpu='git pull origin "$(current_branch)"'
 alias gpum='git pull origin master '
 alias gd='git diff '
 alias gb='git branch '
@@ -31,10 +35,6 @@ clean() {
 burn() {
   git branch -D "$1" # Delete branch locally
   git push origin :"$1" # Delete branch from remote (GitHub)
-}
-
-current_branch() {
-  basename "$(git symbolic-ref HEAD)"
 }
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'

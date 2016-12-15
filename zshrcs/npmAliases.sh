@@ -10,7 +10,8 @@ alias nit='npm install && npm test '
 alias nis='npm install --save '
 alias nuis='npm uninstall --save '
 
-alias nig='npm install --global '
+# alias nig='npm install --global '
+alias nig='yarn global add '
 alias nuig='npm uninstall --global '
 
 alias nid='npm install --save-dev '
@@ -20,6 +21,7 @@ alias nif='npm init -f '
 alias nl='npm link '
 alias nrl='npm run lint '
 alias nrt='npm run transpile '
+alias nrf='npm run flow '
 
 alias nv='npm version '
 alias nvp='npm version patch && git push --follow-tags '
