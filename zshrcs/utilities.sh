@@ -18,8 +18,6 @@ cz () {
   ls
 }
 
-eval $(thefuck --alias)
-
 alias c='hicat '
 alias v='vim '
 alias tr="tree -I 'node_modules' -L 4"
@@ -37,4 +35,18 @@ function take() {
   cd $1
 }
 
-alias co="code-insiders "
+function co() {
+  if [[ $# -eq 0 ]] ; then
+    code-insiders .
+    exit 1
+  fi
+  code-insiders "$1"
+}
+
+function s() {
+  if [[ $# -eq 0 ]] ; then
+    subl .
+    exit 1
+  fi
+  subl "$1"
+}
