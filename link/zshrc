@@ -53,10 +53,8 @@ alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
 # Shortcuts to executable files
-alias s="subl ."
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-
 
 export NVM_DIR="/Users/dawsonbotsford/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -65,6 +63,7 @@ source $HOME/dotfiles/zshrcs/arcAliases.sh
 source $HOME/dotfiles/zshrcs/gitAliases.sh
 source $HOME/dotfiles/zshrcs/npmAliases.sh
 source $HOME/dotfiles/zshrcs/utilities.sh
+source $HOME/dotfiles/zshrcs/bindkey.sh
 
 source ~/uberPrivaterc
 
