@@ -50,3 +50,11 @@ function s() {
   fi
   subl "$1"
 }
+
+function db-nm() {
+  mkdir src
+  mv index.js src
+  mv cli.js src
+  npm install --save-dev babel-cli babel-preset-es2015 babel-preset-stage-2
+
+}
