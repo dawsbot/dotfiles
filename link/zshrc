@@ -54,17 +54,21 @@ export NVM_DIR="/Users/dawsonbotsford/.nvm"
 # oh my zsh
 export ZSH=/Users/dawsonbotsford/.oh-my-zsh
 ZSH_THEME="agnoster"
-
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-source $HOME/Dropbox/dotfiles/zshrcs/arcAliases.sh
-# source $HOME/Dropbox/dotfiles/zshrcs/gitAliases.sh
-source $HOME/Dropbox/dotfiles/zshrcs/npmAliases.sh
-source $HOME/Dropbox/dotfiles/zshrcs/utilities.sh
-source $HOME/Dropbox/dotfiles/zshrcs/bindkey.sh
+ZSHRCS_HOME="$HOME/Dropbox/dotfiles/zshrcs"
+source "$ZSHRCS_HOME/arcAliases.sh"
+source "$ZSHRCS_HOME/gitAliases.sh"
+source "$ZSHRCS_HOME/npmAliases.sh"
+source "$ZSHRCS_HOME/utilities.sh"
+source "$ZSHRCS_HOME/bindkey.sh"
 
-source ~/uberPrivaterc
+UBER_PRIVATE_RC="~/uberPrivaterc"
+if [ -f UBER_PRIVATE_RC ]
+then
+  source UBER_PRIVATE_RC
+fi
 
 # KEEP AT END OF FILE
 #Removes username from prompt status line
