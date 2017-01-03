@@ -1,10 +1,4 @@
 # Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 # Increase history size
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -26,9 +20,6 @@ eval "$(fasd --init auto)"
 
 #backwards search
 bindkey "^R" history-incremental-search-backward
-
-#Removes user from prompt status line
-prompt_context(){}
 
 #Yank directly to clipboard OSX
 set clipboard=unnamed
@@ -56,17 +47,26 @@ alias -g ......='../../../../..'
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
+# nvm file path (node version manager)
 export NVM_DIR="/Users/dawsonbotsford/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-source $HOME/dotfiles/zshrcs/arcAliases.sh
-source $HOME/dotfiles/zshrcs/gitAliases.sh
-source $HOME/dotfiles/zshrcs/npmAliases.sh
-source $HOME/dotfiles/zshrcs/utilities.sh
-source $HOME/dotfiles/zshrcs/bindkey.sh
+# oh my zsh
+export ZSH=/Users/dawsonbotsford/.oh-my-zsh
+ZSH_THEME="agnoster"
+
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
+source $HOME/Dropbox/dotfiles/zshrcs/arcAliases.sh
+# source $HOME/Dropbox/dotfiles/zshrcs/gitAliases.sh
+source $HOME/Dropbox/dotfiles/zshrcs/npmAliases.sh
+source $HOME/Dropbox/dotfiles/zshrcs/utilities.sh
+source $HOME/Dropbox/dotfiles/zshrcs/bindkey.sh
 
 source ~/uberPrivaterc
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# KEEP AT END OF FILE
+#Removes username from prompt status line
+prompt_context(){}
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh

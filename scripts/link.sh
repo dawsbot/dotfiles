@@ -4,8 +4,8 @@
 ############################
 
 ########## Variables
-dir=~/dotfiles/link               # dotfiles directory
-olddir=~/dotfiles_old             # old dotfiles backup directory
+dir=~/Dropbox/dotfiles/link               # dotfiles directory
+olddir=~/Dropbox/dotfiles_old             # old dotfiles backup directory
 # files="vimrc zshrc eslintrc gitignore"    # list of files/folders to symlink in homedir
 files="vimrc zshrc vim"    # list of files/folders to symlink in homedir
 
