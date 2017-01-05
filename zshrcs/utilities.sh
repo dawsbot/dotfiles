@@ -14,7 +14,7 @@ printColors () {
 }
 
 cz () {
-  cd ~/dotfiles/zshrcs
+  cd ~/Dropbox/dotfiles/zshrcs
   ls
 }
 
