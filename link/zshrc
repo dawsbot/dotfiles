@@ -64,10 +64,11 @@ source "$ZSHRCS_HOME/npmAliases.sh"
 source "$ZSHRCS_HOME/utilities.sh"
 source "$ZSHRCS_HOME/bindkey.sh"
 
-UBER_PRIVATE_RC="~/uberPrivaterc"
-if [ -f UBER_PRIVATE_RC ]
+UBER_PRIVATE_RC="$HOME/uberPrivaterc"
+if [ -f $UBER_PRIVATE_RC ]
 then
-  source UBER_PRIVATE_RC
+  echo "uber private found"
+  source $UBER_PRIVATE_RC
 fi
 
 # KEEP AT END OF FILE
