@@ -5,23 +5,19 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # Extend path
-# export PATH=/usr/local/bin:$PATH
-# export PATH=/usr/local/share/npm/bin:$PATH
-# export PATH=$PATH:/usr/local/lib
-# export PATH=$PATH:/usr/local/git
 export PATH="$PATH:$HOME/cli"
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting */
+# export PATH=/usr/local/bin:$PATH
+# export PATH="$PATH:$HOME/.rvm/bin"
 
-# Manually set your language environment
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 
 eval "$(fasd --init auto)"
 
-#backwards search
-bindkey "^R" history-incremental-search-backward
+# backwards search
+# bindkey "^R" history-incremental-search-backward
 
-#Yank directly to clipboard OSX
+# Yank directly to clipboard OSX
 set clipboard=unnamed
 
 ########## ALIASES ###########
@@ -38,10 +34,10 @@ alias pydemon="nodemon --exec 'python' "
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
+alias ......='../../../../..'
 
 # Shortcuts to executable files
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
@@ -67,7 +63,6 @@ source "$ZSHRCS_HOME/bindkey.sh"
 UBER_PRIVATE_RC="$HOME/uberPrivaterc"
 if [ -f $UBER_PRIVATE_RC ]
 then
-  echo "uber private found"
   source $UBER_PRIVATE_RC
 fi
 
