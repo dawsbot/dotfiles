@@ -38,9 +38,9 @@ function take() {
 function co() {
   if [[ $# -eq 0 ]] ; then
     code-insiders .
-    exit 1
+  else
+    code-insiders "$1"
   fi
-  code-insiders "$1"
 }
 
 function s() {
