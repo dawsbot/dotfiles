@@ -1,11 +1,10 @@
-
 > Highly recommended dotfiles for OSX hacking with maximum-efficient-speed.
 
 <br>
 
-Includes:  
+Includes:
 
-1. iterm2 setup with oh-my-zsh  
+1. iterm2 setup with oh-my-zsh
 2. vimrc setup with **all** bundled packages :tada:
 
 <br>
@@ -27,7 +26,8 @@ cd dotfiles
 sh scripts/link.sh
 ```
 
-This links your root files to the ~/dotfiles files. Modifications can be made to `~/<file>` **or** `~/dotfiles/link/<file>` since they are symlinked.
+This links your root files to the ~/dotfiles files.  
+Modifications can be made to `~/<file>` **or** `~/dotfiles/link/<file>` since they are symlinked.
 
 <br>
 
@@ -37,7 +37,6 @@ cd ~
 git clone https://github.com/dawsonbotsford/dotfiles
 
 cd dotfiles
-# Will take ~20 minutes
 sh setup/freshOSXInstall.sh
 
 # Link all dotfiles to $HOME
