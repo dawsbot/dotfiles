@@ -4,6 +4,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+eval "$(rbenv init - --no-rehash)"
+
 # Extend path
 export PATH="$PATH:$HOME/cli"
 # export PATH=/usr/local/bin:$PATH
@@ -70,3 +72,6 @@ fi
 #Removes username from prompt status line
 prompt_context(){}
 
+
+# added by travis gem
+[ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh

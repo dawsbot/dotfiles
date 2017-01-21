@@ -1,4 +1,5 @@
 # copy last command
+alias cp='cp -r '
 alias copyLastCmd='fc -ln -1 | awk '{$1=$1}1' | pbcopy '
 
 # kill functions for processes
