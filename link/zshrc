@@ -1,10 +1,18 @@
 # Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
+# Use this to lazy load bigger deps (like nvm)
+lazy_source () {
+  eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
+}
+
+NVM_SOURCE=$HOME/.nvm/nvm.sh
+lazy_source nvm $NVM_SOURCE
+
 # Increase history size
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-eval "$(rbenv init - --no-rehash)"
+# eval "$(rbenv init - --no-rehash)"
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
@@ -36,18 +44,9 @@ alias pydemon="nodemon --exec 'python' "
 #youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
-alias ...='../..'
-alias ....='../../..'
-alias .....='../../../..'
-alias ......='../../../../..'
-
 # Shortcuts to executable files
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-
-# nvm file path (node version manager)
-export NVM_DIR="/Users/dawsonbotsford/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 # oh my zsh
 export ZSH=/Users/dawsonbotsford/.oh-my-zsh
@@ -65,13 +64,12 @@ source "$ZSHRCS_HOME/bindkey.sh"
 UBER_PRIVATE_RC="$HOME/uberPrivaterc"
 if [ -f $UBER_PRIVATE_RC ]
 then
-  source $UBER_PRIVATE_RC
+  # source $UBER_PRIVATE_RC
 fi
 
 # KEEP AT END OF FILE
 #Removes username from prompt status line
 prompt_context(){}
 
-
 # added by travis gem
-[ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh
+# [ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh
