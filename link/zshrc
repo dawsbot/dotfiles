@@ -1,11 +1,15 @@
 # Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
 # Use this to lazy load bigger deps (like nvm)
+
 lazy_source () {
   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 }
 
-NVM_SOURCE=$HOME/.nvm/nvm.sh
-lazy_source nvm $NVM_SOURCE
+# NVM_SOURCE=$HOME/.nvm/nvm.sh
+# lazy_source nvm $NVM_SOURCE
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Increase history size
 HISTFILE=~/.zsh_history
