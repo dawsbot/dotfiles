@@ -2,6 +2,8 @@ current_branch() {
   basename "$(git symbolic-ref HEAD)"
 }
 
+alias hb='hub browse'
+
 alias g='git '
 alias gs='git status '
 alias ga='git add '
