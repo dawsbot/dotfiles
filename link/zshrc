@@ -9,7 +9,7 @@ lazy_source () {
 # lazy_source nvm $NVM_SOURCE
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use # This loads nvm
 
 # Increase history size
 HISTFILE=~/.zsh_history
