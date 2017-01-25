@@ -36,18 +36,11 @@ function take() {
   cd $1
 }
 
-function co() {
-  if [[ $# -eq 0 ]] ; then
-    code-insiders .
-  else
-    code-insiders "$1"
-  fi
-}
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl "
 
 function s() {
   if [[ $# -eq 0 ]] ; then
     subl .
-    exit 1
   fi
   subl "$1"
 }
@@ -56,6 +49,7 @@ function db-nm() {
   mkdir src
   mv index.js src
   mv cli.js src
+  cp  ~/code/gmap/.babelrc .
   npm install --save-dev babel-cli babel-preset-es2015 babel-preset-stage-2
-
+  echo "UPDATE PACKAGE.JSON"
 }
