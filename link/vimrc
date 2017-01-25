@@ -35,6 +35,7 @@ NeoBundle 'tomtom/tcomment_vim.git'
 NeoBundle 'bling/vim-airline'
 " NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'qpkorr/vim-bufkill'
+NeoBundle 'herrbischoff/cobalt2.vim'
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'jelera/vim-javascript-syntax'
@@ -43,7 +44,7 @@ NeoBundle 'editorconfig/editorconfig-vim'
 " NeoBundle 'nathanaelkane/vim-indent-guides'
 " NeoBundle 'tmhedberg/matchit'
 
-NeoBundle 'yosiat/oceanic-next-vim'
+" NeoBundle 'yosiat/oceanic-next-vim'
 " NeoBundle 'mhartington/oceanic-next'
 call neobundle#end()
 
@@ -57,15 +58,15 @@ set si
 NeoBundleCheck
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set laststatus=2
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" set laststatus=2
 
-let g:syntastic_javascript_eslint_generic = 1
-let g:syntastic_javascript_eslint_exec = 'xo'
-let g:syntastic_javascript_eslint_args = '--compact'
-let g:syntastic_javascript_checkers = ['eslint', 'jshint']
+" let g:syntastic_javascript_eslint_generic = 1
+" let g:syntastic_javascript_eslint_exec = 'xo'
+" let g:syntastic_javascript_eslint_args = '--compact'
+" let g:syntastic_javascript_checkers = ['eslint', 'jshint']
 
 " let g:syntastic_javascript_checkers=['eslint']
 " let g:syntastic_python_checkers = []
@@ -83,7 +84,7 @@ set number
 set showmode
 set cursorline
 set cursorcolumn
-set scrolloff=5
+set scrolloff=10
 
 " Syntax
 syntax on
@@ -94,7 +95,7 @@ set background=dark
 
 " colorscheme solarized
 set t_Co=256
-colorscheme OceanicNext
+" colorscheme OceanicNext
 
 set noswapfile
 
@@ -142,6 +143,7 @@ nnoremap <CR> :noh<CR><CR>
   command Spell execute "set spell spelllang=en_us"
   command T :normal i nadiia rtsao<ESC>
 
+" Auto-add shebang for certain file types
 augroup Shebang
   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$
   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
