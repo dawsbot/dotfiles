@@ -71,7 +71,7 @@ source "$ZSHRCS_HOME/npmAliases.sh"
 source "$ZSHRCS_HOME/utilities.sh"
 source "$ZSHRCS_HOME/bindkey.sh"
 
-UBER_PRIVATE_RC="$HOME/uberPrivaterc"
+UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
 if [ -f $UBER_PRIVATE_RC ]
 then
   source $UBER_PRIVATE_RC
