@@ -1,3 +1,9 @@
+
+filetype plugin on
+
+" set wildignore+=**/node_modules/**
+" set path+=**
+
 """"""""""""""""""" Functions """""""""""""""""""""
 function! TrimWhiteSpace()
   %s/\s\+$//e
@@ -20,8 +26,7 @@ set clipboard=unnamed
 """"""""""""""""""" Neobundle """""""""""""""""""
 " Required:
 if has('vim_starting')
- set nocompatible
- set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 end
 
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -33,7 +38,6 @@ NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'tomtom/tcomment_vim.git'
 NeoBundle 'bling/vim-airline'
-" NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'qpkorr/vim-bufkill'
 NeoBundle 'herrbischoff/cobalt2.vim'
 
@@ -86,16 +90,11 @@ set cursorline
 set cursorcolumn
 set scrolloff=10
 
-" Syntax
-syntax on
-
 match ErrorMsg '\s\+$'
 
 set background=dark
 
-" colorscheme solarized
 set t_Co=256
-" colorscheme OceanicNext
 
 set noswapfile
 
@@ -108,13 +107,15 @@ set hlsearch
 set incsearch
 set backspace=indent,eol,start
 
+syntax on
+
 set mouse=a
 set ttymouse=xterm
 
 """"""""""""""""""" Leader overrides """"""""""""""""""""
 nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
-nnoremap <silent> <leader>" :call DoubleQuotesToSingle()<CR>
-nnoremap <silent> <leader>' :call DoubleQuotesToSingle()<CR>
+" nnoremap <silent> <leader>" :call DoubleQuotesToSingle()<CR>
+" nnoremap <silent> <leader>' :call DoubleQuotesToSingle()<CR>
 nmap <leader>n :NERDTree<cr>
 
 "Delete buffer special. Defined in vim-bufkill
@@ -138,10 +139,10 @@ nnoremap <leader><leader> :bnext<CR>
 "Set no highlight after a second \"Enter\" press
 nnoremap <CR> :noh<CR><CR>
 
-"Custom commands
-  "Engage spell checking
-  command Spell execute "set spell spelllang=en_us"
-  command T :normal i nadiia rtsao<ESC>
+"""""""""""""""""""" Custom commands """"""""""""""""""""
+"Engage spell checking
+command Spell execute "set spell spelllang=en_us"
+command T :normal i nadiia rtsao<ESC>
 
 " Auto-add shebang for certain file types
 augroup Shebang
@@ -157,4 +158,4 @@ set ignorecase
 set showmatch
 
 "Place a width 1 margin on the left
-set foldcolumn=1
+" set foldcolumn=1

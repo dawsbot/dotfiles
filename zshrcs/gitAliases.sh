@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 current_branch() {
   basename "$(git symbolic-ref HEAD)"
 }
@@ -16,7 +17,7 @@ alias gchb='git checkout -b '
 
 alias gp='git push '
 alias gps='git push staging '
-alias gpo='git push origin '
+alias gpo='git push origin "$(current_branch)"'
 alias gpom='git push origin master '
 alias gphm='git push heroku master '
 alias gpbm='git push origin master && git push heroku master '

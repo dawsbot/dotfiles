@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 alias i='npm install '
 alias t='npm test '
 alias it='npm install && npm test'
@@ -25,9 +26,11 @@ alias nrf='npm run flow '
 
 alias nv='npm version '
 alias gpft='git push --follow-tags'
-alias nvp='npm version patch -m ":package: %s" && gpft '
-alias nvmi='npm version minor -m ":package: %s" && gpft '
-alias nvma='npm version major -m ":package: %s" && gpft '
+
+PUSH_PUB="gpft && npm publish"
+alias nvp="npm version patch -m ":package: %s" && $PUSH_PUB"
+alias nvmi="npm version minor -m ":package: %s" && $PUSH_PUB"
+alias nvma="npm version major -m ":package: %s" && $PUSH_PUB"
 alias np='npm publish '
 alias ns='npm start '
 
