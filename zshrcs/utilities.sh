@@ -1,6 +1,7 @@
+#!/usr/bin/env bash
 # copy last command
 alias cp='cp -r '
-alias copyLastCmd='fc -ln -1 | awk '{$1=$1}1' | pbcopy '
+alias copyLastCmd="fc -ln -1 | pbcopy"
 
 # kill functions for processes
 alias kPhantom='pkill -f phantom'
@@ -15,7 +16,7 @@ printColors () {
 }
 
 cz () {
-  cd ~/Dropbox/dotfiles/zshrcs
+  cd ~/Dropbox/dotfiles/zshrcs || exit
   ls
 }
 
@@ -32,8 +33,8 @@ upgradeAll () {
 }
 
 function take() {
-  mkdir -p $1
-  cd $1
+  mkdir -p "$1"
+  cd "$1" || exit
 }
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl "
@@ -52,4 +53,14 @@ function db-nm() {
   cp  ~/code/gmap/.babelrc .
   npm install --save-dev babel-cli babel-preset-es2015 babel-preset-stage-2
   echo "UPDATE PACKAGE.JSON"
+}
+
+alias play='cd "$(mktemp)"'
+
+function new-repo() {
+  git branch -u origin/master
+  hub create
+  travis enable
+  g*
+  openg && opent
 }
