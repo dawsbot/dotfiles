@@ -1,6 +1,6 @@
 # Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
 
-source $(pluc-cli --shellPath)
+# source $(pluc-cli --shellPath)
 function pluc() {
   pluc-cli "$@"
   source "$(pluc-cli --shellPath)"
