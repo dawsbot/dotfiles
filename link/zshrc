@@ -1,11 +1,5 @@
 # Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
 
-# source $(pluc-cli --shellPath)
-function pluc() {
-  pluc-cli "$@"
-  source "$(pluc-cli --shellPath)"
-}
-
 DROPBOX_PATH=$HOME/dropbox
 
 # Load z https://github.com/rupa/z
@@ -30,9 +24,14 @@ export SAVEHIST=10000
 
 eval "$(rbenv init - --no-rehash)"
 
+# Go
+export GOPATH=$HOME/golang
+export GOROOT=$GOPATH
+
 # Extend path
 export PATH="$PATH:$HOME/cli"
 export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
+export PATH="$PATH:$GOPATH/bin"
 
 export LANG=en_US.UTF-8
 export EDITOR='vim'
@@ -82,6 +81,12 @@ then
 fi
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
+
+source $(pluc-cli --destinationPath)
+function pluc() {
+  pluc-cli "$@"
+  source "$(pluc-cli --destinationPath)"
+}
 
 # KEEP AT END OF FILE
 #Removes username from prompt status line
