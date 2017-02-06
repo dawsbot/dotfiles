@@ -45,6 +45,12 @@ function s() {
   fi
   subl "$1"
 }
+function vs() {
+  if [[ $# -eq 0 ]] ; then
+    code-insiders .
+  fi
+  code-insiders "$1"
+}
 
 function db-nm() {
   mkdir src

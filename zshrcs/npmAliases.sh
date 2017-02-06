@@ -28,9 +28,9 @@ alias nv='npm version '
 alias gpft='git push --follow-tags'
 
 PUSH_PUB="gpft && npm publish"
-alias nvp="npm version patch -m ":package: %s" && $PUSH_PUB"
-alias nvmi="npm version minor -m ":package: %s" && $PUSH_PUB"
-alias nvma="npm version major -m ":package: %s" && $PUSH_PUB"
+alias nvp="npm version patch -m \":package: %s\" && $PUSH_PUB"
+alias nvmi="npm version minor -m \":package: %s\" && $PUSH_PUB"
+alias nvma="npm version major -m \":package: %s\" && $PUSH_PUB"
 alias np='npm publish '
 alias ns='npm start '
 

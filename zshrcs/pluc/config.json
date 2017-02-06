@@ -1,0 +1,7 @@
+{
+	"mono": "cd ~/code/superfine-monorepo && ls",
+	"play": "cd \"$(mktemp -d)\"",
+	"code": "cd ~/code && ls",
+	"gre": "git pull --rebase origin master",
+	"psg": "ps aux | grep "
+}
