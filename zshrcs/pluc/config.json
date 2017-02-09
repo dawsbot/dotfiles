@@ -3,5 +3,8 @@
 	"play": "cd \"$(mktemp -d)\"",
 	"code": "cd ~/code && ls",
 	"gre": "git pull --rebase origin master",
-	"psg": "ps aux | grep "
+	"psg": "ps aux | grep ",
+	"gotest": "go test -v . | sed /PASS/s//$(printf \"\\033[32mPASS\\033[0m\")/ | sed /FAIL/s//$(printf \"\\033[31mFAIL\\033[0m\")/\n",
+	"getGlobalGitignore": "git config --get core.excludesfile",
+	"uni": "unpm install"
 }
