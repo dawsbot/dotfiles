@@ -13,6 +13,7 @@ cd "$dir" || exit
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
     # printf "\nMoving any existing dotfiles from ~ to $olddir"
+    rm "$olddir/$file"
     mv "$HOME/.$file" "$olddir/$file"
 
     ln -s "$dir/$file" "$HOME/.$file"

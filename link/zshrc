@@ -26,7 +26,7 @@ eval "$(rbenv init - --no-rehash)"
 
 # Go
 export GOPATH=$HOME/golang
-export GOROOT=$GOPATH
+# export GOROOT=$GOPATH
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
