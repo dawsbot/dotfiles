@@ -6,5 +6,9 @@
 	"psg": "ps aux | grep ",
 	"gotest": "go test -v . | sed /PASS/s//$(printf \"\\033[32mPASS\\033[0m\")/ | sed /FAIL/s//$(printf \"\\033[31mFAIL\\033[0m\")/\n",
 	"getGlobalGitignore": "git config --get core.excludesfile",
-	"uni": "unpm install"
+	"uni": "unpm install",
+	"udie": "rm -rf node_modules && uni",
+	"gam": "ga -A && gc -m ",
+	"nv": "node -v",
+	"ncc": "npm cache clean"
 }
