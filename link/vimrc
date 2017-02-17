@@ -142,7 +142,8 @@ nnoremap <CR> :noh<CR><CR>
 """""""""""""""""""" Custom commands """"""""""""""""""""
 "Engage spell checking
 command Spell execute "set spell spelllang=en_us"
-command T :normal i nadiia rtsao<ESC>
+command T :normal i dkearns aleksey<ESC>
+command OT :normal i nadiia rtsao<ESC>
 
 " Auto-add shebang for certain file types
 augroup Shebang
