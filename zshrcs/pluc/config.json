@@ -4,11 +4,17 @@
 	"code": "cd ~/code && ls",
 	"gre": "git pull --rebase origin master",
 	"psg": "ps aux | grep ",
-	"gotest": "go test -v . | sed /PASS/s//$(printf \"\\033[32mPASS\\033[0m\")/ | sed /FAIL/s//$(printf \"\\033[31mFAIL\\033[0m\")/\n",
 	"getGlobalGitignore": "git config --get core.excludesfile",
 	"uni": "unpm install",
 	"udie": "rm -rf node_modules && uni",
 	"gam": "ga -A && gc -m ",
 	"nv": "node -v",
-	"ncc": "npm cache clean"
+	"ncc": "npm cache clean",
+	"drop": "cd ~/Dropbox",
+	"l": "ls",
+	"dun": "terminal-notifier -message 'done!'",
+	"al": "arc land",
+	"cnit": "cn && it",
+	"unit": "uni && t",
+	"yarnt": "yarn && t"
 }
