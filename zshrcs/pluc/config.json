@@ -16,5 +16,16 @@
 	"al": "arc land",
 	"cnit": "cn && it",
 	"unit": "uni && t",
-	"yarnt": "yarn && t"
+	"yarnt": "yarn && t",
+	"nif": "npm init -f",
+	"git": "hub",
+	"gm": "git merge",
+	"gms": "git merge --squash",
+	"osp": "osnpm publish",
+	"npmv": "npm -v",
+	"y": "yarn",
+	"yl": "yarn link",
+	"ya": "yarn add",
+	"yr": "yarn remove",
+	"yrs": "yarn remove --save"
 }
