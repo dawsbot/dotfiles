@@ -52,6 +52,10 @@ function vs() {
   code-insiders "$1"
 }
 
+function remove-app() {
+  rm -rf /Applications/"$1".app
+}
+
 function db-nm() {
   mkdir src
   mv index.js src

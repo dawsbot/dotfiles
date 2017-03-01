@@ -27,5 +27,11 @@
 	"yl": "yarn link",
 	"ya": "yarn add",
 	"yr": "yarn remove",
-	"yrs": "yarn remove --save"
+	"yrs": "yarn remove --save",
+	"yad": "yarn add --dev",
+	"devbox": "ssh aptera-deville-3.dev",
+	"rnm": "rm -rf node_modules",
+	"rmr": "rm -rf",
+	"rmnm": "rm -rf node_modules",
+	"udiet": "udie && t"
 }
