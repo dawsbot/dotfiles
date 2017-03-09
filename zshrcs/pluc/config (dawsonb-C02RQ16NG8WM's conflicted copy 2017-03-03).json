@@ -29,8 +29,12 @@
 	"yr": "yarn remove",
 	"yrs": "yarn remove --save",
 	"yad": "yarn add --dev",
-	"yga": "yarn global add",
-	"grao": "git remote add origin",
 	"devbox": "ssh aptera-deville-3.dev",
+	"rnm": "rm -rf node_modules",
+	"rmr": "rm -rf",
+	"rmnm": "rm -rf node_modules",
+	"udiet": "udie && t",
+	"lsallsal": "lsal",
+	"lsal": "ls -al",
 	"vp": "vim $(pluc-cli --sourcePath)"
 }

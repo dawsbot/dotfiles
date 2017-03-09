@@ -25,6 +25,7 @@ alias v='vim '
 alias tr="tree -I 'node_modules' -L 4"
 
 upgradeAll () {
+  upgrade_oh_my_zsh
   brew prune
   brew update
   brew upgrade
