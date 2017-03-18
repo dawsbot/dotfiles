@@ -1,8 +1,4 @@
-
 filetype plugin on
-
-" set wildignore+=**/node_modules/**
-" set path+=**
 
 """"""""""""""""""" Functions """""""""""""""""""""
 function! TrimWhiteSpace()
@@ -110,12 +106,13 @@ set backspace=indent,eol,start
 syntax on
 
 set mouse=a
-set ttymouse=xterm
+
+if !has('nvim')
+  set ttymouse=xterm
+endif
 
 """"""""""""""""""" Leader overrides """"""""""""""""""""
 nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
-" nnoremap <silent> <leader>" :call DoubleQuotesToSingle()<CR>
-" nnoremap <silent> <leader>' :call DoubleQuotesToSingle()<CR>
 nmap <leader>n :NERDTree<cr>
 
 "Delete buffer special. Defined in vim-bufkill
@@ -127,7 +124,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>e :wq<cr>
 nnoremap <leader>! :q!<cr>
 nnoremap <leader>1 :q!<cr>
-set pastetoggle=<F2>
+
 nmap <leader>p <F2><CR>ki
 
 " Navigating windows
@@ -140,10 +137,10 @@ nnoremap <leader><leader> :bnext<CR>
 nnoremap <CR> :noh<CR><CR>
 
 """""""""""""""""""" Custom commands """"""""""""""""""""
+" Paste in teammate names for code review
+nnoremap <leader>t a dkearns aleksey<ESC>
 "Engage spell checking
 command Spell execute "set spell spelllang=en_us"
-command T :normal i dkearns aleksey<ESC>
-command OT :normal i nadiia rtsao<ESC>
 
 " Auto-add shebang for certain file types
 augroup Shebang
@@ -157,6 +154,3 @@ set ignorecase
 
 " Show matching brackets when text indicator is over them
 set showmatch
-
-"Place a width 1 margin on the left
-" set foldcolumn=1

@@ -69,9 +69,12 @@ function db-nm() {
 alias play='cd "$(mktemp)"'
 
 function new-repo() {
-  git branch -u origin/master
   hub create
   travis enable
   g*
   openg && opent
+}
+
+gcl() {
+  git clone "$1" && cd "$(basename "$1")"
 }

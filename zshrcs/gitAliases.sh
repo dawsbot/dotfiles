@@ -42,9 +42,4 @@ burn() {
 }
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
-
-gcl() {
-  git clone "$1"
-}
-
 alias prune='git branch | grep -v "master" | xargs git branch -D'
