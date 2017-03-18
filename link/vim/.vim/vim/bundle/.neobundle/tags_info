@@ -1,0 +1,10 @@
+editorconfig-vim
+neobundle.vim
+nerdtree
+oceanic-next-vim
+syntastic
+tcomment_vim
+vim-airline
+vim-bufkill
+vim-javascript-syntax
+vim-surround

@@ -11,11 +11,11 @@ lazy_source () {
   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 }
 
-# NVM_SOURCE=$HOME/.nvm/nvm.sh
-# lazy_source nvm $NVM_SOURCE
+NVM_SOURCE=$HOME/.nvm/nvm.sh
+lazy_source nvm $NVM_SOURCE
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Increase history size
 export HISTFILE=~/.zsh_history
@@ -30,13 +30,13 @@ export GOPATH=$HOME/golang
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
-# export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
+export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$(yarn global bin)"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export LANG=en_US.UTF-8
-# export EDITOR='vim'
+export EDITOR='nvim'
 
 # backwards search
 # bindkey "^R" history-incremental-search-backward
@@ -83,8 +83,8 @@ fi
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
-alias vim='/usr/local/Cellar/vim/8.0.0402/bin/vim'
-export EDITOR='vim'
+alias vim='nvim'
+alias v='nvim'
 
 source $(pluc-cli --destinationPath)
 function pluc() {
@@ -98,3 +98,7 @@ prompt_context(){}
 
 # added by travis gem
 [ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
