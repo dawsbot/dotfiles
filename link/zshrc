@@ -36,7 +36,7 @@ export PATH="$PATH:$(yarn global bin)"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export LANG=en_US.UTF-8
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # backwards search
 # bindkey "^R" history-incremental-search-backward
@@ -83,8 +83,9 @@ fi
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
-alias vim='nvim'
-alias v='nvim'
+alias vim='/usr/local/Cellar/vim/8.0.0512/bin/vim'
+# alias vim='nvim'
+alias v='$EDITOR'
 
 source $(pluc-cli --destinationPath)
 function pluc() {
