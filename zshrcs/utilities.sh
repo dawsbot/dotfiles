@@ -25,6 +25,7 @@ alias v='vim '
 alias tr="tree -I 'node_modules' -L 4"
 
 upgradeAll () {
+  ussh
   upgrade_oh_my_zsh
   brew prune
   brew update
@@ -77,4 +78,14 @@ function new-repo() {
 
 gcl() {
   git clone "$1" && cd "$(basename "$1")"
+}
+
+fetch-all() {
+  git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+  git fetch --all
+  git pull --all
+}
+
+squash-root() {
+  git reset $(git commit-tree HEAD^{tree} -m "🎉 init")
 }
