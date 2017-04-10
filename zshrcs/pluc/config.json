@@ -18,7 +18,6 @@
 	"unit": "uni && t",
 	"yarnt": "yarn && t",
 	"nif": "npm init -f",
-	"git": "hub",
 	"gm": "git merge",
 	"gms": "git merge --squash",
 	"osp": "osnpm publish",
@@ -38,5 +37,10 @@
 	"lsal": "ls -al",
 	"vp": "vim $(pluc-cli --sourcePath)",
 	"wh": "which",
-	"yt": "yarn && npm run test"
+	"yt": "yarn && npm run test",
+	"vh": "vim ~/.zsh_history",
+	"peep": "ssh adhoc04-sjc1",
+	"yga": "yarn global add",
+	"ap": "arc patch",
+	"cnt": "cn && t"
 }
