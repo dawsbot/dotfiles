@@ -42,5 +42,8 @@
 	"peep": "ssh adhoc04-sjc1",
 	"yga": "yarn global add",
 	"ap": "arc patch",
-	"cnt": "cn && t"
+	"cnt": "cn && t",
+	"ys": "yarn start",
+	"yi": "yarn init",
+	"yiy": "yarn init -y"
 }
