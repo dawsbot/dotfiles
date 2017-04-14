@@ -75,17 +75,18 @@ source "$ZSHRCS_HOME/npmAliases.sh"
 source "$ZSHRCS_HOME/utilities.sh"
 source "$ZSHRCS_HOME/bindkey.sh"
 
-UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
-if [ -f $UBER_PRIVATE_RC ]
-then
-  source $UBER_PRIVATE_RC
-fi
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
 # alias vim='/usr/local/Cellar/vim/8.0.0512/bin/vim'
 alias vim='nvim'
 alias v='$EDITOR'
+
+UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
+if [ -f $UBER_PRIVATE_RC ]
+then
+  source $UBER_PRIVATE_RC
+fi
 
 source $(pluc-cli --destinationPath)
 function pluc() {

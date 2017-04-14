@@ -89,3 +89,10 @@ fetch-all() {
 squash-root() {
   git reset $(git commit-tree HEAD^{tree} -m "🎉 init")
 }
+
+copy-gh-stuff() {
+  cp ~/Dropbox/sharedCode/pluc/.gitignore .
+  cp ~/Dropbox/sharedCode/pluc/.gitattributes .
+  cp ~/Dropbox/sharedCode/pluc/.editorconfig .
+  cp ~/Dropbox/sharedCode/pluc/.travis.yml .
+}
