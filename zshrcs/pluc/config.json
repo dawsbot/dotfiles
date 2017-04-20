@@ -28,16 +28,15 @@
 	"yr": "yarn remove",
 	"yrs": "yarn remove --save",
 	"yad": "yarn add --dev",
-	"devbox": "ssh aptera-deville-3.dev",
+	"devbox": "ssh 35.161.209.63",
 	"rnm": "rm -rf node_modules",
 	"rmr": "rm -rf",
 	"rmnm": "rm -rf node_modules",
 	"udiet": "udie && t",
-	"lsallsal": "lsal",
 	"lsal": "ls -al",
-	"vp": "vim $(pluc-cli --sourcePath)",
+	"vp": "vim $(pluc-cli --sourcePath) && pluc transpile",
 	"wh": "which",
-	"yt": "yarn && npm run test",
+	"yt": "yarn && npm test",
 	"vh": "vim ~/.zsh_history",
 	"peep": "ssh adhoc04-sjc1",
 	"yga": "yarn global add",
@@ -45,5 +44,7 @@
 	"cnt": "cn && t",
 	"ys": "yarn start",
 	"yi": "yarn init",
-	"yiy": "yarn init -y"
+	"yiy": "yarn init -y",
+	"nin": "npm info",
+	"transpile": "pluc --transpile"
 }

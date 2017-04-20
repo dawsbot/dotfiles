@@ -37,6 +37,7 @@ export PATH="$HOME/.yarn/bin:$PATH"
 
 export LANG=en_US.UTF-8
 export EDITOR='vim'
+export VISUAL='vim'
 
 # backwards search
 # bindkey "^R" history-incremental-search-backward
@@ -49,13 +50,13 @@ alias sz='source ~/.zshrc'
 alias vz='$EDITOR ~/.zshrc'
 alias vv='$EDITOR ~/.vimrc'
 
-#daemon watching
+# daemon watching
 alias na="nodemon --exec 'ava'"
 alias nx="nodemon --exec 'xo'"
 alias nt="nodemon --exec 'npm test'"
 alias pydemon="nodemon --exec 'python' "
 
-#youtube-dl mp3 alias
+# youtube-dl mp3 alias
 alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
 # oh my zsh

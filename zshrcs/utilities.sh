@@ -96,3 +96,11 @@ copy-gh-stuff() {
   cp ~/Dropbox/sharedCode/pluc/.editorconfig .
   cp ~/Dropbox/sharedCode/pluc/.travis.yml .
 }
+
+# "in <dir> <commands>"
+# executes "commands" in "dir" then returns to cwd
+in() {
+	cd $1
+	eval "${@:2}"
+	cd -
+}
