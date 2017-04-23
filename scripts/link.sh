@@ -4,17 +4,18 @@
 ############################
 
 dir="$HOME/Dropbox/dotfiles/link" # dotfiles directory
-files="vimrc zshrc vim"    # list of files/folders to symlink in homedir
+files="zshrc vim"    # list of files/folders to symlink in homedir
 
 cd "$dir" || exit
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks 
 for file in $files; do
-  rm -rf ~/.$file
-  ln -s "$dir/$file" ~/.$file
+  rm -rf "$HOME/.$file"
+  ln -s "$HOME/$file" "$HOME/.$file"
 done
 
 # link neovimrc
-rm -rf ~/.config
-mkdir ~/.config
-ln -s ~/.vim ~/.config/nvim
+rm -rf ~/.config/nvim
+mkdir ~/.config/nvim
+ln -s "$dir/vimrc" ~/.config/nvim/init.vim
+# ln -s ~/.vim ~/.config/nvim

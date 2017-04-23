@@ -46,5 +46,7 @@
 	"yi": "yarn init",
 	"yiy": "yarn init -y",
 	"nin": "npm info",
-	"transpile": "pluc --transpile"
+	"transpile": "pluc --transpile",
+	"vd": "vim diff",
+	"r": "rg"
 }

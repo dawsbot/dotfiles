@@ -7,12 +7,12 @@ DROPBOX_PATH=$HOME/dropbox
 . $DROPBOX_PATH/dotfiles/scripts/z.sh
 
 # Use this to lazy load bigger deps (like nvm)
-lazy_source () {
-  eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
-}
+# lazy_source () {
+#   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
+# }
 
-NVM_SOURCE=$HOME/.nvm/nvm.sh
-lazy_source nvm $NVM_SOURCE
+# NVM_SOURCE=$HOME/.nvm/nvm.sh
+# lazy_source nvm $NVM_SOURCE
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
@@ -75,7 +75,6 @@ source "$ZSHRCS_HOME/gitAliases.sh"
 source "$ZSHRCS_HOME/npmAliases.sh"
 source "$ZSHRCS_HOME/utilities.sh"
 source "$ZSHRCS_HOME/bindkey.sh"
-
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
