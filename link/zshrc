@@ -36,8 +36,6 @@ export PATH="$PATH:$(yarn global bin)"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export LANG=en_US.UTF-8
-export EDITOR='vim'
-export VISUAL='vim'
 
 # backwards search
 # bindkey "^R" history-incremental-search-backward
@@ -79,8 +77,10 @@ source "$ZSHRCS_HOME/bindkey.sh"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
 
 # alias vim='/usr/local/Cellar/vim/8.0.0512/bin/vim'
-alias vim='nvim'
-alias v='$EDITOR'
+export EDITOR=nvim
+export VISUAL="$EDITOR"
+alias vim="$EDITOR"
+alias v="$EDITOR"
 
 UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
 if [ -f $UBER_PRIVATE_RC ]
