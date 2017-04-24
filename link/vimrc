@@ -68,8 +68,9 @@ endif
 set guifont=Operator\ Mono:h14
 
 colorscheme OceanicNext
-
-match Error '\s\+$' " Highlight trailing spaces as errors
+" Italicize comments
+" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
+highlight Comment gui=italic
 
 set number
 set relativenumber
@@ -94,9 +95,14 @@ set ignorecase " Ignore case when searching
 set clipboard=unnamed " Use system-wide clipboard
 set mouse=a " Mouse can scroll
 
+match Error '\s\+$' " Highlight trailing spaces as errors
+
+set list
+set listchars=tab:-> " Show tabs as special character
+
 autocmd FileType gitcommit :startinsert " Start git commits in edit mode
 
-""""""""""""""" Leader shortcuts """""""""""""
+""""""""""""""" Shortcuts """""""""""""
 let mapleader = ' '
 
 " Saving
@@ -121,13 +127,12 @@ nnoremap Y y$
 " Autofix all eslint issues
 nnoremap <leader>el :call ESLintFix()<CR>
 function ESLintFix()
-	silent execute "!./node_modules/.bin/eslint --fix %"
-	edit! %
+ silent execute "!./node_modules/.bin/eslint --fix %"
+ edit! %
 endfunction
 
-" Auto-add shebang for certain file types
+" Auto-add shebang
 augroup Shebang
-  " autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$
   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
 augroup END
 
