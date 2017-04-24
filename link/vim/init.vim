@@ -1,19 +1,21 @@
 """""""""""""""" Plug """"""""""""""""""""""""
-call plug#begin('~/Dropbox/dotfiles/link/plugged')
+" Plug start
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Load on startup
 Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
-" Re-enable if deciding to use a nerd patched font
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'tomtom/tcomment_vim'
 Plug 'scrooloose/syntastic'
 
-" Syntax-specific
-Plug 'othree/yajs.vim' , { 'for': 'javascript' } " Syntax for js
-Plug 'mtscout6/syntastic-local-eslint.vim', { 'for': 'javascript' } " Local eslint
+" JavaScript
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+" Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+
+" Plug 'sheerun/vim-polyglot'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -21,12 +23,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 call plug#end()
 
 " Airline
-" Enable the list of buffers
-let g:airline#extenons#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
-
 let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts = 1
 
@@ -34,23 +31,22 @@ let g:airline_powerline_fonts = 1
 let NERDTreeShowLineNumbers=1
 
 " Syntastic
-let g:syntastic_error_symbol='✘'
-let g:syntastic_warning_symbol='⚠︎'
-let g:syntastic_check_on_open = 1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" Javascript lint
-let g:syntastic_javascript_checkers=['eslint']
-
-" let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0 " No need to lint while \"wq\"'ing
-let g:syntastic_aggregate_errors = 1 " Combine all output (eslint & flow)
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
+let g:syntastic_javascript_checkers = ['eslint']
 " let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 
 " " let g:syntastic_javascript_eslint_generic = 1
 " " let g:syntastic_javascript_eslint_exec = 'xo'
-" let g:syntastic_javascript_eslint_args = '--compact'
+" " let g:syntastic_javascript_eslint_args = '--compact'
+" " let g:syntastic_javascript_checkers = ['eslint', 'jshint']
 "
 """""""""""""""" Plug end """""""""""""""""""
 
@@ -72,25 +68,11 @@ colorscheme OceanicNext
 set number
 set relativenumber
 set noswapfile
-set hlsearch " Highlight search matches while I type
-set incsearch " Search as I type
-set smartindent
+set hlsearch
 
 set cursorline
 set cursorcolumn
 set scrolloff=20
-
-set expandtab
-set tabstop=2
-
-" Show matching brackets when text indicator is over them
-set showmatch
-
-" Ignore case when searching
-set ignorecase
-
-" Copy to system clipboard
-set clipboard=unnamed
 
 " Mouse scrolling
 set mouse=a
@@ -98,14 +80,20 @@ set mouse=a
 " Set's vim's shell to source zshrc (so aliases are available in "!<command>"
 set shell=/bin/zsh\ --login
 
+" Copy to system clipboard
+set clipboard=unnamed
+
+" Ignore case when searching
+set ignorecase
+
 
 """"""""""""""" Leader shortcuts """""""""""""
 let mapleader = ' '
 
 " Saving
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q!<CR>
-nnoremap <leader>e :wq<CR>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q!<cr>
+nnoremap <leader>e :wq<cr>
 
 nnoremap <leader>n :NERDTree<cr>
 
@@ -116,16 +104,6 @@ nnoremap <leader><leader> :bnext<CR>
 
 " Un-highlight search matches after a second \"Enter\" press
 nnoremap <CR> :noh<CR><CR>
-
-" yank to the end of line
-nnoremap Y y$
-
-" Autofix all eslint issues
-nnoremap <leader>el :call ESLintFix()<CR> 
-function ESLintFix()
-	silent execute "!./node_modules/.bin/eslint --fix %"
-	edit! %
-endfunction
 
 
 " """" fix broken crontab temp file """""
@@ -144,13 +122,38 @@ endfunction
 "   ''
 " endfunction
 "
+" " Set leader key
+"
+" "Yank to clipboard
+"
+" """"""""""""""""""" Neobundle """""""""""""""""""
+" " Required:
+" if has('vim_starting')
+"   set runtimepath+=~/.vim/bundle/neobundle.vim/
+" end
+"
+" call neobundle#begin(expand('~/.vim/bundle/'))
+"
 " " Let NeoBundle manage NeoBundle
 " " Required:
+" NeoBundleFetch 'Shougo/neobundle.vim'
+" NeoBundle 'scrooloose/syntastic.git'
+" NeoBundle 'scrooloose/nerdtree.git'
+" NeoBundle 
+" NeoBundle 'bling/vim-airline'
 " NeoBundle 'qpkorr/vim-bufkill'
+" NeoBundle 'herrbischoff/cobalt2.vim'
 "
 " NeoBundle 'tpope/vim-surround'
+" NeoBundle 'jelera/vim-javascript-syntax'
+" NeoBundle 'editorconfig/editorconfig-vim'
+" " NeoBundle 'pangloss/vim-javascript'
 " " NeoBundle 'nathanaelkane/vim-indent-guides'
 " " NeoBundle 'tmhedberg/matchit'
+"
+" " NeoBundle 'yosiat/oceanic-next-vim'
+" " NeoBundle 'mhartington/oceanic-next'
+" call neobundle#end()
 "
 " let g:airline_powerline_fonts = 1
 "
@@ -178,6 +181,9 @@ endfunction
 " " let g:syntastic_python_checkers = []
 " let g:syntastic_check_on_open=1
 "
+" " NERDTree
+" let NERDTreeShowLineNumbers=1
+"
 " " Close out NERDTree if it's the last things open
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "
@@ -191,12 +197,28 @@ endfunction
 "
 " match ErrorMsg '\s\+$'
 "
+" set background=dark
+"
 " set t_Co=256
 "
+" set noswapfile
+"
 " "Tabbing and efficiency
+" set tabstop=2
 " set smartindent
 " set shiftwidth=2
+" set expandtab
+" set hlsearch
+" set incsearch
 " set backspace=indent,eol,start
+"
+" syntax on
+"
+" set mouse=a
+"
+" if !has('nvim')
+"   set ttymouse=xterm
+" endif
 "
 " """"""""""""""""""" Leader overrides """"""""""""""""""""
 " nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
@@ -204,9 +226,12 @@ endfunction
 " "Delete buffer special. Defined in vim-bufkill
 " nmap <leader>k :BD<CR>
 "
+"
 " nmap <leader>p <F2><CR>ki
 "
 " " Navigating windows
+" nnoremap <silent> <leader>l :wincmd l<CR>
+" nnoremap <silent> <leader>h :wincmd h<CR>
 " nnoremap <silent> <leader>j :wincmd j<CR>
 " nnoremap <leader><leader> :bnext<CR>
 "
@@ -226,3 +251,6 @@ endfunction
 "   autocmd BufNewFile *.js 0put =\"\'use strict\';\<nl>\"|$
 " augroup END
 "
+"
+" " Show matching brackets when text indicator is over them
+" set showmatch

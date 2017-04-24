@@ -4,7 +4,7 @@
 ############################
 
 DIR="$HOME/Dropbox/dotfiles/link" # dotfiles directory
-FILES="zshrc vim"    # list of files/folders to symlink in homedir
+FILES="zshrc vimrc"    # list of files/folders to symlink in homedir
 
 cd "$DIR" || exit
 

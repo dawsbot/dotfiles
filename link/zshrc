@@ -44,9 +44,13 @@ export LANG=en_US.UTF-8
 clipboard=unnamed
 
 ########## ALIASES ###########
-alias sz='source ~/.zshrc'
-alias vz='$EDITOR ~/.zshrc'
-alias vv='$EDITOR ~/.vimrc'
+export EDITOR=nvim
+export VISUAL="$EDITOR"
+alias vim="$EDITOR"
+alias v="$EDITOR"
+alias sz="source ~/.zshrc"
+alias vz="$EDITOR ~/.zshrc"
+alias vv="$EDITOR ~/.vimrc"
 
 # daemon watching
 alias na="nodemon --exec 'ava'"
@@ -75,12 +79,6 @@ source "$ZSHRCS_HOME/utilities.sh"
 source "$ZSHRCS_HOME/bindkey.sh"
 
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
-
-# alias vim='/usr/local/Cellar/vim/8.0.0512/bin/vim'
-export EDITOR=nvim
-export VISUAL="$EDITOR"
-alias vim="$EDITOR"
-alias v="$EDITOR"
 
 UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
 if [ -f $UBER_PRIVATE_RC ]
