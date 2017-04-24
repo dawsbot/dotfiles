@@ -35,6 +35,7 @@
 	"udiet": "udie && t",
 	"lsal": "ls -al",
 	"vp": "vim $(pluc-cli --sourcePath) && pluc transpile",
+	"vpp": "vim $(pluc-cli --destinationPath)",
 	"wh": "which",
 	"yt": "yarn && npm test",
 	"vh": "vim ~/.zsh_history",
@@ -46,7 +47,8 @@
 	"yi": "yarn init",
 	"yiy": "yarn init -y",
 	"nin": "npm info",
-	"transpile": "pluc --transpile",
+	"transpile": "vpp",
 	"vd": "vim diff",
-	"r": "rg"
+	"r": "rg",
+	"bomb": "cd .. && rm -rf $OLDPWD"
 }

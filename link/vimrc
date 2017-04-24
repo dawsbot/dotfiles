@@ -4,16 +4,14 @@ call plug#begin('~/Dropbox/dotfiles/link/plugged')
 " Load on startup
 Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
-" Re-enable if deciding to use a nerd patched font
-" Plug 'ryanoasis/vim-devicons'
 Plug 'editorconfig/editorconfig-vim'
-
 Plug 'tomtom/tcomment_vim'
 Plug 'scrooloose/syntastic'
 
 " Syntax-specific
 Plug 'othree/yajs.vim' , { 'for': 'javascript' } " Syntax for js
 Plug 'mtscout6/syntastic-local-eslint.vim', { 'for': 'javascript' } " Local eslint
+Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -25,7 +23,8 @@ call plug#end()
 let g:airline#extenons#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-set laststatus=2
+
+" set laststatus=2
 
 let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts = 1
@@ -38,8 +37,9 @@ let g:syntastic_error_symbol='✘'
 let g:syntastic_warning_symbol='⚠︎'
 let g:syntastic_check_on_open = 1
 
+
 " Javascript lint
-let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_checkers=['eslint', 'xo']
 
 " let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -52,13 +52,13 @@ let g:syntastic_aggregate_errors = 1 " Combine all output (eslint & flow)
 " " let g:syntastic_javascript_eslint_exec = 'xo'
 " let g:syntastic_javascript_eslint_args = '--compact'
 "
-"""""""""""""""" Plug end """""""""""""""""""
+"""""""""""""""" Plug End """""""""""""""""""
 
 
-"""""""""""""""" miscellaneous """""""""""""""
+"""""""""""""""" Miscellaneous """""""""""""""
 set encoding=utf8
 set background=dark
-filetype plugin on
+filetype plugin on " Auto-detect un-labeled filetypes
 
 syntax enable
 
@@ -69,45 +69,43 @@ set guifont=Operator\ Mono:h14
 
 colorscheme OceanicNext
 
+match Error '\s\+$' " Highlight trailing spaces as errors
+
 set number
 set relativenumber
+
 set noswapfile
+set undofile " Persistent undos across file saves
 set hlsearch " Highlight search matches while I type
 set incsearch " Search as I type
 set smartindent
 
-set cursorline
-set cursorcolumn
-set scrolloff=20
+set cursorline " Highlight line
+set cursorcolumn " Highlight column
+set scrolloff=20 " Scroll when 20 units from top/bottom
 
-set expandtab
-set tabstop=2
+set expandtab " tabs are actually spaces
+set tabstop=2 " tab two instead of four spaces
 
 " Show matching brackets when text indicator is over them
 set showmatch
 
-" Ignore case when searching
-set ignorecase
+set ignorecase " Ignore case when searching
+set clipboard=unnamed " Use system-wide clipboard
+set mouse=a " Mouse can scroll
 
-" Copy to system clipboard
-set clipboard=unnamed
-
-" Mouse scrolling
-set mouse=a
-
-" Set's vim's shell to source zshrc (so aliases are available in "!<command>"
-set shell=/bin/zsh\ --login
-
+autocmd FileType gitcommit :startinsert " Start git commits in edit mode
 
 """"""""""""""" Leader shortcuts """""""""""""
 let mapleader = ' '
 
 " Saving
 nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q!<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>1 :q!<CR>
 nnoremap <leader>e :wq<CR>
 
-nnoremap <leader>n :NERDTree<cr>
+nnoremap <leader>n :NERDTree<CR>
 
 " Swap between panes
 nnoremap <silent> <leader>h :wincmd h<CR>
@@ -121,12 +119,17 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap Y y$
 
 " Autofix all eslint issues
-nnoremap <leader>el :call ESLintFix()<CR> 
+nnoremap <leader>el :call ESLintFix()<CR>
 function ESLintFix()
 	silent execute "!./node_modules/.bin/eslint --fix %"
 	edit! %
 endfunction
 
+" Auto-add shebang for certain file types
+augroup Shebang
+  " autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$
+  autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
+augroup END
 
 " """" fix broken crontab temp file """""
 " au BufEnter /private/tmp/crontab.* setl backupcopy=yes
@@ -144,24 +147,18 @@ endfunction
 "   ''
 " endfunction
 "
-" " Let NeoBundle manage NeoBundle
-" " Required:
+"
+" Set's vim's shell to source zshrc (so aliases are available in "!<command>"
+" set shell=/bin/zsh\ --login
+"
 " NeoBundle 'qpkorr/vim-bufkill'
 "
 " NeoBundle 'tpope/vim-surround'
 " " NeoBundle 'nathanaelkane/vim-indent-guides'
 " " NeoBundle 'tmhedberg/matchit'
 "
-" let g:airline_powerline_fonts = 1
-"
-" " Required:
-" " filetype plugin indent on
 " set ai
 " set si
-"
-" " If there are uninstalled bundles found on startup,
-" " this will conveniently prompt you to install them.
-" NeoBundleCheck
 "
 " " Syntastic
 " " set statusline+=%#warningmsg#
@@ -182,16 +179,6 @@ endfunction
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "
 " """"""""""""""""""""""""" Custom
-" set relativenumber
-" set number
-" set showmode
-" set cursorline
-" set cursorcolumn
-" set scrolloff=10
-"
-" match ErrorMsg '\s\+$'
-"
-" set t_Co=256
 "
 " "Tabbing and efficiency
 " set smartindent
@@ -208,10 +195,6 @@ endfunction
 "
 " " Navigating windows
 " nnoremap <silent> <leader>j :wincmd j<CR>
-" nnoremap <leader><leader> :bnext<CR>
-"
-" "Set no highlight after a second \"Enter\" press
-" nnoremap <CR> :noh<CR><CR>
 "
 " """""""""""""""""""" Custom commands """"""""""""""""""""
 " " Paste in teammate names for code review
@@ -219,10 +202,4 @@ endfunction
 " "Engage spell checking
 " command Spell execute "set spell spelllang=en_us"
 "
-" " Auto-add shebang for certain file types
-" augroup Shebang
-"   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$
-"   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
-"   autocmd BufNewFile *.js 0put =\"\'use strict\';\<nl>\"|$
-" augroup END
-"
+
