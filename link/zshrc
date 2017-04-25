@@ -1,18 +1,17 @@
-# Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
+# github.com/dawsbot/dotfiles
 
 DROPBOX_PATH=$HOME/dropbox
 
 # Load z https://github.com/rupa/z
-# eval "$(fasd --init auto)"
 . $DROPBOX_PATH/dotfiles/scripts/z.sh
 
 # Use this to lazy load bigger deps (like nvm)
-lazy_source () {
-  eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
-}
+# lazy_source () {
+#   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
+# }
 
-NVM_SOURCE=$HOME/.nvm/nvm.sh
-lazy_source nvm $NVM_SOURCE
+# NVM_SOURCE=$HOME/.nvm/nvm.sh
+# lazy_source nvm $NVM_SOURCE
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
@@ -26,29 +25,27 @@ eval "$(rbenv init - --no-rehash)"
 
 # Go
 export GOPATH=$HOME/golang
-# export GOROOT=$GOPATH
+export PATH="$PATH:$GOPATH/bin"
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
-export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
-export PATH="$PATH:$GOPATH/bin"
+# export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
 export PATH="$PATH:$(yarn global bin)"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export LANG=en_US.UTF-8
-export EDITOR='vim'
-export VISUAL='vim'
-
-# backwards search
-# bindkey "^R" history-incremental-search-backward
 
 # Yank directly to clipboard OSX
 clipboard=unnamed
 
-########## ALIASES ###########
-alias sz='source ~/.zshrc'
-alias vz='$EDITOR ~/.zshrc'
-alias vv='$EDITOR ~/.vimrc'
+########## Aliases ###########
+export EDITOR=nvim # Neovim is bae
+export VISUAL="$EDITOR"
+alias vim="$EDITOR"
+alias v="$EDITOR"
+alias sz="source ~/.zshrc"
+alias vz="$EDITOR ~/.zshrc"
+alias vv="$EDITOR ~/.vimrc"
 
 # daemon watching
 alias na="nodemon --exec 'ava'"
@@ -63,45 +60,43 @@ alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="agnoster"
 plugins=(git)
-
-# autosuggestions
-plugins=(zsh-autosuggestions)
+plugins=(zsh-autosuggestions) # Predictive suggestions
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3' # Suggest in orange
 
 source $ZSH/oh-my-zsh.sh
 
 ZSHRCS_HOME="$DROPBOX_PATH/dotfiles/zshrcs"
-source "$ZSHRCS_HOME/arcAliases.sh"
 source "$ZSHRCS_HOME/gitAliases.sh"
 source "$ZSHRCS_HOME/npmAliases.sh"
 source "$ZSHRCS_HOME/utilities.sh"
-source "$ZSHRCS_HOME/bindkey.sh"
 
+# vim fuzzy file searching with ripgrep
+# https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
+# --files: List files that would be searched but do not search
+# --no-ignore: Do not respect .gitignore, etc...
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
-
-# alias vim='/usr/local/Cellar/vim/8.0.0512/bin/vim'
-alias vim='nvim'
-alias v='$EDITOR'
-
+# Source extra uber rc file if exists (won't on personal machine)
 UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
-if [ -f $UBER_PRIVATE_RC ]
-then
-  source $UBER_PRIVATE_RC
-fi
+[ -f $UBER_PRIVATE_RC ] && source $UBER_PRIVATE_RC
 
+###################### KEEP AT END OF FILE ####################
+
+# https://github.com/dawsbot/pluc
 source $(pluc-cli --destinationPath)
 function pluc() {
   pluc-cli "$@"
   source "$(pluc-cli --destinationPath)"
 }
 
-# KEEP AT END OF FILE
 #Removes username from prompt status line
 prompt_context(){}
 
 # added by travis gem
 [ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh
 
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
+# added by fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
