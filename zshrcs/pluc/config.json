@@ -47,8 +47,11 @@
 	"yi": "yarn init",
 	"yiy": "yarn init -y",
 	"nin": "npm info",
-	"transpile": "vpp",
+	"transpile": "vp",
 	"vd": "vim diff",
 	"r": "rg",
-	"bomb": "cd .. && rm -rf $OLDPWD"
+	"bomb": "cd .. && rm -rf $OLDPWD",
+	"bi": "brew install",
+	"ad": "arc diff",
+	"a'*'": "git add -A && git commit && arc diff "
 }

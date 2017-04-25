@@ -1,9 +1,8 @@
-# Dawson Botsford zshrc https://github.com/dawsonbotsford/dotfiles
+# github.com/dawsbot/dotfiles
 
 DROPBOX_PATH=$HOME/dropbox
 
 # Load z https://github.com/rupa/z
-# eval "$(fasd --init auto)"
 . $DROPBOX_PATH/dotfiles/scripts/z.sh
 
 # Use this to lazy load bigger deps (like nvm)
@@ -65,34 +64,38 @@ alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="agnoster"
 plugins=(git)
-
-# autosuggestions
-plugins=(zsh-autosuggestions)
+plugins=(zsh-autosuggestions) # Predictive suggestions
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3' # Suggest in orange
 
 source $ZSH/oh-my-zsh.sh
 
 ZSHRCS_HOME="$DROPBOX_PATH/dotfiles/zshrcs"
-source "$ZSHRCS_HOME/arcAliases.sh"
 source "$ZSHRCS_HOME/gitAliases.sh"
 source "$ZSHRCS_HOME/npmAliases.sh"
 source "$ZSHRCS_HOME/utilities.sh"
-source "$ZSHRCS_HOME/bindkey.sh"
 
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3'
+# vim fuzzy file searching with ripgrep
+# https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
+# --files: List files that would be searched but do not search
+# --no-ignore: Do not respect .gitignore, etc...
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
+# Source extra uber rc file if exists (won't on personal machine)
 UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
-if [ -f $UBER_PRIVATE_RC ]
-then
-  source $UBER_PRIVATE_RC
-fi
+[ -f $UBER_PRIVATE_RC ] && source $UBER_PRIVATE_RC
 
+# KEEP AT END OF FILE
+
+# https://github.com/dawsbot/pluc
 source $(pluc-cli --destinationPath)
 function pluc() {
   pluc-cli "$@"
   source "$(pluc-cli --destinationPath)"
 }
 
-# KEEP AT END OF FILE
 #Removes username from prompt status line
 prompt_context(){}
 
@@ -102,3 +105,5 @@ prompt_context(){}
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
 [[ -f /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

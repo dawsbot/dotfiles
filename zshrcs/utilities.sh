@@ -34,10 +34,10 @@ upgradeAll () {
   npm update -g
 }
 
-function take() {
-  mkdir -p "$1"
-  cd "$1" || exit
-}
+# function take() {
+#   mkdir -p "$1"
+#   cd "$1" || exit
+# }
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl "
 
@@ -54,6 +54,7 @@ function vs() {
   code-insiders "$1"
 }
 
+# Remove application from OSX installed Applications
 function remove-app() {
   rm -rf /Applications/"$1".app
 }
@@ -77,17 +78,17 @@ function new-repo() {
 }
 
 gcl() {
-  git clone "$1" && cd "$(basename "$1")"
+  git clone "$1" && cd "$(basename "$1")" || exit
 }
 
 fetch-all() {
-  git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+  git branch -r | grep -v '\->' | while read -r remote; do git branch --track "${remote#origin/}" "$remote"; done
   git fetch --all
   git pull --all
 }
 
 squash-root() {
-  git reset $(git commit-tree HEAD^{tree} -m "🎉 init")
+  git reset "$(git commit-tree HEAD^\{tree\} -m \"🎉 init\")"
 }
 
 copy-gh-stuff() {
@@ -99,8 +100,12 @@ copy-gh-stuff() {
 
 # "in <dir> <commands>"
 # executes "commands" in "dir" then returns to cwd
-in() {
-	cd $1
-	eval "${@:2}"
-	cd -
+function in() {
+  cd "$1" || exit
+  eval "${@:2}"
+  cd - || exit
 }
+
+# "!!" executes last command
+bindkey -s '  ' '!!^m^m'
+

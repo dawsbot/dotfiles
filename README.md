@@ -1,12 +1,19 @@
-> Dotfiles for OSX hacking with maximum-efficient-speed.
+> Dotfiles for ⚡️-fast hacking
 
 <br>
 
-Includes:
+This assumes you have the following:
 
-1. iterm2 setup for oh-my-zsh 💁
-2. neovim setup similar to a well equipped IDE 💅
-3. Bootstrap scripts to link it all up for you ⚡️
+1. MacOS
+2. [iTerm2](https://www.iterm2.com/)
+3. [Operator Mono Font](https://www.typography.com/blog/introducing-operator). Change [link/zshrc](link/zshrc) if you want to use a different *italics friendly* font
+
+🎁 You'll get:
+
+1. A beautiful terminal thanks to zsh & oh-my-zsh 💁
+2. A [Neovim](https://neovim.io/) setup similar to a well equipped IDE 💅
+3. A packaged vimrc with linting & syntax highlighting from the get-go 🎨
+4. A bootstrap script to get setup quickly ⚡️
 
 ![demo](img/demo.png)
 
@@ -14,13 +21,10 @@ Includes:
 
 ### Install
 
-#### XCode already installed
 ```sh
 cd ~
 git clone https://github.com/dawsonbotsford/dotfiles
-
-# Link all dotfiles to $HOME
-./dotfiles/scripts/link.sh
+./dotfiles/scripts/bootstrap.sh
 ```
 
 Modifications can be made to either `~/<file>` **or** `~/dotfiles/link/<file>` since they are symlinked.
@@ -33,11 +37,11 @@ cd ~
 git clone https://github.com/dawsonbotsford/dotfiles
 
 ./dotfiles/setup/freshOSXInstall.sh
-./dotfiles/scripts/link.sh
+./dotfiles/scripts/bootstrap.sh
 ```
 
 <br>
 
 ## License
 
-MIT © [Dawson Botsford](http://dawsonbotsford.com)
+MIT © [Dawson Botsford](https://dawsbot.com)

@@ -8,9 +8,13 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'scrooloose/syntastic'
 
+" File searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 " Syntax-specific
 Plug 'othree/yajs.vim' , { 'for': 'javascript' } " Syntax for js
-Plug 'mtscout6/syntastic-local-eslint.vim', { 'for': 'javascript' } " Local eslint
+" Plug 'mtscout6/syntastic-local-eslint.vim', { 'for': 'javascript' } " Local eslint
 Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
 
 " On-demand loading
@@ -20,7 +24,8 @@ call plug#end()
 
 " Airline
 " Enable the list of buffers
-let g:airline#extenons#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
@@ -37,16 +42,24 @@ let g:syntastic_error_symbol='✘'
 let g:syntastic_warning_symbol='⚠︎'
 let g:syntastic_check_on_open = 1
 
-
 " Javascript lint
 let g:syntastic_javascript_checkers=['eslint', 'xo']
 
-" let g:syntastic_always_populate_loc_list = 1
+" Trim trailing whitespace
+function! TrimTrailingWhitespace(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+
+" Source local xo executable
+" let b:syntastic_javascript_xo_exec = TrimTrailingWhitespace(system('echo $(pwd)/node_modules/.bin/xo'))
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+let b:syntastic_javascript_xo_exec = system('echo $(npm bin)/xo')
+
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0 " No need to lint while \"wq\"'ing
 let g:syntastic_aggregate_errors = 1 " Combine all output (eslint & flow)
 
-" let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 
 " " let g:syntastic_javascript_eslint_generic = 1
 " " let g:syntastic_javascript_eslint_exec = 'xo'
@@ -62,20 +75,22 @@ filetype plugin on " Auto-detect un-labeled filetypes
 
 syntax enable
 
+" Pretty colors
 if (has("termguicolors"))
  set termguicolors
 endif
-set guifont=Operator\ Mono:h14
+set guifont=Operator\ Mono:h14 " Custom font.
 
 colorscheme OceanicNext
+
 " Italicize comments
 " https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
 highlight Comment gui=italic
 
-set number
-set relativenumber
+set number " Absolute line number in left gutter
+set relativenumber " Relative line numbers except current line
 
-set noswapfile
+set noswapfile " Don't let vim create swapfiles
 set undofile " Persistent undos across file saves
 set hlsearch " Highlight search matches while I type
 set incsearch " Search as I type
@@ -83,7 +98,7 @@ set smartindent
 
 set cursorline " Highlight line
 set cursorcolumn " Highlight column
-set scrolloff=20 " Scroll when 20 units from top/bottom
+set scrolloff=10 " Scroll when 20 units from top/bottom
 
 set expandtab " tabs are actually spaces
 set tabstop=2 " tab two instead of four spaces
@@ -102,6 +117,12 @@ set listchars=tab:-> " Show tabs as special character
 
 autocmd FileType gitcommit :startinsert " Start git commits in edit mode
 
+" Auto-reload vimrc in all active windows on change
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
 """"""""""""""" Shortcuts """""""""""""
 let mapleader = ' '
 
@@ -110,6 +131,8 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>1 :q!<CR>
 nnoremap <leader>e :wq<CR>
+
+nnoremap <leader>t :terminal<CR>
 
 nnoremap <leader>n :NERDTree<CR>
 
@@ -120,21 +143,48 @@ nnoremap <leader><leader> :bnext<CR>
 
 " Un-highlight search matches after a second \"Enter\" press
 nnoremap <CR> :noh<CR><CR>
-
+"
 " yank to the end of line
 nnoremap Y y$
 
 " Autofix all eslint issues
 nnoremap <leader>el :call ESLintFix()<CR>
-function ESLintFix()
- silent execute "!./node_modules/.bin/eslint --fix %"
- edit! %
-endfunction
+nnoremap <leader>xo :call XOLintFix()<CR>
+
+""""""""""""""""" Neovim Terminal """""""""""""""""""""""
+tnoremap <Esc> <C-\><C-n> " Escape from insert mode in shell
+
+" Disable ex mode
+:map Q <Nop>
+
+" ripgrep file search with \":F\"
+" https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* F call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Auto-add shebang
 augroup Shebang
   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
 augroup END
+
+function! ESLintFix()
+ silent execute "!./node_modules/.bin/eslint --fix %"
+ edit! %
+endfunction
+
+function! XOLintFix()
+ silent execute "!./node_modules/.bin/xo --fix %"
+ edit! %
+endfunction
 
 " """" fix broken crontab temp file """""
 " au BufEnter /private/tmp/crontab.* setl backupcopy=yes
