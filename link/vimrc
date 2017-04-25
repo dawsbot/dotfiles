@@ -1,101 +1,145 @@
 """""""""""""""" Plug """"""""""""""""""""""""
-" Plug start
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('~/Dropbox/dotfiles/link/plugged')
 
 " Load on startup
 Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
-Plug 'ryanoasis/vim-devicons'
 Plug 'editorconfig/editorconfig-vim'
-
 Plug 'tomtom/tcomment_vim'
 Plug 'scrooloose/syntastic'
 
-" JavaScript
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-" Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+" File searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-" Plug 'sheerun/vim-polyglot'
+" Syntax-specific
+Plug 'othree/yajs.vim' , { 'for': 'javascript' } " Syntax for js
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " imports, etc.
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
+
+" Plug 'mattn/emmet-vim', { 'for': 'html' } " html tab completions
+Plug 'mattn/emmet-vim' " html tab completions
+" Re-enable when neovim python runtime is figured out https://github.com/neovim/neovim/issues/1203
+" Plug 'valloric/MatchTagAlways', {'for': 'html'}
+" Re-enable when working on a css project and care to figure out why this is not working
+" Plug 'skammer/vim-css-color', { 'for': 'css' } " css color highlighting
 
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
 " Airline
-set laststatus=2
+let g:airline#extensions#tabline#enabled = 1 " Enable topnav of buffers
+let g:airline#extensions#tabline#fnamemod = ':t' " Only filename in top nav
 let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts = 1
 
 " Nerdtree
 let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+nnoremap <leader>n :NERDTree<CR>
+" If no file is specified, open to nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
+
+" Emmet
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+" vim-jsx
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let g:syntastic_error_symbol='✘'
+let g:syntastic_warning_symbol='⚠︎'
+let g:syntastic_check_on_open = 1
+
+" Javascript lint
+let g:syntastic_javascript_checkers=['eslint', 'xo']
+
+" Trim trailing whitespace
+function! TrimTrailingWhitespace(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+
+" Source local xo executable
+let b:syntastic_javascript_xo_exec = TrimTrailingWhitespace(system('echo $(npm bin)/xo'))
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+" let b:syntastic_javascript_xo_exec = system('echo $(npm bin)/xo')
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-
-" " let g:syntastic_javascript_eslint_generic = 1
-" " let g:syntastic_javascript_eslint_exec = 'xo'
-" " let g:syntastic_javascript_eslint_args = '--compact'
-" " let g:syntastic_javascript_checkers = ['eslint', 'jshint']
-"
-"""""""""""""""" Plug end """""""""""""""""""
+let g:syntastic_check_on_wq = 0 " No need to lint while \"wq\"'ing
+let g:syntastic_aggregate_errors = 1 " Combine all output (eslint & flow)
 
 
-"""""""""""""""" miscellaneous """""""""""""""
+"""""""""""""""" Miscellaneous """""""""""""""
 set encoding=utf8
 set background=dark
-filetype plugin on
+filetype plugin on " Auto-detect un-labeled filetypes
 
 syntax enable
 
+" Pretty colors
 if (has("termguicolors"))
  set termguicolors
 endif
-set guifont=Operator\ Mono:h14
+set guifont=Operator\ Mono:h14 " Custom font.
 
 colorscheme OceanicNext
 
-set number
-set relativenumber
-set noswapfile
-set hlsearch
+" Italicize comments
+" https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
+highlight Comment gui=italic
 
-set cursorline
-set cursorcolumn
-set scrolloff=20
+set relativenumber number " Absolute line number on current, relative elsewhere
 
-" Mouse scrolling
-set mouse=a
+set noswapfile " Don't create swapfiles
+set undofile " Persistent undos across file saves
 
-" Set's vim's shell to source zshrc (so aliases are available in "!<command>"
-set shell=/bin/zsh\ --login
+set cursorline " Highlight line
+set cursorcolumn " Highlight column
+set scrolloff=10 " Scroll when this far from top/bottom
 
-" Copy to system clipboard
-set clipboard=unnamed
+set tabstop=2 shiftwidth=2 expandtab " tabs are 2 spaces
 
-" Ignore case when searching
-set ignorecase
+" Show matching brackets when text indicator is over them
+set showmatch
 
+set ignorecase " Ignore case when searching
+set clipboard=unnamed " Use system-wide clipboard
+set mouse=a " Mouse can scroll
 
-""""""""""""""" Leader shortcuts """""""""""""
+match Error '\s\+$' " Highlight trailing spaces as errors
+
+set list
+set listchars=tab:-> " Show tabs as special character
+
+autocmd FileType gitcommit :startinsert " Start git commits in edit mode
+
+" Auto-reload vimrc in all active windows on change
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+""""""""""""""" Shortcuts """""""""""""
 let mapleader = ' '
 
 " Saving
-nnoremap <leader>w :w<cr>
-nnoremap <leader>q :q!<cr>
-nnoremap <leader>e :wq<cr>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>1 :q!<CR>
+nnoremap <leader>e :wq<CR>
 
-nnoremap <leader>n :NERDTree<cr>
+nnoremap <leader>k :bd<CR> " Close current buffer
+
+nnoremap <leader>t :terminal<CR> " Open buffered vim terminal
+
+nnoremap <leader>f :Find<CR>
+nnoremap <leader>F :Files<CR>
 
 " Swap between panes
 nnoremap <silent> <leader>h :wincmd h<CR>
@@ -105,6 +149,74 @@ nnoremap <leader><leader> :bnext<CR>
 " Un-highlight search matches after a second \"Enter\" press
 nnoremap <CR> :noh<CR><CR>
 
+" Yank to the end of line
+nnoremap Y y$
+" Move easier to beginning/end of line
+nnoremap L $
+nnoremap H 0
+nnoremap ; :
+
+nnoremap aw zg
+
+" File autocompletion
+inoremap <c-f> <c-x><c-f>
+
+" turn on spelling for markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell
+" highlight bad words in red
+autocmd BufRead,BufNewFile *.md hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
+
+" Autofix linting
+nnoremap <leader>el :call ESLintFix()<CR>
+nnoremap <leader>xo :call XOFix()<CR>
+
+""""""""""""""""" Neovim Terminal """""""""""""""""""""""
+tnoremap <Esc> <C-\><C-n> " Escape from insert mode in shell
+
+" Disable ex mode
+:map Q :q<CR>
+
+
+" Disable auto-comment extending
+" http://vim.wikia.com/wiki/Disable_automatic_comment_insertion<Paste>
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Remember cursor position between vim sessions
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\"" |
+  \ endif
+" center buffer around cursor when opening files
+autocmd BufRead * normal zz
+
+" ripgrep file search with \":Find\"
+" https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+" Auto-add shebang
+augroup Shebang
+  autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
+augroup END
+
+function! ESLintFix()
+ silent execute "!./node_modules/.bin/eslint --fix %"
+ edit! %
+endfunction
+
+function! XOFix()
+ silent execute "!./node_modules/.bin/xo --fix %"
+ edit! %
+endfunction
 
 " """" fix broken crontab temp file """""
 " au BufEnter /private/tmp/crontab.* setl backupcopy=yes
@@ -122,121 +234,18 @@ nnoremap <CR> :noh<CR><CR>
 "   ''
 " endfunction
 "
-" " Set leader key
-"
-" "Yank to clipboard
-"
-" """"""""""""""""""" Neobundle """""""""""""""""""
-" " Required:
-" if has('vim_starting')
-"   set runtimepath+=~/.vim/bundle/neobundle.vim/
-" end
-"
-" call neobundle#begin(expand('~/.vim/bundle/'))
-"
-" " Let NeoBundle manage NeoBundle
-" " Required:
-" NeoBundleFetch 'Shougo/neobundle.vim'
-" NeoBundle 'scrooloose/syntastic.git'
-" NeoBundle 'scrooloose/nerdtree.git'
-" NeoBundle 
-" NeoBundle 'bling/vim-airline'
-" NeoBundle 'qpkorr/vim-bufkill'
-" NeoBundle 'herrbischoff/cobalt2.vim'
-"
-" NeoBundle 'tpope/vim-surround'
-" NeoBundle 'jelera/vim-javascript-syntax'
-" NeoBundle 'editorconfig/editorconfig-vim'
-" " NeoBundle 'pangloss/vim-javascript'
-" " NeoBundle 'nathanaelkane/vim-indent-guides'
-" " NeoBundle 'tmhedberg/matchit'
-"
-" " NeoBundle 'yosiat/oceanic-next-vim'
-" " NeoBundle 'mhartington/oceanic-next'
-" call neobundle#end()
-"
-" let g:airline_powerline_fonts = 1
-"
-" " Required:
-" " filetype plugin indent on
-" set ai
-" set si
-"
-" " If there are uninstalled bundles found on startup,
-" " this will conveniently prompt you to install them.
-" NeoBundleCheck
-"
-" " Syntastic
-" " set statusline+=%#warningmsg#
-" " set statusline+=%{SyntasticStatuslineFlag()}
-" " set statusline+=%*
-" " set laststatus=2
-"
-" " let g:syntastic_javascript_eslint_generic = 1
-" " let g:syntastic_javascript_eslint_exec = 'xo'
-" " let g:syntastic_javascript_eslint_args = '--compact'
-" " let g:syntastic_javascript_checkers = ['eslint', 'jshint']
-"
-" " let g:syntastic_javascript_checkers=['eslint']
-" " let g:syntastic_python_checkers = []
-" let g:syntastic_check_on_open=1
-"
-" " NERDTree
-" let NERDTreeShowLineNumbers=1
-"
 " " Close out NERDTree if it's the last things open
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "
-" """"""""""""""""""""""""" Custom
-" set relativenumber
-" set number
-" set showmode
-" set cursorline
-" set cursorcolumn
-" set scrolloff=10
-"
-" match ErrorMsg '\s\+$'
-"
-" set background=dark
-"
-" set t_Co=256
-"
-" set noswapfile
-"
-" "Tabbing and efficiency
-" set tabstop=2
-" set smartindent
-" set shiftwidth=2
-" set expandtab
-" set hlsearch
-" set incsearch
 " set backspace=indent,eol,start
-"
-" syntax on
-"
-" set mouse=a
-"
-" if !has('nvim')
-"   set ttymouse=xterm
-" endif
 "
 " """"""""""""""""""" Leader overrides """"""""""""""""""""
 " nnoremap <silent> <leader>s :call TrimWhiteSpace()<CR>
 "
-" "Delete buffer special. Defined in vim-bufkill
-" nmap <leader>k :BD<CR>
-"
-"
 " nmap <leader>p <F2><CR>ki
 "
 " " Navigating windows
-" nnoremap <silent> <leader>l :wincmd l<CR>
-" nnoremap <silent> <leader>h :wincmd h<CR>
 " nnoremap <silent> <leader>j :wincmd j<CR>
-" nnoremap <leader><leader> :bnext<CR>
-"
-" "Set no highlight after a second \"Enter\" press
-" nnoremap <CR> :noh<CR><CR>
 "
 " """""""""""""""""""" Custom commands """"""""""""""""""""
 " " Paste in teammate names for code review
@@ -244,13 +253,4 @@ nnoremap <CR> :noh<CR><CR>
 " "Engage spell checking
 " command Spell execute "set spell spelllang=en_us"
 "
-" " Auto-add shebang for certain file types
-" augroup Shebang
-"   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl>\"|$
-"   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
-"   autocmd BufNewFile *.js 0put =\"\'use strict\';\<nl>\"|$
-" augroup END
-"
-"
-" " Show matching brackets when text indicator is over them
-" set showmatch
+
