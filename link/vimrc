@@ -18,14 +18,16 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " imports, etc.
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
-" Plug 'mtscout6/syntastic-local-eslint.vim', { 'for': 'javascript' } " Local eslint
 
 " Plug 'mattn/emmet-vim', { 'for': 'html' } " html tab completions
 Plug 'mattn/emmet-vim' " html tab completions
+" Re-enable when neovim python runtime is figured out https://github.com/neovim/neovim/issues/1203
+" Plug 'valloric/MatchTagAlways', {'for': 'html'}
+" Re-enable when working on a css project and care to figure out why this is not working
 " Plug 'skammer/vim-css-color', { 'for': 'css' } " css color highlighting
 
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
@@ -38,6 +40,10 @@ let g:airline_powerline_fonts = 1
 " Nerdtree
 let NERDTreeShowLineNumbers=1
 let NERDTreeShowHidden=1
+nnoremap <leader>n :NERDTree<CR>
+" If no file is specified, open to nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
 
 " Emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
@@ -132,7 +138,8 @@ nnoremap <leader>k :bd<CR> " Close current buffer
 
 nnoremap <leader>t :terminal<CR> " Open buffered vim terminal
 
-nnoremap <leader>n :NERDTree<CR>
+nnoremap <leader>f :Find<CR>
+nnoremap <leader>F :Files<CR>
 
 " Swap between panes
 nnoremap <silent> <leader>h :wincmd h<CR>
@@ -148,6 +155,8 @@ nnoremap Y y$
 nnoremap L $
 nnoremap H 0
 nnoremap ; :
+
+nnoremap aw zg
 
 " File autocompletion
 inoremap <c-f> <c-x><c-f>
@@ -165,7 +174,7 @@ nnoremap <leader>xo :call XOFix()<CR>
 tnoremap <Esc> <C-\><C-n> " Escape from insert mode in shell
 
 " Disable ex mode
-:map Q <Nop>
+:map Q :q<CR>
 
 
 " Disable auto-comment extending
@@ -180,7 +189,7 @@ autocmd BufReadPost *
 " center buffer around cursor when opening files
 autocmd BufRead * normal zz
 
-" ripgrep file search with \":F\"
+" ripgrep file search with \":Find\"
 " https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
 " --column: Show column number
 " --line-number: Show line number
@@ -192,7 +201,7 @@ autocmd BufRead * normal zz
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* F call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Auto-add shebang
 augroup Shebang
