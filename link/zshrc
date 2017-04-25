@@ -25,25 +25,21 @@ eval "$(rbenv init - --no-rehash)"
 
 # Go
 export GOPATH=$HOME/golang
-# export GOROOT=$GOPATH
+export PATH="$PATH:$GOPATH/bin"
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
-export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
-export PATH="$PATH:$GOPATH/bin"
+# export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
 export PATH="$PATH:$(yarn global bin)"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 export LANG=en_US.UTF-8
 
-# backwards search
-# bindkey "^R" history-incremental-search-backward
-
 # Yank directly to clipboard OSX
 clipboard=unnamed
 
-########## ALIASES ###########
-export EDITOR=nvim
+########## Aliases ###########
+export EDITOR=nvim # Neovim is bae
 export VISUAL="$EDITOR"
 alias vim="$EDITOR"
 alias v="$EDITOR"
@@ -87,7 +83,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
 [ -f $UBER_PRIVATE_RC ] && source $UBER_PRIVATE_RC
 
-# KEEP AT END OF FILE
+###################### KEEP AT END OF FILE ####################
 
 # https://github.com/dawsbot/pluc
 source $(pluc-cli --destinationPath)
@@ -102,8 +98,5 @@ prompt_context(){}
 # added by travis gem
 [ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh
 
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
-
+# added by fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

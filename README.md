@@ -6,7 +6,11 @@ This assumes you have the following:
 
 1. MacOS
 2. [iTerm2](https://www.iterm2.com/)
-3. [Operator Mono Font](https://www.typography.com/blog/introducing-operator). Change [link/zshrc](link/zshrc) if you want to use a different *italics friendly* font
+3. [Operator Mono Font](https://www.typography.com/blog/introducing-operator). Change the following line in [link/vimrc](link/vimrc) to use a different *italics friendly* font
+
+```sh
+set guifont=Operator\ Mono:h14 " Custom font.
+```
 
 🎁 You'll get:
 

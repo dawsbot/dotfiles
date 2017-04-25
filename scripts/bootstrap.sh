@@ -3,7 +3,7 @@
 ############################
 
 DIR="$HOME/Dropbox/dotfiles/link" # dotfiles directory
-FILES="zshrc vimrc"    # list of files/folders to symlink in homedir
+FILES="zshrc vimrc gitignore" # symlink to homedir
 
 cd "$DIR" || exit
 
@@ -13,15 +13,19 @@ for file in $FILES; do
   ln -s "$DIR/$file" "$HOME/.$file"
 done
 
-# link neovimrc
-rm -rf ~/.config/nvim
-mkdir ~/.config/nvim
-ln -s "$DIR/vimrc" ~/.config/nvim/init.vim
+# Link Neovim
+rm -rf "$HOME/.config/nvim"
+mkdir -p "$HOME/.config/nvim/spell"
+ln -s "$DIR/vimrc" "$HOME/.config/nvim/init.vim" # vimrc
+ln -s "$DIR/en.utf-8.add" "$HOME/.config/nvim/spell/en.utf-8.add" # Dictionary
+
+# Link global gitignore
+git config --global core.excludesfile ~/.gitignore
 
 # Enable italics in terminal
-tic ../styles/xterm-256color-italic.terminfo
 if [ "$TERM" != "xterm-256color-italic" ]
-        then
-                echo "⚠️  Set terminal type to xterm-256color-italic in iTerm settings"
-                echo "Follow this for more info: https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux"
-        fi
+then
+  tic ../styles/xterm-256color-italic.terminfo
+  echo "⚠️  Set terminal type to xterm-256color-italic in iTerm settings"
+  echo "Follow this for more info: https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux"
+fi
