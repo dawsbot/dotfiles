@@ -1,3 +1,5 @@
+let mapleader = ' '
+
 """""""""""""""" Plug """"""""""""""""""""""""
 call plug#begin('~/Dropbox/dotfiles/link/plugged')
 
@@ -6,7 +8,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'mhartington/oceanic-next'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tomtom/tcomment_vim'
-Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
+Plug 'kshenoy/vim-signature' " Display vim marks in left bar
+Plug 'airblade/vim-gitgutter' " Displays git diff in left bar
+
+Plug 'jiangmiao/auto-pairs'
+" Completion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " File searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -22,7 +30,7 @@ Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
 " Plug 'mattn/emmet-vim', { 'for': 'html' } " html tab completions
 Plug 'mattn/emmet-vim' " html tab completions
 " Re-enable when neovim python runtime is figured out https://github.com/neovim/neovim/issues/1203
-" Plug 'valloric/MatchTagAlways', {'for': 'html'}
+Plug 'valloric/MatchTagAlways', {'for': 'html'}
 " Re-enable when working on a css project and care to figure out why this is not working
 " Plug 'skammer/vim-css-color', { 'for': 'css' } " css color highlighting
 
@@ -33,7 +41,7 @@ call plug#end()
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1 " Enable topnav of buffers
-let g:airline#extensions#tabline#fnamemod = ':t' " Only filename in top nav
+" let g:airline#extensions#tabline#fnamemod = ':t' " Only filename in top nav
 let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts = 1
 
@@ -46,33 +54,60 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
 
 " Emmet
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " vim-jsx
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
+" Neomake
+let g:neomake_javascript_eslint_maker = {
+      \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+      \ '%W%f: line %l\, col %c\, Warning - %m',
+      \ 'exe': "eslint",
+      \ 'args': ['-f', 'compact'],
+      \ }
+
+let g:neomake_jsx_eslint_maker = {
+      \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+      \ '%W%f: line %l\, col %c\, Warning - %m',
+      \ 'exe': "eslint",
+      \ 'args': ['-f', 'compact'],
+      \ }
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+
+autocmd! BufWritePost * Neomake
+
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" tab completion of deoplete suggestions
+imap <tab> <C-n>
+
 " Syntastic
-let g:syntastic_error_symbol='✘'
-let g:syntastic_warning_symbol='⚠︎'
-let g:syntastic_check_on_open = 1
-
-" Javascript lint
-let g:syntastic_javascript_checkers=['eslint', 'xo']
-
 " Trim trailing whitespace
 function! TrimTrailingWhitespace(txt)
   return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 endfunction
 
-" Source local xo executable
-let b:syntastic_javascript_xo_exec = TrimTrailingWhitespace(system('echo $(npm bin)/xo'))
-let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
-" let b:syntastic_javascript_xo_exec = system('echo $(npm bin)/xo')
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0 " No need to lint while \"wq\"'ing
-let g:syntastic_aggregate_errors = 1 " Combine all output (eslint & flow)
+" let g:syntastic_error_symbol='✘'
+" let g:syntastic_warning_symbol='⚠︎'
+" let g:syntastic_check_on_open = 1
+"
+" " Javascript lint
+" let g:syntastic_javascript_checkers=['eslint', 'xo']
+"
+"
+" " Source local xo executable
+" let b:syntastic_javascript_xo_exec = TrimTrailingWhitespace(system('echo $(npm bin)/xo'))
+" let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+" " let b:syntastic_javascript_xo_exec = system('echo $(npm bin)/xo')
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_wq = 0 " No need to lint while \"wq\"'ing
+" let g:syntastic_aggregate_errors = 1 " Combine all output (eslint & flow)
 
 
 """""""""""""""" Miscellaneous """""""""""""""
@@ -84,7 +119,7 @@ syntax enable
 
 " Pretty colors
 if (has("termguicolors"))
- set termguicolors
+  set termguicolors
 endif
 set guifont=Operator\ Mono:h14 " Custom font.
 
@@ -109,26 +144,27 @@ set tabstop=2 shiftwidth=2 expandtab " tabs are 2 spaces
 set showmatch
 
 set ignorecase " Ignore case when searching
-set clipboard=unnamed " Use system-wide clipboard
+" set clipboard=unnamed " Use system-wide clipboard
+set clipboard+=unnamedplus
 set mouse=a " Mouse can scroll
 
 match Error '\s\+$' " Highlight trailing spaces as errors
 
 set list
-set listchars=tab:-> " Show tabs as special character
+set listchars=tab:>- " Show tabs as special character
 
 autocmd FileType gitcommit :startinsert " Start git commits in edit mode
 
 " Auto-reload vimrc in all active windows on change
 augroup myvimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+  au!
+  au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
 """"""""""""""" Shortcuts """""""""""""
-let mapleader = ' '
 
 " Saving
+imap jj <esc>:w<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>1 :q!<CR>
@@ -136,9 +172,8 @@ nnoremap <leader>e :wq<CR>
 
 nnoremap <leader>k :bd<CR> " Close current buffer
 
-nnoremap <leader>t :terminal<CR> " Open buffered vim terminal
-
-nnoremap <leader>f :Find<CR>
+" nnoremap <leader>f :Find<CR>
+nnoremap <leader>f :FZF<CR>
 nnoremap <leader>F :Files<CR>
 
 " Swap between panes
@@ -154,8 +189,11 @@ nnoremap Y y$
 " Move easier to beginning/end of line
 nnoremap L $
 nnoremap H 0
-nnoremap ; :
 
+" duplicate current line below
+noremap <leader>d Y'>p
+
+" add work under cursor to dictionary
 nnoremap aw zg
 
 " File autocompletion
@@ -166,16 +204,23 @@ autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell
 " highlight bad words in red
 autocmd BufRead,BufNewFile *.md hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
 
-" Autofix linting
-nnoremap <leader>el :call ESLintFix()<CR>
-nnoremap <leader>xo :call XOFix()<CR>
 
 """"""""""""""""" Neovim Terminal """""""""""""""""""""""
 tnoremap <Esc> <C-\><C-n> " Escape from insert mode in shell
+" Open terminal faster
+nnoremap <leader>t :terminal<CR>
 
-" Disable ex mode
-:map Q :q<CR>
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
+" Disable ex mode and replace with quitting
+:map Q <Nop>
 
 " Disable auto-comment extending
 " http://vim.wikia.com/wiki/Disable_automatic_comment_insertion<Paste>
@@ -183,9 +228,9 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Remember cursor position between vim sessions
 autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal! g'\"" |
+      \ endif
 " center buffer around cursor when opening files
 autocmd BufRead * normal zz
 
@@ -201,21 +246,25 @@ autocmd BufRead * normal zz
 " --follow: Follow symlinks
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " Auto-add shebang
 augroup Shebang
   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
 augroup END
 
+" Autofix linting
+" nnoremap <leader>el :call ESLintFix()<CR>
+nnoremap <leader>xo :call XOFix()<CR>
+
 function! ESLintFix()
- silent execute "!./node_modules/.bin/eslint --fix %"
- edit! %
+  silent execute "!./node_modules/.bin/eslint --fix %"
+  edit! %
 endfunction
 
 function! XOFix()
- silent execute "!./node_modules/.bin/xo --fix %"
- edit! %
+  silent execute "!./node_modules/.bin/xo --fix %"
+  edit! %
 endfunction
 
 " """" fix broken crontab temp file """""
@@ -250,7 +299,4 @@ endfunction
 " """""""""""""""""""" Custom commands """"""""""""""""""""
 " " Paste in teammate names for code review
 " nnoremap <leader>t a dkearns aleksey<ESC>
-" "Engage spell checking
-" command Spell execute "set spell spelllang=en_us"
-"
 
