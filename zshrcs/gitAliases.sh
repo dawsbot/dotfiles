@@ -27,7 +27,6 @@ alias gpft='git push --follow-tags '
 alias gpu='git pull origin "$(current_branch)"'
 alias gpum='git pull origin master '
 alias gd='git diff '
-alias gb='git branch '
 alias gbd='git branch -D '
 
 alias gr='git remote '

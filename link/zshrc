@@ -18,8 +18,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Increase history size
 export HISTFILE=~/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTSIZE=100000
+export SAVEHIST=100000
 
 eval "$(rbenv init - --no-rehash)"
 
@@ -41,11 +41,14 @@ clipboard=unnamed
 ########## Aliases ###########
 export EDITOR=nvim # Neovim is bae
 export VISUAL="$EDITOR"
-alias vim="$EDITOR"
+export GIT_EDITOR="$EDITOR"
+
 alias v="$EDITOR"
-alias sz="source ~/.zshrc"
+alias vim="$EDITOR"
 alias vz="$EDITOR ~/.zshrc"
 alias vv="$EDITOR ~/.vimrc"
+alias vh="$EDITOR ~/.zsh_history"
+alias sz="source ~/.zshrc"
 
 # daemon watching
 alias na="nodemon --exec 'ava'"

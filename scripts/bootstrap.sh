@@ -1,5 +1,6 @@
 ############################
 # Creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
+# Assumes you placed this repo in $HOME/Dropbox
 ############################
 
 DIR="$HOME/Dropbox/dotfiles/link" # dotfiles directory
@@ -29,3 +30,7 @@ then
   echo "⚠️  Set terminal type to xterm-256color-italic in iTerm settings"
   echo "Follow this for more info: https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux"
 fi
+
+# Enusure pip3 exists (for neovim's deoplete)
+command -v pip3 >/dev/null 2>&1 || echo "pip3 required for neovim deoplete, but none installed. See \"requirements\" here for more info: https://github.com/Shougo/deoplete.nvim"
+

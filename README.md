@@ -7,6 +7,7 @@ This assumes you have the following:
 1. MacOS
 2. [iTerm2](https://www.iterm2.com/)
 3. [Operator Mono Font](https://www.typography.com/blog/introducing-operator). Change the following line in [link/vimrc](link/vimrc) to use a different *italics friendly* font
+4. Dropbox located in `$HOME/Dropbox` (same as `~`)
 
 ```sh
 set guifont=Operator\ Mono:h14 " Custom font.
@@ -26,7 +27,7 @@ set guifont=Operator\ Mono:h14 " Custom font.
 ### Install
 
 ```sh
-cd ~
+cd ~/Dropbox
 git clone https://github.com/dawsonbotsford/dotfiles
 ./dotfiles/scripts/bootstrap.sh
 ```
@@ -37,7 +38,7 @@ Modifications can be made to either `~/<file>` **or** `~/dotfiles/link/<file>` s
 
 #### Brand-New Computer
 ```sh
-cd ~
+cd ~/Dropbox
 git clone https://github.com/dawsonbotsford/dotfiles
 
 ./dotfiles/setup/freshOSXInstall.sh
