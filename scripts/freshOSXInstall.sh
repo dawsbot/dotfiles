@@ -14,16 +14,16 @@ cd ~ || exit
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 #Dotfiles
+cd "$HOME/Dropbox"
 git clone git@github.com:dawsonbotsford/dotfiles.git
-cd dotfiles/scripts || exit
-sh link.sh
+./dotfiles/scripts/bootstrap.sh
 
 brew update
-brew install wget
-brew install node
+brew install wget node
 brew install the_silver_searcher # Also known as "ag"
 
 brew install diff-so-fancy
+
 # Set default "git diff" to be diff-so-fancy
 git config --global core.pager "diff-so-fancy | less --tabs=2 -RFX"
 
@@ -31,12 +31,7 @@ npm install -g npm-name-cli
 npm install -g hicat
 npm install -g nodemon
 
-brew install vim
-brew install cmake
-
-# Neobundle install
-curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
-sh ./install.sh
+brew install vim cmake
 
 sudo easy_install pip
 sudo pip install grip

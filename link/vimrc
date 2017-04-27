@@ -190,19 +190,19 @@ nnoremap Y y$
 nnoremap L $
 nnoremap H 0
 
-" duplicate current line below
-noremap <leader>d Y'>p
+" duplicate current line or selection
+nnoremap <leader>d yyp
+nnoremap <leader>D yyP
+vmap <leader>d Y'>p
+vmap <leader>D Y'>P
 
 " add work under cursor to dictionary
 nnoremap aw zg
 
-" File autocompletion
-inoremap <c-f> <c-x><c-f>
-
 " turn on spelling for markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell complete+=kspell
 " highlight bad words in red
-autocmd BufRead,BufNewFile *.md hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
+" autocmd BufRead,BufNewFile *.md hi SpellBad guibg=#ff2929 guifg=#ffffff" ctermbg=224
 
 
 """"""""""""""""" Neovim Terminal """""""""""""""""""""""
@@ -219,7 +219,7 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-" Disable ex mode and replace with quitting
+" Disable ex mode
 :map Q <Nop>
 
 " Disable auto-comment extending

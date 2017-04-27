@@ -46,7 +46,7 @@ export GIT_EDITOR="$EDITOR"
 alias v="$EDITOR"
 alias vim="$EDITOR"
 alias vz="$EDITOR ~/.zshrc"
-alias vv="$EDITOR ~/.vimrc"
+alias vv="$EDITOR $HOME/.config/nvim/init.vim"
 alias vh="$EDITOR ~/.zsh_history"
 alias sz="source ~/.zshrc"
 
