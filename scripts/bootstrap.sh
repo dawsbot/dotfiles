@@ -8,6 +8,7 @@
 ############################
 
 command -v nvim >/dev/null 2>&1 || (echo "\"nvim\" executable required. Install this before running bootsrap" && exit 0);
+command -v pluc-cli >/dev/null 2>&1 || (echo "\"pluc-cli\" executable required. Install this at https://dawsbot.com/pluc before running bootstrap" && exit 0);
 
 DIR="$HOME/Dropbox/dotfiles/link" # dotfiles directory
 
@@ -20,9 +21,14 @@ for file in $FILES; do
 done
 
 # Link Neovim
+# Cleanup old files
 rm -rf "$HOME/.config/nvim/init.vim" # vimrc
+rm -rf "$HOME/.config/nvim/spell/en.utf-8.add"
+
 ln -s "$DIR/vimrc" "$HOME/.config/nvim/init.vim" # vimrc
 ln -s "$DIR/en.utf-8.add" "$HOME/.config/nvim/spell/en.utf-8.add" # Dictionary
+cp -rf "$DIR"/pluc/* "$HOME/Library/Preferences/pluc-nodejs/" # pluc https://dawsbot.com/pluc
+pluc-cli --transpile
 
 # Link global gitignore
 git config --global core.excludesfile ~/.gitignore
