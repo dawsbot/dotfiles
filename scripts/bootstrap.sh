@@ -1,22 +1,26 @@
 ############################
-# Creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
+# Creates symlinks from this repo to the home directory
+# After this, several checks are made for accessory programs
+# which are required in order to support the advanced features
+# required by these dotfiles (italics, autocomplete, etc.)
+#
 # Assumes you placed this repo in $HOME/Dropbox
 ############################
 
+command -v nvim >/dev/null 2>&1 || (echo "\"nvim\" executable required. Install this before running bootsrap" && exit 0);
+
 DIR="$HOME/Dropbox/dotfiles/link" # dotfiles directory
-FILES="zshrc vimrc gitignore" # symlink to homedir
 
-cd "$DIR" || exit
+FILES="zshrc gitignore" # symlink to homedir
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
+# Symlink "$FILES" to "$HOME/*"
 for file in $FILES; do
   rm -rf "$HOME/.$file"
   ln -s "$DIR/$file" "$HOME/.$file"
 done
 
 # Link Neovim
-rm -rf "$HOME/.config/nvim"
-mkdir -p "$HOME/.config/nvim/spell"
+rm -rf "$HOME/.config/nvim/init.vim" # vimrc
 ln -s "$DIR/vimrc" "$HOME/.config/nvim/init.vim" # vimrc
 ln -s "$DIR/en.utf-8.add" "$HOME/.config/nvim/spell/en.utf-8.add" # Dictionary
 
@@ -34,3 +38,4 @@ fi
 # Enusure pip3 exists (for neovim's deoplete)
 command -v pip3 >/dev/null 2>&1 || echo "pip3 required for neovim deoplete, but none installed. See \"requirements\" here for more info: https://github.com/Shougo/deoplete.nvim"
 
+echo "✅  Bootstrapped successfully!"
