@@ -1,9 +1,1 @@
-link/vim/bundle
-dotAtom/compile-cache
-dotAtom/blog-store
-node_modules
-
-*.log
-.apm
-blob-store
-
+link/plugged/MatchTagAlways
