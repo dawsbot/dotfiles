@@ -1,3 +1,7 @@
+" TODO: copy line from `x` lines up or down and paste in current position
+
+
+"
 let mapleader = ' '
 
 """""""""""""""" Plug """"""""""""""""""""""""
@@ -15,8 +19,8 @@ Plug 'airblade/vim-gitgutter' " Displays git diff in left bar
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete suggestions
 
 " File searching
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 
 " Syntax-specific
 Plug 'othree/yajs.vim' , { 'for': 'javascript' } " Syntax
@@ -39,8 +43,10 @@ call plug#end()
 " Airline
 let g:airline#extensions#tabline#enabled = 1 " Enable topnav of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Only filename in top nav
-let g:airline_theme='oceanicnext'
-let g:airline_powerline_fonts = 1
+let g:airline_theme='oceanicnext' " match colorscheme
+let g:airline_powerline_fonts = 1 " enable fancy fonts
+let g:airline_section_b = '' " clear section on bottom-left which contains hunks & branch
+let g:airline_section_z = '' " clear section on bottom-right which contains percentage, line number, & column number
 
 " Nerdtree
 let NERDTreeShowLineNumbers=1
@@ -137,6 +143,8 @@ set scrolloff=10 " Scroll when this far from top/bottom
 
 set tabstop=2 shiftwidth=2 expandtab " tabs are 2 spaces
 
+set modifiable
+
 " Show matching brackets when text indicator is over them
 set showmatch
 
@@ -162,6 +170,7 @@ augroup END
 """"""""""""""" Abbreviations """""""""
 :iabbrev gh https://github.com/dawsbot
 :iabbrev em dawsonbotsford@gmail.com
+:iabbrev cb - [ ]
 
 :iabbrev fro for
 
@@ -173,33 +182,45 @@ inoremap jj <esc>:w<CR>
 inoremap kk <esc>:wq<CR>
 
 nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
+nnoremap <silent> <leader>q :call SafeClose()<CR>
+nnoremap <silent> <leader>e :w<CR>:call SafeClose()<CR>
 nnoremap <leader>1 :q!<CR>
-nnoremap <leader>e :wq<CR>
 
-nnoremap <leader>k :bd<CR> " Close current buffer
+" Not needed since SafeClose() does similar
+" nnoremap <leader>k :bd!<CR> " Close current buffer
 
 " Fix strange yank/paste behavior in term
 function! ClipboardYank()
   call system('pbcopy', @@)
 endfunction
-function! ClipboardPaste()
-  let @@ = system('pbpaste')
-endfunction
+" function! ClipboardPaste()
+"   let @@ = system('pbpaste')
+" endfunction
 
 vnoremap <silent> y y:call ClipboardYank()<cr>
 vnoremap <silent> d d:call ClipboardYank()<cr>
-nnoremap <silent> p :call ClipboardPaste()<cr>p
+" nnoremap <silent> p :call ClipboardPaste()<cr>p
 
 " edit vimrc
 nnoremap <leader>vv :vsplit $MYVIMRC<CR>
 " nnoremap <leader>f :Find<CR>
-nnoremap <leader>f :FZF<CR>
-nnoremap <leader>F :Files<CR>
+" nnoremap <leader>f :FZF<CR>
+" nnoremap <leader>F :Files<CR>
 
 " panes
-nnoremap <leader>s :split<CR>
-nnoremap <leader>vs :vsplit<CR>
+
+function! Move(direction)
+  if a:direction == 'h'
+    bprevious
+  elseif a:direction == 'l'
+    bnext
+  endif
+endfunction
+
+noremap <C-l> :call Move('l')<CR>
+noremap <C-h> :call Move('h')<CR>
+nnoremap <leader>j :split<CR>
+nnoremap <leader>l :vsplit<CR>
 set splitright " open splits to the right
 
 nnoremap <silent> <leader>h :wincmd h<CR>
@@ -240,14 +261,12 @@ au BufEnter *
       \   :startinsert |
       \ endif " insert mode always when entering terminal
 
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+" nnoremap <C-l> :call Move('l')<CR>
+" nnoremap <C-h> :call Move('h')<CR>
+" tnoremap <silent> <C-h> <C-\><C-n>:call Move('h')<CR>
+" tnoremap <silent> <C-l> <C-\><C-n>:call Move('l')<CR>
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
 
 " Disable ex mode
 :map Q <Nop>
@@ -281,6 +300,31 @@ endfunction
 function! XOFix()
   silent execute "!./node_modules/.bin/xo --fix %"
   edit! %
+endfunction
+
+" Prompt for vim exit confirmation before closing
+function! NumBuffers()
+  return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+
+function! DeleteBuffer()
+  setl bufhidden=delete
+  bnext
+  setl bufhidden=hide
+endfunction
+
+function! SafeClose()
+  let num_windows = winnr('$')
+  let num_buffers = NumBuffers()
+  if num_windows == 1 && num_buffers > 1
+    call DeleteBuffer()
+  elseif num_windows == 1
+    " if 1 == confirm("Quit Vim?", "&Yes\n&No", 2)
+      quit
+    endif
+  else
+    close
+  endif
 endfunction
 
 " """" fix broken crontab temp file """""
