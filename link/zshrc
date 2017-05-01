@@ -13,8 +13,8 @@ DROPBOX_PATH=$HOME/dropbox
 # NVM_SOURCE=$HOME/.nvm/nvm.sh
 # lazy_source nvm $NVM_SOURCE
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Increase history size
 export HISTFILE=~/.zsh_history
@@ -29,9 +29,12 @@ export PATH="$PATH:$GOPATH/bin"
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+
 # export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
-export PATH="$PATH:$(yarn global bin)"
-export PATH="$HOME/.yarn/bin:$PATH"
+# export PATH="$PATH:$(yarn global bin)"
+# export PATH="$HOME/.yarn/bin:$PATH"
+# yarn config set prefix $(npm config get prefix)
 
 export LANG=en_US.UTF-8
 

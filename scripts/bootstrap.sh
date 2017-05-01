@@ -24,6 +24,7 @@ done
 # Cleanup old files
 rm -rf "$HOME/.config/nvim/init.vim" # vimrc
 rm -rf "$HOME/.config/nvim/spell/en.utf-8.add"
+rm -rf "$HOME/Library/Preferences/pluc-nodejs/*" # pluc https://dawsbot.com/pluc
 
 ln -s "$DIR/vimrc" "$HOME/.config/nvim/init.vim" # vimrc
 ln -s "$DIR/en.utf-8.add" "$HOME/.config/nvim/spell/en.utf-8.add" # Dictionary
@@ -42,6 +43,6 @@ then
 fi
 
 # Enusure pip3 exists (for neovim's deoplete)
-command -v pip3 >/dev/null 2>&1 || echo "pip3 required for neovim deoplete, but none installed. See \"requirements\" here for more info: https://github.com/Shougo/deoplete.nvim"
+command -v pip3 >/dev/null 2>&1 || echo "pip3 required for neovim deoplete, but none installed. Enter \"brew install python3 && pip3 install --upgrade neovim\" and see \"requirements\" here for more info: https://github.com/Shougo/deoplete.nvim"
 
 echo "✅  Bootstrapped successfully!"
