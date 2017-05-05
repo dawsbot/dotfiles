@@ -27,7 +27,7 @@ alias nrf='npm run flow '
 alias nv='npm version '
 alias gpft='git push --follow-tags'
 
-PUSH_PUB="gpft && npm publish"
+PUSH_PUB="gpft"
 alias nvp="npm version patch -m \"📦 %s\" && $PUSH_PUB"
 alias nvmi="npm version minor -m \"📦 %s\" && $PUSH_PUB"
 alias nvma="npm version major -m \"📦 %s\" && $PUSH_PUB"

@@ -9,13 +9,12 @@ call plug#begin('~/Dropbox/dotfiles/link/plugged')
 
 " Load on startup
 Plug 'vim-airline/vim-airline'
-Plug 'mhartington/oceanic-next' " color scheme
 Plug 'editorconfig/editorconfig-vim' " Load .editorconfig if exists
 Plug 'tomtom/tcomment_vim' " `gcc` commenting
 Plug 'neomake/neomake' " linting, build tasks
 Plug 'kshenoy/vim-signature' " Display vim marks in left bar
 Plug 'airblade/vim-gitgutter' " Displays git diff in left bar
-
+Plug 'joshdick/onedark.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete suggestions
 
 " File searching
@@ -34,7 +33,7 @@ Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
 " Re-enable when neovim python runtime is figured out https://github.com/neovim/neovim/issues/1203
 Plug 'valloric/MatchTagAlways', {'for': 'html'}
 " Re-enable when working on a css project and care to figure out why this is not working
-" Plug 'skammer/vim-css-color', { 'for': 'css' } " css color highlighting
+" Plug 'ap/vim-css-color', { 'for': 'css' } " css color highlighting
 
 Plug 'scrooloose/nerdtree'
 
@@ -43,7 +42,7 @@ call plug#end()
 " Airline
 let g:airline#extensions#tabline#enabled = 1 " Enable topnav of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Only filename in top nav
-let g:airline_theme='oceanicnext' " match colorscheme
+let g:airline_theme='onedark' " match colorscheme
 let g:airline_powerline_fonts = 1 " enable fancy fonts
 let g:airline_section_b = '' " clear section on bottom-left which contains hunks & branch
 let g:airline_section_z = '' " clear section on bottom-right which contains percentage, line number, & column number
@@ -81,7 +80,6 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_jsx_enabled_makers = ['eslint']
 
 autocmd! BufWritePost * Neomake
-
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
@@ -126,7 +124,7 @@ if (has("termguicolors"))
 endif
 set guifont=Operator\ Mono:h14 " Custom font.
 
-colorscheme OceanicNext
+colorscheme onedark
 
 " Italicize comments
 " https://alexpearce.me/2014/05/italics-in-iterm2-vim-tmux/
@@ -182,8 +180,8 @@ inoremap jj <esc>:w<CR>
 inoremap kk <esc>:wq<CR>
 
 nnoremap <leader>w :w<CR>
-nnoremap <silent> <leader>q :call SafeClose()<CR>
-nnoremap <silent> <leader>e :w<CR>:call SafeClose()<CR>
+nnoremap <leader>q :call SafeClose()<CR>
+nnoremap <leader>e :w<CR>:call SafeClose()<CR>
 nnoremap <leader>1 :q!<CR>
 
 " Not needed since SafeClose() does similar
@@ -316,12 +314,13 @@ endfunction
 function! SafeClose()
   let num_windows = winnr('$')
   let num_buffers = NumBuffers()
-  if num_windows == 1 && num_buffers > 1
+  " if num_windows == 1 && num_buffers > 1
+  if num_buffers > 1
     call DeleteBuffer()
   elseif num_windows == 1
     " if 1 == confirm("Quit Vim?", "&Yes\n&No", 2)
-      quit
-    endif
+    quit
+    " endif
   else
     close
   endif
