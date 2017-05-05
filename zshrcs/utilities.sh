@@ -15,6 +15,7 @@ printColors () {
   for x in 0 1 4 5 7 8; do for i in `seq 30 37`; do for a in `seq 40 47`; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo "";
 }
 
+# change dirs to zshrcs' file dump location
 cz () {
   cd ~/Dropbox/dotfiles/zshrcs || exit
   ls
@@ -77,20 +78,19 @@ function new-repo() {
   openg && opent
 }
 
-gcl() {
-  git clone "$1" && cd "$(basename "$1")" || exit
-}
-
 fetch-all() {
   git branch -r | grep -v '\->' | while read -r remote; do git branch --track "${remote#origin/}" "$remote"; done
   git fetch --all
   git pull --all
 }
 
+# squash every single git commit into one root init commit
 squash-root() {
-  git reset "$(git commit-tree HEAD^\{tree\} -m \"🎉 init\")"
+  git reset --soft "$(git rev-list --max-parents=0 --abbrev-commit HEAD)"
+  git commit --amend -m "🎉 init"
 }
 
+# When ghetto-starting my own projects, these important files are missing
 copy-gh-stuff() {
   cp ~/Dropbox/sharedCode/pluc/.gitignore .
   cp ~/Dropbox/sharedCode/pluc/.gitattributes .
@@ -98,8 +98,8 @@ copy-gh-stuff() {
   cp ~/Dropbox/sharedCode/pluc/.travis.yml .
 }
 
-# "in <dir> <commands>"
 # executes "commands" in "dir" then returns to cwd
+# Usage: "in <dir> <commands>"
 function in() {
   cd "$1" || exit
   eval "${@:2}"
@@ -108,4 +108,18 @@ function in() {
 
 # "!!" executes last command
 bindkey -s '  ' '!!^m^m'
+
+# clones and cd's the url in the clipboard. No need to paste!
+# Usage: "cl <git url"
+function cl() {
+  local git_url
+  git_url="$(pbpaste)" 
+  git clone "$git_url"
+  cd "$(basename "$git_url")" || exit
+}
+
+# git clone and cd into that dir
+gcl() {
+  git clone "$1" && cd "$(basename "$1")" || exit
+}
 
