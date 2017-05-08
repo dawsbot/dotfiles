@@ -3,9 +3,9 @@
 This assumes you have the following:
 
 1. MacOS
-2. [iTerm2](https://www.iterm2.com/)
+2. [iTerm2](https://www.iterm2.com/) (instead of the default MacOS Terminal)
 3. zsh (instead of the default bash)
-4. [Operator Mono Font](https://www.typography.com/blog/introducing-operator). Change the following line in [link/vimrc](link/vimrc) if you want to use a different *italics friendly* font
+4. [Operator Mono Font](https://www.typography.com/blog/introducing-operator). Change the following line in [`link/vimrc`](link/vimrc) if you want to use a different *italics friendly* font
 ```sh
 set guifont=Operator\ Mono:h14 " Custom font.
 ```
