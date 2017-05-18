@@ -16,7 +16,7 @@ Plug 'kshenoy/vim-signature' " Display vim marks in left bar
 Plug 'airblade/vim-gitgutter' " Displays git diff in left bar
 Plug 'joshdick/onedark.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete suggestions
-
+Plug 'pbrisbin/vim-mkdir'
 " File searching
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
