@@ -28,7 +28,9 @@ rm -rf "$HOME/Library/Preferences/pluc-nodejs/*" # pluc https://dawsbot.com/pluc
 
 ln -s "$DIR/vimrc" "$HOME/.config/nvim/init.vim" # vimrc
 ln -s "$DIR/en.utf-8.add" "$HOME/.config/nvim/spell/en.utf-8.add" # Dictionary
-cp -rf "$DIR"/pluc/* "$HOME/Library/Preferences/pluc-nodejs/" # pluc https://dawsbot.com/pluc
+
+rm -rf "$HOME/Library/Preferences/pluc-nodejs" 
+ln -s "$DIR"/pluc-nodejs "$HOME/Library/Preferences" # pluc https://dawsbot.com/pluc
 pluc-cli --transpile
 
 # Link global gitignore

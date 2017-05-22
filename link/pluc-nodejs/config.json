@@ -51,7 +51,7 @@
 	"bomb": "cd .. && rm -rf $OLDPWD",
 	"bi": "brew install",
 	"ad": "arc diff",
-	"a'*'": "git add -A && git commit && arc diff ",
+	"a*": "git add -A && git commit && arc diff ",
 	"gb": "git branch | pick | xargs git checkout",
 	"rn": "rm -rf node_modules",
 	"rny": "rn && y"
