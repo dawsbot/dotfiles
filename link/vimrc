@@ -156,8 +156,6 @@ match Error '\s\+$' " Highlight trailing spaces as errors
 set list
 set listchars=tab:>- " Show tabs as special character
 
-autocmd FileType gitcommit :startinsert " Start git commits in edit mode
-
 " Auto-reload vimrc in on change
 augroup myvimrc
   " clear all au's that may already exist (in-case this is loaded twice)
