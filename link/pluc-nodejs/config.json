@@ -53,5 +53,6 @@
 	"gb": "git branch | pick | xargs git checkout",
 	"rn": "rm -rf node_modules",
 	"rny": "rn && y",
-	"nrd": "npm run dev"
+	"nrd": "npm run dev",
+	"dif": "git diff head~"
 }
