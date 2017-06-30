@@ -54,5 +54,7 @@
 	"rn": "rm -rf node_modules",
 	"rny": "rn && y",
 	"nrd": "npm run dev",
-	"dif": "git diff head~"
+	"dif": "git diff head~",
+	"ygr": "yarn global remove",
+	"grh": "git reset --hard origin/master"
 }
