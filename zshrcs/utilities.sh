@@ -50,9 +50,9 @@ function s() {
 }
 function vs() {
   if [[ $# -eq 0 ]] ; then
-    code-insiders .
+    code .
   fi
-  code-insiders "$1"
+  code "$1"
 }
 
 # Remove application from OSX installed Applications

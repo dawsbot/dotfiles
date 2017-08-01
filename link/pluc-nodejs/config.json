@@ -1,6 +1,5 @@
 {
 	"play": "cd \"$(mktemp -d)\"",
-	"code": "cd ~/code && ls",
 	"gre": "git pull --rebase origin master",
 	"psg": "ps aux | grep ",
 	"getGlobalGitignore": "git config --get core.excludesfile",
@@ -56,5 +55,6 @@
 	"nrd": "npm run dev",
 	"dif": "git diff head~",
 	"ygr": "yarn global remove",
-	"grh": "git reset --hard origin/master"
+	"grh": "git reset --hard origin/master",
+	"nrs": "npm run start"
 }

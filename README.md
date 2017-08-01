@@ -47,6 +47,11 @@ Modifications can be made to either `~/<file>` **or** `~/Dropbox/dotfiles/link/<
 
 👩‍⚕️ After this, the bootstrap script attempts to doctor your system to ensure you have necessary prerequisites (like python3 or an italic iTerm2 `terminal` in the settings). Warnings are logged to the console to help you get the proper prerequisites.
 
+## Fresh OSX Instructions
+
+* Go Install node 
+* Run bootstrap
+
 ## License
 
 MIT © [Dawson Botsford](https://dawsbot.com)

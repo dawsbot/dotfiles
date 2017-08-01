@@ -21,11 +21,11 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
 export SAVEHIST=100000
 
-eval "$(rbenv init - --no-rehash)"
+# eval "$(rbenv init - --no-rehash)"
 
 # Go
-export GOPATH=$HOME/golang
-export PATH="$PATH:$GOPATH/bin"
+# export GOPATH=$HOME/golang
+# export PATH="$PATH:$GOPATH/bin"
 
 # Extend path
 export PATH="$PATH:$HOME/cli"

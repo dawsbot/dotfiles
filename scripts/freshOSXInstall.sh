@@ -30,6 +30,7 @@ git config --global core.pager "diff-so-fancy | less --tabs=2 -RFX"
 npm install -g npm-name-cli
 npm install -g hicat
 npm install -g nodemon
+npm install -g pluc
 
 brew install vim cmake
 
@@ -37,4 +38,10 @@ sudo easy_install pip
 sudo pip install grip
 
 git clone git://github.com/tarruda/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# install neovim plug package manager
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Enable key repeats
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 

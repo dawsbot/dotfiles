@@ -1,7 +1,5 @@
 " TODO: copy line from `x` lines up or down and paste in current position
 
-
-"
 let mapleader = ' '
 
 """""""""""""""" Plug """"""""""""""""""""""""
