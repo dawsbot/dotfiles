@@ -49,7 +49,7 @@
 	"bi": "brew install",
 	"ad": "arc diff",
 	"a*": "git add -A && git commit && arc diff ",
-	"gb": "git branch | pick | xargs git checkout",
+	"gb": "git branch",
 	"rn": "rm -rf node_modules",
 	"rny": "rn && y",
 	"nrd": "npm run dev",
