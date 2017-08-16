@@ -85,10 +85,6 @@ source "$ZSHRCS_HOME/utilities.sh"
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-# Source extra uber rc file if exists (won't on personal machine)
-UBER_PRIVATE_RC="$HOME/uberPrivaterc.sh"
-[ -f $UBER_PRIVATE_RC ] && source $UBER_PRIVATE_RC
-
 ###################### KEEP AT END OF FILE ####################
 
 # https://github.com/dawsbot/pluc
