@@ -56,5 +56,6 @@
 	"dif": "git diff head~",
 	"ygr": "yarn global remove",
 	"grh": "git reset --hard origin/master",
-	"nrs": "npm run start"
+	"nrs": "npm run start",
+	"nu": "npm update"
 }

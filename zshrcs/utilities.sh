@@ -113,13 +113,13 @@ bindkey -s '  ' '!!^m^m'
 # Usage: "cl <git url"
 function cl() {
   local git_url
-  git_url="$(pbpaste)" 
+  git_url="$(pbpaste)"
   git clone "$git_url"
   cd "$(basename "$git_url")" || exit
 }
 
 # git clone and cd into that dir
 gcl() {
-  git clone "$1" && cd "$(basename "$1")" || exit
+  git clone "$1"
 }
 
