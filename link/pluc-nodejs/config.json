@@ -10,7 +10,6 @@
 	"ncc": "npm cache clean",
 	"l": "ls",
 	"dun": "terminal-notifier -message 'done!'",
-	"al": "arc land",
 	"cnit": "cn && it",
 	"unit": "uni && t",
 	"yarnt": "yarn && t",
@@ -26,7 +25,6 @@
 	"yt": "yarn && npm test",
 	"yrs": "yarn remove --save",
 	"yad": "yarn add --dev",
-	"devbox": "ssh 35.161.209.63",
 	"rnm": "rm -rf node_modules",
 	"rmr": "rm -rf",
 	"rmnm": "rm -rf node_modules",
@@ -37,7 +35,6 @@
 	"wh": "which",
 	"peep": "ssh adhoc04-sjc1",
 	"yga": "yarn global add",
-	"ap": "arc patch",
 	"cnt": "cn && t",
 	"ys": "yarn start",
 	"yi": "yarn init",
@@ -47,8 +44,6 @@
 	"r": "rg",
 	"bomb": "cd .. && rm -rf $OLDPWD",
 	"bi": "brew install",
-	"ad": "arc diff",
-	"a*": "git add -A && git commit && arc diff ",
 	"gb": "git branch",
 	"rn": "rm -rf node_modules",
 	"rny": "rn && y",
@@ -57,5 +52,6 @@
 	"ygr": "yarn global remove",
 	"grh": "git reset --hard origin/master",
 	"nrs": "npm run start",
-	"nu": "npm update"
+	"nu": "npm update",
+	"grm": "git rebase master"
 }

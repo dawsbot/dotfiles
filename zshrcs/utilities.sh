@@ -26,7 +26,6 @@ alias v='vim '
 alias tr="tree -I 'node_modules' -L 4"
 
 upgradeAll () {
-  ussh
   upgrade_oh_my_zsh
   brew prune
   brew update
@@ -115,7 +114,6 @@ function cl() {
   local git_url
   git_url="$(pbpaste)"
   git clone "$git_url"
-  cd "$(basename "$git_url")" || exit
 }
 
 # git clone and cd into that dir
