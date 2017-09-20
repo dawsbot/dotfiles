@@ -32,7 +32,7 @@ alias gbd='git branch -D '
 alias grv='git remote -v '
 
 clean() {
-  git checkout . && git clean -f -d
+  git reset && git checkout . && git clean -f -d
 }
 burn() {
   git branch -D "$1" # Delete branch locally

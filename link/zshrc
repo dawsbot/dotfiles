@@ -30,8 +30,9 @@ export SAVEHIST=100000
 # Extend path
 export PATH="$PATH:$HOME/cli"
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+export PATH="$PATH:$HOME/driver-clis/google-cloud-sdk/bin"
+export PATH="$PATH:$HOME/driver-clis/ude-scripts"
 
-# export PATH=$HOME/.nvm/versions/node/v6.9.4/bin:$PATH
 # export PATH="$PATH:$(yarn global bin)"
 # export PATH="$HOME/.yarn/bin:$PATH"
 # yarn config set prefix $(npm config get prefix)

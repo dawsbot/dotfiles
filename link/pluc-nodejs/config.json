@@ -53,5 +53,7 @@
 	"grh": "git reset --hard origin/master",
 	"nrs": "npm run start",
 	"nu": "npm update",
-	"grm": "git rebase master"
+	"grm": "git rebase master",
+	"pr": "hub pull-request",
+	"gr": "git remote"
 }
