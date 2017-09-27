@@ -118,6 +118,6 @@ function cl() {
 
 # git clone and cd into that dir
 gcl() {
-  git clone "$1"
+  git clone $(pbpaste)
 }
 
