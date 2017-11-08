@@ -10,12 +10,6 @@ DROPBOX_PATH=$HOME/dropbox
 #   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 # }
 
-# NVM_SOURCE=$HOME/.nvm/nvm.sh
-# lazy_source nvm $NVM_SOURCE
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-
 # Increase history size
 export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
@@ -32,6 +26,13 @@ export PATH="$PATH:$HOME/cli"
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 export PATH="$PATH:$HOME/driver-clis/google-cloud-sdk/bin"
 export PATH="$PATH:$HOME/driver-clis/ude-scripts"
+
+# React Native Path setup https://facebook.github.io/react-native/docs/getting-started.html
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export PATH="/usr/local/sbin:$PATH"
 
 # export PATH="$PATH:$(yarn global bin)"
 # export PATH="$HOME/.yarn/bin:$PATH"
