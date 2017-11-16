@@ -59,17 +59,6 @@ function remove-app() {
   rm -rf /Applications/"$1".app
 }
 
-function db-nm() {
-  mkdir src
-  mv index.js src
-  mv cli.js src
-  cp  ~/code/gmap/.babelrc .
-  npm install --save-dev babel-cli babel-preset-es2015 babel-preset-stage-2
-  echo "UPDATE PACKAGE.JSON"
-}
-
-alias play='cd "$(mktemp)"'
-
 function new-repo() {
   hub create
   travis enable
@@ -117,6 +106,7 @@ function cl() {
 }
 
 # git clone and cd into that dir
+# Usage: "gcl" when git url is in clipboard
 gcl() {
   git clone $(pbpaste)
 }
