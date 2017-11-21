@@ -10,6 +10,10 @@ DROPBOX_PATH=$HOME/dropbox
 #   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 # }
 
+
+# Source all other zshrc helpers/aliases
+source "$DROPBOX_PATH/dotfiles/sh-helpers.sh"
+
 # Increase history size
 export HISTFILE=~/.zsh_history
 export HISTSIZE=100000
@@ -72,11 +76,6 @@ plugins=(zsh-autosuggestions) # Predictive suggestions
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3' # Suggest in orange
 
 source $ZSH/oh-my-zsh.sh
-
-ZSHRCS_HOME="$DROPBOX_PATH/dotfiles/zshrcs"
-source "$ZSHRCS_HOME/gitAliases.sh"
-source "$ZSHRCS_HOME/npmAliases.sh"
-source "$ZSHRCS_HOME/utilities.sh"
 
 # vim fuzzy file searching with ripgrep
 # https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
