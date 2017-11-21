@@ -47,5 +47,7 @@
 	"ag": "ag --ignore node_modules ",
 	"dy": "rm -rf node_modules && y",
 	"dyt": "dy && t",
-	"gfo": "git fetch origin"
+	"gfo": "git fetch origin",
+	"c": "hicat",
+	"v": "vim"
 }
