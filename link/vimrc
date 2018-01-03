@@ -189,9 +189,6 @@ nnoremap <leader>1 :q!<CR>
 function! ClipboardYank()
   call system('pbcopy', @@)
 endfunction
-" function! ClipboardPaste()
-"   let @@ = system('pbpaste')
-" endfunction
 
 vnoremap <silent> y y:call ClipboardYank()<cr>
 vnoremap <silent> d d:call ClipboardYank()<cr>
@@ -227,7 +224,7 @@ nnoremap <leader><leader> :bnext<CR>
 nnoremap <CR> :noh<CR><CR> " Yank to the end of line
 nnoremap Y y$
 " Move easier to beginning/end of line
-nnoremap L $
+nnoremap e $
 nnoremap H 0
 
 " duplicate current line or selection
@@ -283,10 +280,6 @@ autocmd BufRead * normal zz
 augroup Shebang
   autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"|$
 augroup END
-
-" Autofix linting
-" nnoremap <leader>el :call ESLintFix()<CR>
-nnoremap <leader>xo :call XOFix()<CR>
 
 function! ESLintFix()
   silent execute "!./node_modules/.bin/eslint --fix %"
