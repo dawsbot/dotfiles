@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CLIPBOARD_CONTENTS=$(pbpaste)
+
 ################## GIT ALIASES ######################
 current_branch() {
   basename "$(git symbolic-ref HEAD)"
@@ -154,7 +156,7 @@ fetch-all() {
 # squash every single git commit into one root init commit
 squash-root() {
   git reset --soft "$(git rev-list --max-parents=0 --abbrev-commit HEAD)"
-  git commit --amend -m "🎉 init"
+  git commit --amend -m "🎉  init"
 }
 
 # When ghetto-starting my own projects, these important files are missing
@@ -190,3 +192,21 @@ gcl() {
   git clone $(pbpaste)
 }
 
+# copy a branch name from a github pr to clipboard.
+branch() {
+  gch master
+  git pull origin master
+  git fetch origin "$CLIPBOARD_CONTENTS"
+  git checkout "$CLIPBOARD_CONTENTS"
+  git merge master
+}
+
+b() {
+  git fetch origin "$CLIPBOARD_CONTENTS"
+  git checkout "$CLIPBOARD_CONTENTS"
+}
+
+opent() {
+  CURRENT_GIT_REPO=$(basename `git rev-parse --show-toplevel`)
+  open https://travis-ci.com/drivergroup/"$CURRENT_GIT_REPO"
+}

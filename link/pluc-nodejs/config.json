@@ -49,5 +49,10 @@
 	"dyt": "dy && t",
 	"gfo": "git fetch origin",
 	"c": "hicat",
-	"v": "vim"
+	"v": "vim",
+	"yst": "yarn storybook",
+	"up": "gch master && gpu",
+	"yf": "yarn flow",
+	"apr": "gch master && gpu",
+	"yb": "yarn build"
 }
