@@ -193,17 +193,12 @@ gcl() {
 }
 
 # copy a branch name from a github pr to clipboard.
-branch() {
+b() {
   gch master
   git pull origin master
   git fetch origin "$CLIPBOARD_CONTENTS"
   git checkout "$CLIPBOARD_CONTENTS"
   git merge master
-}
-
-b() {
-  git fetch origin "$CLIPBOARD_CONTENTS"
-  git checkout "$CLIPBOARD_CONTENTS"
 }
 
 opent() {
