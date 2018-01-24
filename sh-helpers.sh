@@ -9,7 +9,6 @@ current_branch() {
 
 alias hb='hub browse'
 
-alias g='git '
 alias gs='git status '
 alias ga='git add '
 alias gl='git log '
@@ -196,9 +195,11 @@ gcl() {
 b() {
   gch master
   git pull origin master
-  git fetch origin "$CLIPBOARD_CONTENTS"
-  git checkout "$CLIPBOARD_CONTENTS"
-  git merge master
+  fetch-all
+  git checkout "$(pbpaste)"
+  git pull
+  # git merge master
+  # git status
 }
 
 opent() {
