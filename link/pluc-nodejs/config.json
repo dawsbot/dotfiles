@@ -54,5 +54,14 @@
 	"up": "gch master && gpu",
 	"yf": "yarn flow",
 	"apr": "gch master && gpu",
-	"yb": "yarn build"
+	"yb": "yarn build",
+	"gd": "git diff",
+	"gp": "git push",
+	"ga": "git add",
+	"gs": "git status",
+	"gl": "git log",
+	"gi": "git init",
+	"gch": "git checkout",
+	"gchb": "git checkout -b",
+	"gc": "git commit"
 }
