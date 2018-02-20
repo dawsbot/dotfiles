@@ -9,20 +9,10 @@ current_branch() {
 
 alias hb='hub browse'
 
-alias gs='git status '
-alias ga='git add '
-alias gl='git log '
-alias gi='git init '
 alias gaa='git add -A '
-alias gc='git commit '
-alias gch='git checkout '
-alias gchm='git checkout master '
-alias gchb='git checkout -b '
 
-alias gp='git push '
 alias gps='git push staging '
 alias gpo='git push origin "$(current_branch)"'
-alias gpu='git pull origin "$(current_branch)"'
 alias gpom='git push origin master '
 alias gphm='git push heroku master '
 alias gpbm='git push origin master && git push heroku master '
@@ -30,7 +20,6 @@ alias gpft='git push --follow-tags '
 
 alias gpu='git pull origin "$(current_branch)"'
 alias gpum='git pull origin master '
-alias gd='git diff '
 alias gbd='git branch -D '
 alias grv='git remote -v '
 
