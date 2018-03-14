@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-CLIPBOARD_CONTENTS=$(pbpaste)
-
 ################## GIT ALIASES ######################
 current_branch() {
   basename "$(git symbolic-ref HEAD)"
@@ -11,11 +9,8 @@ alias hb='hub browse'
 
 alias gaa='git add -A '
 
-alias gps='git push staging '
 alias gpo='git push origin "$(current_branch)"'
 alias gpom='git push origin master '
-alias gphm='git push heroku master '
-alias gpbm='git push origin master && git push heroku master '
 alias gpft='git push --follow-tags '
 
 alias gpu='git pull origin "$(current_branch)"'
@@ -83,8 +78,6 @@ alias nr='npm run '
 alias nrw='npm run watch '
 alias w='npm run watch '
 alias nrb='npm run build '
-alias nrbd='npm run build-docs '
-alias nrsd='npm run serve-docs '
 
 die() {
   rm -rf node_modules
@@ -132,7 +125,7 @@ function new-repo() {
   hub create
   travis enable
   g*
-  openg && opent
+  openg
 }
 
 fetch-all() {
@@ -145,14 +138,6 @@ fetch-all() {
 squash-root() {
   git reset --soft "$(git rev-list --max-parents=0 --abbrev-commit HEAD)"
   git commit --amend -m "🎉  init"
-}
-
-# When ghetto-starting my own projects, these important files are missing
-copy-gh-stuff() {
-  cp ~/Dropbox/sharedCode/pluc/.gitignore .
-  cp ~/Dropbox/sharedCode/pluc/.gitattributes .
-  cp ~/Dropbox/sharedCode/pluc/.editorconfig .
-  cp ~/Dropbox/sharedCode/pluc/.travis.yml .
 }
 
 # executes "commands" in "dir" then returns to cwd
