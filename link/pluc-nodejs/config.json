@@ -53,7 +53,7 @@
 	"yst": "yarn storybook",
 	"up": "gch master && gpu",
 	"yf": "yarn flow",
-	"apr": "gch master && gpu",
+	"apr": "gch master && git reset --hard origin/master && fetch-all",
 	"yb": "yarn build",
 	"gd": "git diff",
 	"gp": "git push",
@@ -63,5 +63,6 @@
 	"gi": "git init",
 	"gch": "git checkout",
 	"gchb": "git checkout -b",
-	"gc": "git commit"
+	"gc": "git commit",
+	"gmm": "git merge master"
 }
