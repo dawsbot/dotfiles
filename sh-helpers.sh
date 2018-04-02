@@ -116,11 +116,6 @@ function vs() {
   code "$1"
 }
 
-# Remove application from OSX installed Applications
-function remove-app() {
-  rm -rf /Applications/"$1".app
-}
-
 function new-repo() {
   hub create
   travis enable
@@ -165,18 +160,15 @@ gcl() {
   git clone $(pbpaste)
 }
 
-# copy a branch name from a github pr to clipboard.
-b() {
-  gch master
-  git pull origin master
-  fetch-all
-  git checkout "$(pbpaste)"
-  git pull
-  # git merge master
-  # git status
-}
-
 opent() {
   CURRENT_GIT_REPO=$(basename `git rev-parse --show-toplevel`)
   open https://travis-ci.com/drivergroup/"$CURRENT_GIT_REPO"
+}
+
+apr() {
+	gch master
+  git pull
+  fetch-all
+  gch "$1"
+  git merge master
 }

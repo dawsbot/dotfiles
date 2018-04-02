@@ -19,7 +19,7 @@
 	"yl": "yarn link",
 	"ya": "yarn add",
 	"yr": "yarn remove",
-	"yt": "yarn test",
+	"yt": "yarn && yarn test",
 	"yrs": "yarn remove --save",
 	"yad": "yarn add --dev",
 	"rmr": "rm -rf",
@@ -53,7 +53,6 @@
 	"yst": "yarn storybook",
 	"up": "gch master && gpu",
 	"yf": "yarn flow",
-	"apr": "gch master && git reset --hard origin/master && fetch-all",
 	"yb": "yarn build",
 	"gd": "git diff",
 	"gp": "git push",
@@ -64,5 +63,6 @@
 	"gch": "git checkout",
 	"gchb": "git checkout -b",
 	"gc": "git commit",
-	"gmm": "git merge master"
+	"gmm": "git merge master",
+	"yj": "yarn jest"
 }
