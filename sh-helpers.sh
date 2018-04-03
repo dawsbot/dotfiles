@@ -166,9 +166,9 @@ opent() {
 }
 
 apr() {
-	gch master
+	git checkout master
   git pull
   fetch-all
-  gch "$1"
+  git checkout "$1"
   git merge master
 }
