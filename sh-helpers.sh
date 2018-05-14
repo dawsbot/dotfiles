@@ -111,9 +111,9 @@ upgradeAll () {
 # open vscode to current directory OR open file/dir in arg1
 function vs() {
   if [[ $# -eq 0 ]] ; then
-    code .
+    code-insiders .
   fi
-  code "$1"
+  code-insiders "$1"
 }
 
 function new-repo() {
