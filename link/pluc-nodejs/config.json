@@ -64,5 +64,6 @@
 	"gchb": "git checkout -b",
 	"gc": "git commit",
 	"gmm": "git merge master",
-	"yj": "yarn jest"
+	"yj": "yarn jest",
+	"ye": "yarn e2e"
 }
