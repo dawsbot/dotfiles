@@ -1,3 +1,6 @@
 .DS_Store
 .vscode
+.idea
 ignore-me*
+.dockerignore
+.8.dockerfile
