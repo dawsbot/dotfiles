@@ -4,7 +4,7 @@
 
 ```sh
 cd ~/Dropbox
-git clone https://github.com/dawsonbotsford/dotfiles
+git clone https://github.com/dawsbot/dotfiles
 ./dotfiles/scripts/bootstrap.sh
 ```
 
