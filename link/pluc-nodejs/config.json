@@ -65,5 +65,7 @@
 	"gc": "git commit",
 	"gmm": "git merge master",
 	"yj": "yarn jest",
-	"ye": "yarn e2e"
+	"ye": "yarn e2e",
+	"ytsc": "yarn tsc",
+	"yw": "yarn watch"
 }
