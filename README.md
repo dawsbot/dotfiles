@@ -1,5 +1,15 @@
 > Dotfiles for ⚡️-fast hacking
 
+## Install
+
+```sh
+cd ~/Dropbox
+git clone https://github.com/dawsonbotsford/dotfiles
+./dotfiles/scripts/bootstrap.sh
+```
+
+<br />
+
 This assumes you have the following:
 
 1. MacOS
@@ -20,21 +30,9 @@ set guifont=Operator\ Mono:h14 " Custom font.
 
 ![demo](img/demo.png)
 
-<br>
-
-### Install
-
-```sh
-cd ~/Dropbox
-git clone https://github.com/dawsonbotsford/dotfiles
-./dotfiles/scripts/bootstrap.sh
-```
-
-Modifications can be made to either `~/<file>` **or** `~/Dropbox/dotfiles/link/<file>` since they are symlinked.
-
-<br>
-
 ## More Information
+
+* Modifications can be made to either `~/<file>` **or** `~/Dropbox/dotfiles/link/<file>` since they are symlinked.
 
 ### Bootstrap Script
 
