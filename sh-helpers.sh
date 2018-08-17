@@ -29,15 +29,12 @@ burn() {
 }
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
+alias gpr='g* && pr'
+
 alias prune='git branch | grep -v "master" | xargs git branch -D'
 
-
 ###################### npm/yarn aliases ##################
-alias i='npm install '
-alias t='npm test '
-alias it='npm install && npm test'
-
-alias t='npm test '
+alias t='yarn test '
 # Install and uninstall shorteners
 alias ni='npm install '
 alias nit='npm install && npm test '

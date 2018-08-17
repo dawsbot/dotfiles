@@ -67,5 +67,9 @@
 	"yj": "yarn jest",
 	"ye": "yarn e2e",
 	"ytsc": "yarn tsc",
-	"yw": "yarn watch"
+	"yw": "yarn watch",
+	"di": "docker images",
+	"gchm": "git checkout master && git pull",
+	"gcp": "git cherry-pick",
+	"yscn": "yarn start:cn"
 }
