@@ -7,13 +7,13 @@ call plug#begin('~/Dropbox/dotfiles/link/plugged')
 
 " Load on startup
 Plug 'vim-airline/vim-airline'
-Plug 'editorconfig/editorconfig-vim' " Load .editorconfig if exists
+" Plug 'editorconfig/editorconfig-vim' " Load .editorconfig if exists
 Plug 'tomtom/tcomment_vim' " `gcc` commenting
 Plug 'neomake/neomake' " linting, build tasks
 Plug 'kshenoy/vim-signature' " Display vim marks in left bar
 Plug 'airblade/vim-gitgutter' " Displays git diff in left bar
 Plug 'joshdick/onedark.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete suggestions
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete suggestions
 Plug 'pbrisbin/vim-mkdir'
 " File searching
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
