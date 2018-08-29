@@ -30,6 +30,7 @@ burn() {
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
 alias gpr='g* && pr'
+alias update-branch='git checkout master && git pull && git checkout - && git merge master'
 
 alias prune='git branch | grep -v "master" | xargs git branch -D'
 
@@ -164,8 +165,9 @@ opent() {
 
 apr() {
 	git checkout master
-  git pull
+  git pull origin master
   fetch-all
   git checkout "$1"
+  git pull origin "$1"
   git merge master
 }
