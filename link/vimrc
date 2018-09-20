@@ -317,9 +317,6 @@ function! SafeClose()
   endif
 endfunction
 
-" """" fix broken crontab temp file """""
-" au BufEnter /private/tmp/crontab.* setl backupcopy=yes
-"
 " " Close out NERDTree if it's the last things open
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "
