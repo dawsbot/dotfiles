@@ -30,8 +30,8 @@ burn() {
 
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
 alias gpr='g* && pr'
-alias update-branch='git checkout master && git pull && git checkout - && git merge master'
-alias update-branch-rebase='git checkout master && git pull && git checkout - && git rebase master'
+alias update-branch='git checkout master && git pull origin master && git checkout - && git merge master'
+alias update-branch-rebase='git checkout master && git pull origin master && git checkout - && git rebase master'
 
 alias prune='git branch | grep -v "master" | xargs git branch -D'
 
@@ -100,6 +100,7 @@ alias tr="tree -I 'node_modules' -L 4"
 # Upgrade all the things
 upgradeAll () {
   upgrade_oh_my_zsh
+  yarn global upgrade
   brew prune
   brew update
   brew upgrade
@@ -167,7 +168,7 @@ opent() {
 apr() {
 	git checkout master
   git pull origin master
-  fetch-all
+  fit fetch
   git checkout "$1"
   git pull origin "$1"
   git merge master
