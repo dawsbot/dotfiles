@@ -1,4 +1,3 @@
-# github.com/dawsbot/dotfiles
 
 DROPBOX_PATH=$HOME/dropbox
 
@@ -57,7 +56,13 @@ alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
 # oh my zsh
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_THEME="agnoster"
+# export ZSH_THEME="agnoster"
+
+POWERLEVEL9K_MODE='nerdfont-complete'
+export ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator node_version)
+
 plugins=(git)
 plugins=(zsh-autosuggestions) # Predictive suggestions
 # export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue' # Suggest in orange
