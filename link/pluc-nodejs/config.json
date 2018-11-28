@@ -71,8 +71,5 @@
 	"gst": "git stash",
 	"grc": "git rebase --continue",
 	"gra": "git rebase --abort",
-	"ysd": "yarn start:docz",
-	"ybd": "yarn build:docz",
-	"pry": "hub pull-request -r yasyf",
-	"ydd": "yarn start:docz"
+	"ysd": "yarn start:dev"
 }
