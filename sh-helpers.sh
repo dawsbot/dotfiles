@@ -31,9 +31,10 @@ burn() {
 alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
 alias gpr='g* && pr'
 alias update-branch='git checkout master && git pull origin master && git checkout - && git merge master'
-alias update-branch-rebase='git checkout master && git pull origin master && git checkout - && git rebase master'
 
 alias prune='git branch | grep -v "master" | xargs git branch -D'
+
+alias w='which '
 
 ###################### npm/yarn aliases ##################
 alias t='yarn test '
@@ -75,7 +76,6 @@ alias ne="npm-exec "
 # Command npm script aliases
 alias nr='npm run '
 alias nrw='npm run watch '
-alias w='npm run watch '
 alias nrb='npm run build '
 
 die() {
@@ -157,7 +157,7 @@ function cl() {
 # git clone and cd into that dir
 # Usage: "gcl" when git url is in clipboard
 gcl() {
-  git clone $(pbpaste)
+  git clone "$(pbpaste)" && cd $_
 }
 
 opent() {
@@ -168,7 +168,7 @@ opent() {
 apr() {
 	git checkout master
   git pull origin master
-  fit fetch
+  git fetch
   git checkout "$1"
   git pull origin "$1"
   git merge master
