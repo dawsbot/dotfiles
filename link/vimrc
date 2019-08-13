@@ -19,12 +19,15 @@ Plug 'pbrisbin/vim-mkdir'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'junegunn/fzf.vim'
 
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 " Syntax-specific
 Plug 'othree/yajs.vim' , { 'for': 'javascript' } " Syntax
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " more syntax
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " imports, etc.
 Plug 'mxw/vim-jsx', { 'for': 'javascript' } " jsx support
-Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
+" Plug 'sindresorhus/vim-xo', { 'for': 'javascript' } " Lint with xo
 
 " Plug 'mattn/emmet-vim', { 'for': 'html' } " html tab completions
 " Plug 'mattn/emmet-vim' " html tab completions

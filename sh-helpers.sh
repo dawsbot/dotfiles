@@ -105,7 +105,7 @@ upgradeAll () {
   brew update
   brew upgrade
   brew doctor
-  npm update -g
+  softwareupdate -i -a --restart
 }
 
 # open vscode to current directory OR open file/dir in arg1
@@ -172,4 +172,10 @@ apr() {
   git checkout "$1"
   git pull origin "$1"
   git merge master
+}
+
+docker-bomb() {
+  docker system prune -a
+  docker images purge
+  docker volume prune
 }

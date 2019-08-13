@@ -8,16 +8,20 @@ DROPBOX_PATH=$HOME/dropbox
 # lazy_source () {
 #   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 # }
+nits () {
+  npm install --save $1 && npm install --save-dev @types/$1
+}
 
 # Source all other zshrc helpers/aliases
 source "$DROPBOX_PATH/dotfiles/sh-helpers.sh"
 
 # Increase history size
 export HISTFILE=~/.zsh_history
-export HISTSIZE=100000
-export SAVEHIST=100000
+export HISTSIZE=100000000
+export SAVEHIST=100000000
 
-# eval "$(rbenv init - --no-rehash)"
+# ruby
+eval "$(rbenv init - --no-rehash)"
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
@@ -39,6 +43,10 @@ export EDITOR=nvim # Neovim is bae
 export VISUAL="$EDITOR"
 export GIT_EDITOR="$EDITOR"
 
+alias e="echo"
+alias d="docker"
+alias dc="docker-compose"
+alias python="python3"
 alias v="$EDITOR"
 alias vim="$EDITOR"
 alias vz="$EDITOR ~/.zshrc"
@@ -62,8 +70,11 @@ export ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator)
 
-plugins=(git)
-plugins=(zsh-autosuggestions) # Predictive suggestions
+# plugins=(git)
+plugins+=(zsh-autosuggestions) # Predictive suggestions
+plugins+=(pipenv)
+plugins+=(yarn)
+
 source $ZSH/oh-my-zsh.sh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3' # Suggest in orange
 
@@ -89,16 +100,16 @@ function pluc() {
 prompt_context(){}
 
 # added by travis gem
-[ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh
+# [ -f /Users/dawsonbotsford/.travis/travis.sh ] && source /Users/dawsonbotsford/.travis/travis.sh
 
 # added by fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/dawsonbotsford/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/dawsonbotsford/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f '/Users/dawsonbotsford/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/dawsonbotsford/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/dawsonbotsford/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/dawsonbotsford/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '/Users/dawsonbotsford/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/dawsonbotsford/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 # export PATH="$PATH:$HOME/.rvm/bin"
@@ -167,6 +178,8 @@ alias ye="yarn e2e"
 alias ytsc="yarn tsc"
 alias yw="yarn watch"
 alias di="docker images"
+alias dc="docker-compose"
+alias dcu="docker-compose up"
 alias gchm="git checkout master && git pull origin master"
 alias gchd="git checkout develop && git pull origin develop"
 alias gcp="git cherry-pick"
@@ -176,4 +189,15 @@ alias gst="git stash"
 alias grc="git rebase --continue"
 alias gra="git rebase --abort"
 alias ysd="yarn start:dev"
+alias yd="yarn dev"
+alias p="python"
+alias pa="python server/app.py"
 
+mylast () {
+        re='^[0-9]+$'
+        if ! [[ $1 =~ $re ]] ; then
+           echo "error: $1 not a number" >&2
+        else
+           history | awk '{a[$2]++} END {for (i in a) print a[i], i}' | sort -rn | head -n $1
+        fi
+      }
