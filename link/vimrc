@@ -147,7 +147,7 @@ set modifiable
 " Show matching brackets when text indicator is over them
 set showmatch
 
-set ignorecase " Ignore case when searching
+set smartcase " Ignore case when searching
 " set clipboard=unnamed " Use system-wide clipboard
 set clipboard+=unnamedplus
 set mouse=a " Mouse can scroll
@@ -167,10 +167,6 @@ augroup myvimrc
 augroup END
 
 """"""""""""""" Abbreviations """""""""
-:iabbrev gh https://github.com/dawsbot
-:iabbrev em dawsonbotsford@gmail.com
-:iabbrev cb - [ ]
-
 :iabbrev fro for
 
 """"""""""""""" Shortcuts """""""""""""
@@ -328,3 +324,4 @@ endfunction
 " """""""""""""""""""" Custom commands """"""""""""""""""""
 " " Paste in teammate names for code review
 
+" >_ Customizations for the vim editor. Read more at https://github.com/dawsbot/vimrc-builder
