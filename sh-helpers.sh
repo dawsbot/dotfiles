@@ -9,7 +9,7 @@ alias hb='hub browse'
 
 alias gaa='git add -A '
 
-alias gpo='git push origin "$(current_branch)"'
+alias gpo='git push origin HEAD '
 alias gpom='git push origin master '
 alias gpft='git push --follow-tags '
 
@@ -28,7 +28,7 @@ burn() {
   git push origin :"$1" # Delete branch from remote (GitHub)
 }
 
-alias g'*'='git add -A && git commit && git push origin "$(current_branch)"'
+alias g'*'='git add -A && git commit && git push origin HEAD'
 alias gpr='g* && pr'
 alias update-branch='git checkout master && git pull origin master && git checkout - && git merge master'
 
