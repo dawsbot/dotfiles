@@ -46,6 +46,8 @@ export GIT_EDITOR="$EDITOR"
 alias e="echo"
 alias d="docker"
 alias dc="docker-compose"
+alias dcu="docker-compose up"
+alias dcd="docker-compose down"
 alias python="python3"
 alias v="$EDITOR"
 alias vim="$EDITOR"
@@ -126,6 +128,7 @@ alias yarnt="yarn && t"
 alias nif="npm init -f"
 alias gm="git merge"
 alias gms="git merge --squash"
+alias gf="git fetch"
 alias npmv="npm -v"
 alias y="yarn"
 alias yl="yarn link"
@@ -192,6 +195,13 @@ alias ysd="yarn start:dev"
 alias yd="yarn dev"
 alias p="python"
 alias pa="python server/app.py"
+
+alias firefox="/Applications/Firefox\ Nightly.app/Contents/MacOS/firefox-bin"
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home
+
+export DB_PORT=54322
 
 mylast () {
         re='^[0-9]+$'
