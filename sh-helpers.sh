@@ -83,6 +83,7 @@ alias nrb='npm run build '
 die() {
   rm -rf node_modules
   npm install
+}
 
 ###################### Random other helpers ##################
 # copy last command
@@ -172,3 +173,4 @@ docker-bomb() {
   docker images purge
   docker volume prune
 }
+
