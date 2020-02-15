@@ -2,7 +2,7 @@
 
 ################## GIT ALIASES ######################
 current_branch() {
-  basename "$(git symbolic-ref HEAD)"
+  git rev-parse --abbrev-ref HEAD
 }
 
 alias hb='hub browse'
@@ -14,11 +14,10 @@ alias gpom='git push origin master '
 alias gpft='git push --follow-tags '
 
 alias gpu='git pull origin "$(current_branch)"'
-alias gpum='git pull origin master '
 alias gbd='git branch -D '
 alias grv='git remote -v '
 
-# Remove all dirty parts of hte git tree
+# Remove all dirty parts of the git tree
 clean() {
   git reset && git checkout . && git clean -f -d
 }
@@ -37,7 +36,11 @@ alias prune='git branch | grep -v "master" | xargs git branch -D'
 alias w='which '
 
 ###################### npm/yarn aliases ##################
-alias t='yarn test '
+alias t='npm test '
+alias nd='npm run dev'
+alias nb='npm run build'
+alias ns='npm start'
+
 # Install and uninstall shorteners
 alias ni='npm install '
 alias nit='npm install && npm test '
@@ -75,15 +78,11 @@ alias ne="npm-exec "
 
 # Command npm script aliases
 alias nr='npm run '
-alias nrw='npm run watch '
 alias nrb='npm run build '
 
 die() {
   rm -rf node_modules
   npm install
-}
-
-alias diet='die && npm run test'
 
 ###################### Random other helpers ##################
 # copy last command
@@ -114,13 +113,6 @@ function vs() {
     code-insiders .
   fi
   code-insiders "$1"
-}
-
-function new-repo() {
-  hub create
-  travis enable
-  g*
-  openg
 }
 
 fetch-all() {
@@ -167,8 +159,9 @@ opent() {
 
 apr() {
 	git checkout master
+  git reset --hard origin/master
   git pull origin master
-  git fetch
+  git fetch -p origin
   git checkout "$1"
   git pull origin "$1"
   git merge master
