@@ -105,6 +105,7 @@ upgradeAll () {
   brew update
   brew upgrade
   brew doctor
+  docker image prune --all --filter until=500h # delete all stale-ish docker images
   softwareupdate -i -a --restart
 }
 
