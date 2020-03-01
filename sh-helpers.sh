@@ -101,12 +101,14 @@ alias tr="tree -I 'node_modules' -L 4"
 upgradeAll () {
   upgrade_oh_my_zsh
   yarn global upgrade
-  brew prune
+  npm update -g
   brew update
   brew upgrade
   brew doctor
-  docker image prune --all --filter until=500h # delete all stale-ish docker images
-  softwareupdate -i -a --restart
+  brew prune
+  brew cleanup
+  docker image prune --all --filter until=400h # delete all stale-ish docker images
+  sudo softwareupdate -i -a --restart
 }
 
 # open vscode to current directory OR open file/dir in arg1
