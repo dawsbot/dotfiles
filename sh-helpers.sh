@@ -97,7 +97,13 @@ printColors () {
 
 alias tr="tree -I 'node_modules' -L 4"
 
+# opens a version of chrome where sourcemaps will work without being over https
+openChromeSourceMappable() {
+  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://localhost:3000
+}
+
 # Upgrade all the things
+
 upgradeAll () {
   upgrade_oh_my_zsh
   yarn global upgrade
@@ -114,9 +120,9 @@ upgradeAll () {
 # open vscode to current directory OR open file/dir in arg1
 function vs() {
   if [[ $# -eq 0 ]] ; then
-    code-insiders .
+    code .
   fi
-  code-insiders "$1"
+  code "$1"
 }
 
 fetch-all() {
@@ -171,9 +177,14 @@ apr() {
   git merge master
 }
 
-docker-bomb() {
-  docker system prune -a
-  docker images purge
-  docker volume prune
+to-webp() {
+  cwebp -m 6 -z 9 -q 100 "$1".png -o "$1".webp
+}
+
+ssh-prod() {
+  ssh ubuntu@dev24.everipedia.org
+}
+ssh-dev() {
+  ssh -i ~/Downloads/aws-ep-staging.pem ubuntu@ec2-18-144-104-120.us-west-1.compute.amazonaws.com
 }
 
