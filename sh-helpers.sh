@@ -187,4 +187,8 @@ ssh-prod() {
 ssh-dev() {
   ssh -i ~/Downloads/aws-ep-staging.pem ubuntu@ec2-18-144-104-120.us-west-1.compute.amazonaws.com
 }
+# Kills whatever is running on port 3000
+kill-3000() {
+  lsof -t -i tcp:3000 | xargs kill
+}
 
