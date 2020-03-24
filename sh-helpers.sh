@@ -181,12 +181,16 @@ to-webp() {
   cwebp -m 6 -z 9 -q 100 "$1".png -o "$1".webp
 }
 
-ssh-prod() {
+ssh-old-prod() {
   ssh ubuntu@dev24.everipedia.org
 }
-ssh-dev() {
+ssh-prod() {
   ssh -i ~/Downloads/aws-ep-staging.pem ubuntu@ec2-18-144-104-120.us-west-1.compute.amazonaws.com
 }
+ssh-dev() {
+  ssh -i ~/Downloads/aws-ep-prod.pem ubuntu@ec2-54-151-100-88.us-west-1.compute.amazonaws.com
+}
+
 # Kills whatever is running on port 3000
 kill-3000() {
   lsof -t -i tcp:3000 | xargs kill
