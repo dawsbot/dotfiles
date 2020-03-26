@@ -117,6 +117,31 @@ upgradeAll () {
   sudo softwareupdate -i -a --restart
 }
 
+#!/bin/bash
+
+rm-old-docker() {
+  max_week_size=4
+  docker images | awk 'NR>1 {print $0}' | while read line; do
+    # echo $line
+    id_img=$(echo $line | awk '{print $3}')
+
+    # if older then a month
+    is_month=$(echo $line | grep 'month')
+    if [ ! -z "$is_month" ]; then 
+        echo $id_img
+        docker rmi -f $id_img
+        continue
+    fi
+
+    # remove older then 4 weeks
+    num_week=$(echo $line | grep "week" | awk '{print $4}')
+    if [ ! -z "$num_week" ] && [ $num_week -ge $max_week_size ]; then 
+        echo $id_img
+        docker rmi -f $id_img
+    fi
+done
+}
+
 # open vscode to current directory OR open file/dir in arg1
 function vs() {
   if [[ $# -eq 0 ]] ; then
@@ -181,13 +206,16 @@ to-webp() {
   cwebp -m 6 -z 9 -q 100 "$1".png -o "$1".webp
 }
 
-ssh-old-prod() {
+ssh-non-aws-prod() {
   ssh ubuntu@dev24.everipedia.org
 }
-ssh-prod() {
+
+# Currently prod
+ssh-dev() {
   ssh -i ~/Downloads/aws-ep-staging.pem ubuntu@ec2-18-144-104-120.us-west-1.compute.amazonaws.com
 }
-ssh-dev() {
+
+ssh-prod() {
   ssh -i ~/Downloads/aws-ep-prod.pem ubuntu@ec2-54-151-100-88.us-west-1.compute.amazonaws.com
 }
 
@@ -196,3 +224,7 @@ kill-3000() {
   lsof -t -i tcp:3000 | xargs kill
 }
 
+# Curl as-if you're googlebot mobile
+google-curl() {
+  curl -A "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z‡ Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"  $@
+}
