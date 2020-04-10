@@ -228,3 +228,15 @@ kill-3000() {
 google-curl() {
   curl -A "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z‡ Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"  $@
 }
+
+# https://stackoverflow.com/questions/17414104/git-checkout-latest-tag
+gch-latest-tag() {
+  # Get new tags from remote
+  git fetch --tags
+
+  # Get latest tag name
+  latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+
+  # Checkout latest tag
+  git checkout $latestTag
+}
