@@ -22,7 +22,7 @@ export HISTSIZE=100000000
 export SAVEHIST=100000000
 
 # ruby
-eval "$(rbenv init - --no-rehash)"
+eval "$(rbenv init -)"
 
 # Extend path
 export PATH="$PATH:$HOME/cli"
