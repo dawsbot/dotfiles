@@ -103,21 +103,17 @@ openChromeSourceMappable() {
 }
 
 # Upgrade all the things
-
 upgradeAll () {
   upgrade_oh_my_zsh
   yarn global upgrade
   npm update -g
   brew update
-  brew upgrade
   brew doctor
   brew prune
   brew cleanup
-  docker image prune --all --filter until=400h # delete all stale-ish docker images
-  sudo softwareupdate -i -a --restart
+  yes |  sudo docker system prune --filter "until=504h" # 3 weeks
+  sudo docker image prune -a --filter "until=504h" # 3 weeks
 }
-
-#!/bin/bash
 
 rm-old-docker() {
   max_week_size=4
