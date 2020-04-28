@@ -105,11 +105,8 @@ openChromeSourceMappable() {
 # Upgrade all the things
 upgradeAll () {
   upgrade_oh_my_zsh
-  yarn global upgrade
-  npm update -g
   brew update
   brew doctor
-  brew prune
   brew cleanup
   yes |  sudo docker system prune --filter "until=504h" # 3 weeks
   sudo docker image prune -a --filter "until=504h" # 3 weeks
@@ -202,18 +199,26 @@ to-webp() {
   cwebp -m 6 -z 9 -q 100 "$1".png -o "$1".webp
 }
 
-ssh-non-aws-prod() {
-  ssh ubuntu@dev24.everipedia.org
-}
-
-# Currently prod
+# servers
 ssh-dev() {
-  ssh -i ~/Downloads/aws-ep-staging.pem ubuntu@ec2-18-144-104-120.us-west-1.compute.amazonaws.com
+  ssh ubuntu@ec2-18-144-104-120.us-west-1.compute.amazonaws.com
 }
 
 ssh-prod() {
-  ssh -i ~/Downloads/aws-ep-prod.pem ubuntu@ec2-54-151-100-88.us-west-1.compute.amazonaws.com
+  ssh ubuntu@ec2-54-151-100-88.us-west-1.compute.amazonaws.com
 }
+
+ssh-prod-be() {
+  ssh ubuntu@ec2-50-18-10-247.us-west-1.compute.amazonaws.com
+}
+
+copy() {
+  /bin/cat "$1" | pbcopy
+}
+paste() {
+  pbpaste > "$1"
+}
+
 
 # Kills whatever is running on port 3000
 kill-3000() {

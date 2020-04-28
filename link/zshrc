@@ -77,11 +77,13 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator)
 
 # plugins=(git)
 plugins+=(zsh-autosuggestions) # Predictive suggestions
+plugins+=(zsh-syntax-highlighting)
 # plugins+=(pipenv)
-plugins+=(yarn)
+# plugins+=(yarn)
 
 source $ZSH/oh-my-zsh.sh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=3' # Suggest in orange
+# bindkey '^j'  autosuggest-accept
 
 # vim fuzzy file searching with ripgrep
 # https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2
