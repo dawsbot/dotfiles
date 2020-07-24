@@ -27,9 +27,13 @@ burn() {
   git push origin :"$1" # Delete branch from remote (GitHub)
 }
 
+update-branch() {
+ branch=${1:-'master'}
+ git checkout $branch && git pull origin $branch && git checkout - && git merge $branch
+}
+
 alias g'*'='git add -A && git commit && git push origin HEAD'
 alias gpr='g* && pr'
-alias update-branch='git checkout master && git pull origin master && git checkout - && git merge master'
 
 alias prune='git branch | grep -v "master" | xargs git branch -D'
 
@@ -199,6 +203,7 @@ to-webp() {
   cwebp -m 6 -z 9 -q 100 "$1".png -o "$1".webp
 }
 
+alias cat='hicat '
 # servers
 ssh-dev() {
   ssh ubuntu@ec2-18-144-104-120.us-west-1.compute.amazonaws.com
@@ -241,3 +246,12 @@ gch-latest-tag() {
   # Checkout latest tag
   git checkout $latestTag
 }
+
+stunnel-restart() {
+  cd /usr/local/etc/stunnel
+  # pkill -f stunnel
+  sudo stunnel redis-cli.conf
+  sudo stunnel documentdb-cli.conf
+  cd -
+}
+

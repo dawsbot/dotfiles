@@ -230,3 +230,7 @@ function u() {
   git checkout "$(pbpaste)"
 }
 
+function github-last-commit() {
+  open https://github.com/EveripediaNetwork/frontend-ssr/commit/"$(git rev-parse HEAD)"
+}
+export PATH="/usr/local/opt/mongodb-community@3.6/bin:$PATH"
