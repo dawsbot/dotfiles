@@ -1,4 +1,3 @@
 {
-	"niy": "npm init -y",
-	"cat": "hicat"
+	"ssh-dev-be": "ssh ubuntu@ec2-54-177-201-220.us-west-1.compute.amazonaws.com"
 }
