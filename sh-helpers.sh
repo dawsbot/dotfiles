@@ -255,3 +255,7 @@ stunnel-restart() {
   cd -
 }
 
+stunnel-running() {
+  curl -s 'http://127.0.01:6379' > /dev/null && echo 'YES, port 6379 is setup correctly atleast' || echo 'NO, port 6379 refused connection'
+}
+
