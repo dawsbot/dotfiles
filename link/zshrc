@@ -231,6 +231,6 @@ function u() {
 }
 
 function github-last-commit() {
-  open https://github.com/EveripediaNetwork/frontend-ssr/commit/"$(git rev-parse HEAD)"
+  open https://github.com/EveripediaNetwork/"$(basename `git rev-parse --show-toplevel`)"/commit/"$(git rev-parse HEAD)"
 }
 export PATH="/usr/local/opt/mongodb-community@3.6/bin:$PATH"
