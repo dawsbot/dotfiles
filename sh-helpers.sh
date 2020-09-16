@@ -247,15 +247,27 @@ gch-latest-tag() {
   git checkout $latestTag
 }
 
+stunnel-running() {
+  curl -s 'http://127.0.01:6379' > /dev/null && echo 'YES, port 6379 is setup correctly atleast' || echo 'NO, port 6379 refused connection'
+}
+
 stunnel-restart() {
   cd /usr/local/etc/stunnel
   # pkill -f stunnel
   sudo stunnel redis-cli.conf
   sudo stunnel documentdb-cli.conf
   cd -
+  stunnel-running
 }
 
-stunnel-running() {
-  curl -s 'http://127.0.01:6379' > /dev/null && echo 'YES, port 6379 is setup correctly atleast' || echo 'NO, port 6379 refused connection'
+open-latest-pr() {
+  hub pr list | head -n1 | awk '{print $1;}' | hub pr show 
 }
 
+github-new-release() {
+  latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+
+  open https://analytics.google.com/analytics/web/#/report-home/a57561457w155023168p156727585
+  open https://github.com/EveripediaNetwork/frontend-ssr/releases/edit/$latestTag
+  open https://github.com/EveripediaNetwork/frontend-ssr/releases/new
+}
