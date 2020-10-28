@@ -260,14 +260,15 @@ stunnel-restart() {
   stunnel-running
 }
 
-open-latest-pr() {
+github-open-latest-pr() {
   hub pr list | head -n1 | awk '{print $1;}' | hub pr show 
 }
 
 github-new-release() {
   latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
 
-  open https://analytics.google.com/analytics/web/#/report-home/a57561457w155023168p156727585
   open https://github.com/EveripediaNetwork/frontend-ssr/releases/edit/$latestTag
   open https://github.com/EveripediaNetwork/frontend-ssr/releases/new
+  open https://analytics.google.com/analytics/web/#/report-home/a57561457w155023168p156727585
+  open https://github.com/EveripediaNetwork/frontend-ssr/commits/master
 }
